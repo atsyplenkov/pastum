@@ -1,76 +1,78 @@
-const vscode = require('vscode');
-const { parseClipboard } = require('./parse-table');
+const vscode = require("vscode");
+const { parseClipboard } = require("./parse-table");
 
 async function clipboardToRDataFrame() {
-    try {
-        // 1: Read the clipboard content
-        const clipboardContent = await vscode.env.clipboard.readText();
+  try {
+    // 1: Read the clipboard content
+    const clipboardContent = await vscode.env.clipboard.readText();
 
-        if (!clipboardContent) {
-            vscode.window.showErrorMessage("Clipboard is empty or contains unsupported content.");
-            return;
-        }
-
-        // 2: Try to extract the table from clipboard content
-        let formattedData = null;
-        formattedData = parseClipboard(clipboardContent);
-
-        // 3: Ask the user which framework they want to use 
-        let framework = null;
-        framework = await vscode.window.showQuickPick(
-            ['base', 'tidyverse ✨', 'data.table 🎩', 'polars 🐻'],
-            { placeHolder: 'Select the R framework to use for the dataframe' }
-        );
-        framework = framework.split(' ')[0];
-
-        if (!framework) {
-            vscode.window.showErrorMessage("No framework selected.");
-            return;
-        }
-
-        // 4: Generate the R code using the selected framework
-        const rCode = createRDataFrame(formattedData, framework);
-
-        if (!rCode) {
-            vscode.window.showErrorMessage("Failed to generate R code.");
-            return;
-        }
-
-        // 5: Insert the generated code into the active editor
-        const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            editor.edit(editBuilder => {
-                editBuilder.insert(editor.selection.active, rCode);
-            });
-        }
-    } catch (error) {
-        vscode.window.showErrorMessage(`Error: ${error.message}`);
+    if (!clipboardContent) {
+      vscode.window.showErrorMessage(
+        "Clipboard is empty or contains unsupported content."
+      );
+      return;
     }
+
+    // 2: Try to extract the table from clipboard content
+    let formattedData = null;
+    formattedData = parseClipboard(clipboardContent);
+
+    // 3: Ask the user which framework they want to use
+    let framework = null;
+    framework = await vscode.window.showQuickPick(
+      ["base", "tidyverse ✨", "data.table 🎩", "polars 🐻"],
+      { placeHolder: "Select the R framework to use for the dataframe" }
+    );
+    framework = framework.split(" ")[0];
+
+    if (!framework) {
+      vscode.window.showErrorMessage("No framework selected.");
+      return;
+    }
+
+    // 4: Generate the R code using the selected framework
+    const rCode = createRDataFrame(formattedData, framework);
+
+    if (!rCode) {
+      vscode.window.showErrorMessage("Failed to generate R code.");
+      return;
+    }
+
+    // 5: Insert the generated code into the active editor
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+      editor.edit((editBuilder) => {
+        editBuilder.insert(editor.selection.active, rCode);
+      });
+    }
+  } catch (error) {
+    vscode.window.showErrorMessage(`Error: ${error.message}`);
+  }
 }
 
 /**
  * Generates R dataframe objects.
  * Supports base R, tidyverse, data.table, and R polars frameworks.
- * 
+ *
  * Modified from: https://web-apps.thecoatlessprofessor.com/data/html-table-to-dataframe-tool.html
- * 
+ *
  * Framework-specific details:
  * - base R: Uses data.frame() constructor, no package dependencies
  * - tidyverse: Uses tibble() constructor, requires tidyverse package
  * - data.table: Uses data.table() constructor, requires data.table package
  * - polars: Uses pl$DataFrame() constructor, requires polars package
- * 
+ *
  * @param {Object} tableData - Processed table data
  * @param {Array<string>} tableData.headers - Column names
  * @param {Array<Array<any>>} tableData.data - Table values
  * @param {Array<string>} tableData.columnTypes - Column types ('numeric' or 'string')
  * @param {string} framework - R framework to use ('base', 'tidyverse', 'data.table', 'polars')
  * @returns {string} Generated R code
- * 
+ *
  */
 function createRDataFrame(tableData, framework) {
   const { headers, data, columnTypes } = tableData;
-  let code = '';
+  let code = "";
 
   /**
    * Formats a value according to its column type for R syntax
@@ -79,46 +81,54 @@ function createRDataFrame(tableData, framework) {
    * @returns {string} Formatted value
    */
   function formatValue(value, colIndex) {
-      if (columnTypes[colIndex] === 'numeric') {
-          return value;
-      }
-      return `"${value}"`;
+    if (columnTypes[colIndex] === "numeric") {
+      return value;
+    }
+    return `"${value}"`;
   }
 
   // Generate code based on selected framework
-  if (framework === 'base') {
-      code = `data.frame(\n`;
-      headers.forEach((header, i) => {
-          const values = data.map(row => formatValue(row[i], i)).join(', ');
-          code += `  ${header} = c(${values})${i < headers.length - 1 ? ',\n' : '\n'}`;
-      });
-      code += `)`;
-  } else if (framework === 'tidyverse') {
-      code = `tibble::tibble(\n`;
-      headers.forEach((header, i) => {
-          const values = data.map(row => formatValue(row[i], i)).join(', ');
-          code += `  ${header} = c(${values})${i < headers.length - 1 ? ',\n' : '\n'}`;
-      });
-      code += `)`;
-  } else if (framework === 'data.table') {
-      code = `data.table::data.table(\n`;
-      headers.forEach((header, i) => {
-          const values = data.map(row => formatValue(row[i], i)).join(', ');
-          code += `  ${header} = c(${values})${i < headers.length - 1 ? ',\n' : '\n'}`;
-      });
-      code += `)`;
-  } else if (framework === 'polars') {
-      code = `polars::pl$DataFrame(\n`;
-      headers.forEach((header, i) => {
-          const values = data.map(row => formatValue(row[i], i)).join(', ');
-          code += `  ${header} = c(${values})${i < headers.length - 1 ? ',\n' : '\n'}`;
-      });
-      code += `)`;
+  if (framework === "base") {
+    code = `data.frame(\n`;
+    headers.forEach((header, i) => {
+      const values = data.map((row) => formatValue(row[i], i)).join(", ");
+      code += `  ${header} = c(${values})${
+        i < headers.length - 1 ? ",\n" : "\n"
+      }`;
+    });
+    code += `)`;
+  } else if (framework === "tidyverse") {
+    code = `tibble::tibble(\n`;
+    headers.forEach((header, i) => {
+      const values = data.map((row) => formatValue(row[i], i)).join(", ");
+      code += `  ${header} = c(${values})${
+        i < headers.length - 1 ? ",\n" : "\n"
+      }`;
+    });
+    code += `)`;
+  } else if (framework === "data.table") {
+    code = `data.table::data.table(\n`;
+    headers.forEach((header, i) => {
+      const values = data.map((row) => formatValue(row[i], i)).join(", ");
+      code += `  ${header} = c(${values})${
+        i < headers.length - 1 ? ",\n" : "\n"
+      }`;
+    });
+    code += `)`;
+  } else if (framework === "polars") {
+    code = `polars::pl$DataFrame(\n`;
+    headers.forEach((header, i) => {
+      const values = data.map((row) => formatValue(row[i], i)).join(", ");
+      code += `  ${header} = c(${values})${
+        i < headers.length - 1 ? ",\n" : "\n"
+      }`;
+    });
+    code += `)`;
   }
 
   return code;
 }
 
 module.exports = {
-    clipboardToRDataFrame
-}
+  clipboardToRDataFrame,
+};
