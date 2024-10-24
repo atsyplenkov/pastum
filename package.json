@@ -1,0 +1,58 @@
+{
+  "name": "pastum",
+  "displayName": "Pastum",
+  "description": "Converts copied tables to R, Python or Julia dataframes",
+  "version": "0.0.1",
+  "publisher": "atsyplenkov",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atsyplenkov/pastum"
+  },
+  "homepage": "https://github.com/atsyplenkov/pastum",
+  "bugs": {
+    "url": "https://github.com/atsyplenkov/pastum/issues",
+    "email": "atsyplenkov@fastmail.com"
+  },
+  "engines": {
+    "vscode": "^1.66.0"
+  },
+  "categories": [
+    "Other",
+    "Snippets"
+  ],
+  "keywords": [
+    "paste",
+    "table",
+    "markdown",
+    "paste table",
+    "keybindings"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pastum.Rdataframe",
+        "title": "Pastum: Paste HTML Table to R Dataframe"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.66.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "jsdom": "^25.0.1"
+  }
+}
