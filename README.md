@@ -7,9 +7,9 @@
 
 `pastum` lets you quickly transform any text/html table from your clipboard to a dataframe object of your favourite language — R, Python or Julia. Arrays (or vectors) are also supported for R and Python languages.
 
-<figure>
+<!-- <figure>
 <img src="assets/pastum-addin-demo.gif" style="width:75.0%" alt="Pastum extension demo" /><figcaption aria-hidden="true">Pastum extension demo</figcaption>
-</figure>
+</figure> -->
 
 # Installation
 

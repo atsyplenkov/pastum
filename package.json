@@ -5,6 +5,7 @@
   "version": "0.0.1",
   "publisher": "atsyplenkov",
   "license": "MIT",
+  "icon": "assets/logo.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/atsyplenkov/pastum"
