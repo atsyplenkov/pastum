@@ -1,7 +1,8 @@
-
 /**
- * Generates R code for different data manipulation frameworks.
+ * Generates R dataframe objects.
  * Supports base R, tidyverse, data.table, and R polars frameworks.
+ * 
+ * Modified from: https://web-apps.thecoatlessprofessor.com/data/html-table-to-dataframe-tool.html
  * 
  * Framework-specific details:
  * - base R: Uses data.frame() constructor, no package dependencies
@@ -17,7 +18,7 @@
  * @returns {string} Generated R code
  * 
  */
-function generateRCode(tableData, framework) {
+function createRDataFrame(tableData, framework) {
   const { headers, data, columnTypes } = tableData;
   let code = '';
 
@@ -69,5 +70,5 @@ function generateRCode(tableData, framework) {
 }
 
 module.exports = {
-  generateRCode
+    createRDataFrame
 }

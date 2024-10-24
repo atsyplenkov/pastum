@@ -3,12 +3,12 @@
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://img.shields.io/badge/repo_status-WIP-yellow)](https://www.repostatus.org/#wip)
 <!-- badges: end -->
 
-# pastum <img src="man/figures/logo.png" align="right" width="200" />
+# pastum <img src="assets/logo.png" align="right" width="200" />
 
-`Pastum` lets you quickly transform any text/html table from your clipboard to a dataframe object of your favourite language — R, Python or Julia. Arrays (or vectors) are also supported for R and Python languages.
+`pastum` lets you quickly transform any text/html table from your clipboard to a dataframe object of your favourite language — R, Python or Julia. Arrays (or vectors) are also supported for R and Python languages.
 
 <figure>
-<img src="man/figures/pastum-addin-demo.gif" style="width:75.0%" alt="Pastum extension demo" /><figcaption aria-hidden="true">Pastum extension demo</figcaption>
+<img src="assets/pastum-addin-demo.gif" style="width:75.0%" alt="Pastum extension demo" /><figcaption aria-hidden="true">Pastum extension demo</figcaption>
 </figure>
 
 # Installation
