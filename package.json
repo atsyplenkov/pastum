@@ -36,6 +36,16 @@
         "command": "pastum.Rdataframe",
         "title": "Table ➔ R Dataframe",
         "category": "Pastum"
+      },
+      {
+        "command": "pastum.Pydataframe",
+        "title": "Table ➔ Python Dataframe",
+        "category": "Pastum"
+      },
+      {
+        "command": "pastum.Jldataframe",
+        "title": "Table ➔ Julia Dataframe",
+        "category": "Pastum"
       }
     ]
   },
