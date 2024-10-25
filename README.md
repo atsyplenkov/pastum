@@ -6,9 +6,12 @@
 # pastum <img src="https://github.com/atsyplenkov/pastum/raw/master/assets/logo.png" align="right" width="200" />
 `pastum` allows you to quickly transform any text/HTML table from your clipboard into a dataframe object in your favorite language — R, Python, or Julia. Almost all popular frameworks are supported; if something is missing, don't hesitate to raise an [issue](https://github.com/atsyplenkov/pastum/issues).
 
-<figure>
-<img src="https://github.com/atsyplenkov/pastum/raw/master/assets/demo-r-tibble.gif" style="height:75.0%" alt="Pastum extension demo" />
-</figure>
+# Example usage
+### Text table to tibble (R)
+![](https://github.com/atsyplenkov/pastum/raw/master/assets/demo-r-tibble.gif)
+
+### HTML table to pandas (Python)
+![](https://github.com/atsyplenkov/pastum/raw/master/assets/demo-py-pandas.gif)
 
 # Installation
 You can install the development version from the [Releases](https://github.com/atsyplenkov/pastum/releases/) page. Download the latest `.vsix` file, and install it as described [here](https://code.visualstudio.com/docs/editor/extension-marketplace#_install-from-a-vsix).
