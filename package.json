@@ -1,7 +1,7 @@
 {
   "name": "pastum",
   "displayName": "Pastum",
-  "description": "Converts copied tables to R, Python or Julia dataframes",
+  "description": "Convert table from clipboard to R, Python or Julia dataframe",
   "version": "0.0.1",
   "publisher": "atsyplenkov",
   "license": "MIT",
@@ -29,7 +29,9 @@
     "paste table",
     "keybindings"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "*"
+  ],
   "main": "./extension.js",
   "contributes": {
     "commands": [
@@ -56,14 +58,15 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.7",
     "@types/node": "20.x",
     "@types/vscode": "^1.66.0",
     "@vscode/test-cli": "^0.0.9",
     "@vscode/test-electron": "^2.4.0",
     "chai": "^5.1.2",
     "mocha": "^10.7.3",
-    "typescript": "^5.4.5",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
     "jsdom": "^25.0.1"
   }
 }
