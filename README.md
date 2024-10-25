@@ -3,11 +3,11 @@
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://img.shields.io/badge/repo_status-WIP-yellow)](https://www.repostatus.org/#wip)
 <!-- badges: end -->
 
-# pastum <img src="assets/logo.png" align="right" width="200" />
+# pastum <img src="https://github.com/atsyplenkov/pastum/raw/master/assets/logo.png" align="right" width="200" />
 `pastum` allows you to quickly transform any text/HTML table from your clipboard into a dataframe object in your favorite language — R, Python, or Julia. Almost all popular frameworks are supported; if something is missing, don't hesitate to raise an [issue](https://github.com/atsyplenkov/pastum/issues).
 
 <figure>
-<img src="assets/demo-r-tibble.gif" style="height:75.0%" alt="Pastum extension demo" />
+<img src="https://github.com/atsyplenkov/pastum/raw/master/assets/demo-r-tibble.gif" style="height:75.0%" alt="Pastum extension demo" />
 </figure>
 
 # Installation

@@ -29,9 +29,7 @@
     "paste table",
     "keybindings"
   ],
-  "activationEvents": [
-    "*"
-  ],
+  "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
     "commands": [
