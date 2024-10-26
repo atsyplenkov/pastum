@@ -16,6 +16,11 @@
 # Installation
 You can install the development version from the [Releases](https://github.com/atsyplenkov/pastum/releases/) page. Download the latest `.vsix` file, and install it as described [here](https://code.visualstudio.com/docs/editor/extension-marketplace#_install-from-a-vsix).
 
+# Features
+- The extension mimics the behavior of the [`{datapasta}`](https://github.com/milesmcbain/datapasta/) R package and is capable of detecting the main types: `strings` (or `character` vectors in R), `integer`, and `float` values. A numeric column is considered to be `float` if at least one of the values is `float`; otherwise, the entire column will be treated as `integer`. By default, trailing zeroes are added to all `float` values to comply with `polars` rules.
+- Empty table cells will be replaced with `NA`, `None`, or `missing` values depending on the preferred programming language.
+- By default, the column names are renamed following the PascalCase [convention](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case). However, the user can specify the preferred naming convention in the settings — `pastum.defaultConvention`.
+
 # Contributions
 Contributions are welcome! If you'd like to contribute, please, fork, submit a PR and I'll merge it.
 
