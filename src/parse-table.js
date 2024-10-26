@@ -2,6 +2,7 @@
 // https://web-apps.thecoatlessprofessor.com/data/html-table-to-dataframe-tool.html
 const { JSDOM } = require("jsdom");
 const vscode = require("vscode");
+const utils = require("./utils.js");
 
 /**
  * Parses the clipboard content into a structured table.
@@ -91,69 +92,6 @@ function formatVariableName(name, language) {
 }
 
 /**
- * Converts a string value to its appropriate type (number or string).
- * Used for automatic type detection and conversion of table cell values.
- *
- * @param {string} value - The value to convert
- * @returns {number|string} Converted number if numeric, original string otherwise
- */
-function convertValue(value) {
-  if (isNumeric(value)) {
-    return parseFloat(value.replace(/,/g, ""));
-  }
-  return value;
-}
-
-/**
- * Determines if a string value represents a valid number.
- * Handles various number formats including:
- * - Thousands separators (,)
- * - Decimal points (.)
- * - Negative numbers
- * - Scientific notation
- *
- * Special cases:
- * - Rejects strings starting with '0' followed by digits (e.g., '01234')
- * - Rejects empty strings or whitespace-only strings
- *
- * @param {string} value - The string to test for numeric format
- * @returns {boolean} True if the string represents a valid number
- */
-function isNumeric(value) {
-  // Normalize the string by removing thousands separators
-  const normalized = value.replace(/,/g, "").replace(/\./g, ".");
-
-  return (
-    !isNaN(normalized) &&
-    !isNaN(parseFloat(normalized)) &&
-    normalized.trim() !== "" &&
-    !/^0\d/.test(normalized)
-  ); // Reject numbers with leading zeros
-}
-
-/**
- * Cleans data values by removing leading/trailing whitespace and normalizing spaces.
- * Specifically handles non-breaking spaces (ASCII 160) by converting them to regular spaces.
- *
- * @param {string} value - The data value to clean
- * @returns {string} The cleaned data value
- */
-function cleanDataValue(value) {
-  return value.trim().replace(/\u00A0/g, " ");
-}
-
-/**
- * Checks if a table row contains only empty cells.
- * A cell is considered empty if it's an empty string or contains only whitespace.
- *
- * @param {Array} row - Array of cell values to check
- * @returns {boolean} True if all cells in the row are empty
- */
-function isRowEmpty(row) {
-  return row.every((cell) => cell === "" || cell.trim() === "");
-}
-
-/**
  * Extracts table HTML from a potentially larger HTML string.
  * Uses multiple strategies to find and extract valid table markup.
  *
@@ -181,6 +119,41 @@ function extractTable(html) {
   }
 
   return null;
+}
+
+/**
+ * Expands a plain text table into a normalized matrix.
+ * This function ensures each row has consistent columns and removes any empty rows.
+ *
+ * Process:
+ * 1. Ensure that all rows have the same number of columns.
+ * 2. Normalize rows by filling in any missing cells with empty strings.
+ * 3. Remove empty rows while preserving headers.
+ *
+ * @param {Array<Array<string>>} table - The text table matrix to process
+ * @returns {Array<Array<string>>} Normalized matrix of table data
+ */
+function expandTextTable(table) {
+  // Initialize matrix
+  const matrix = [];
+
+  // Determine the maximum number of columns in the table
+  let maxCols = table.reduce((max, row) => Math.max(max, row.length), 0);
+
+  // Normalize each row
+  table.forEach((row, rowIndex) => {
+    // Ensure consistent column count by adding empty cells to shorter rows
+    while (row.length < maxCols) {
+      row.push("");
+    }
+
+    // Filter out empty rows, but preserve the header row (first row)
+    if (rowIndex === 0 || !utils.isRowEmpty(row)) {
+      matrix.push(row);
+    }
+  });
+
+  return matrix;
 }
 
 /**
@@ -236,7 +209,7 @@ function expandTable(table) {
       colIndex = findNextEmptyCell(rowIndex, colIndex);
 
       // Get and clean cell value
-      const value = cleanDataValue(cell.textContent);
+      const value = utils.cleanDataValue(cell.textContent);
 
       // Expand cell across its span range
       for (let i = 0; i < rowspan; i++) {
@@ -264,7 +237,7 @@ function expandTable(table) {
     })
     .filter((row, index) => {
       // Preserve header row and remove empty data rows
-      return index === 0 || !isRowEmpty(row);
+      return index === 0 || !utils.isRowEmpty(row);
     });
 }
 
@@ -325,21 +298,49 @@ function parseTable(inputString) {
     if (data.length === 0) {
       throw new Error("No data rows found in the table");
     }
-
     // Step 5: Determine column types through data analysis
     const columnTypes = new Array(headers.length).fill("numeric");
+    const columnCounts = new Array(headers.length)
+      .fill(0)
+      .map(() => ({ numeric: 0, nonNumeric: 0 }));
+    // Count numeric and non-numeric values in
+    // each column
     data.forEach((row) => {
       row.forEach((value, colIndex) => {
-        if (columnTypes[colIndex] === "numeric" && !isNumeric(value)) {
-          columnTypes[colIndex] = "string";
+        if (value === "") {
+          // Ignore empty values
+          return;
+        }
+        if (utils.isNumeric(value)) {
+          columnCounts[colIndex].numeric++;
+        } else {
+          columnCounts[colIndex].nonNumeric++;
         }
       });
+    });
+    // If the majority of columns are non-numeric,
+    // assume all columns are strings
+    columnCounts.forEach((counts, colIndex) => {
+      if (counts.nonNumeric >= counts.numeric) {
+        columnTypes[colIndex] = "string";
+      }
+    });
+
+    // Check if all values in a numeric colum are integer
+    columnTypes.forEach((type, colIndex) => {
+      if (type === "numeric") {
+        const values = data.map((row) => row[colIndex]);
+        const allIntegers = values.every((value) => utils.isInt(value));
+        if (allIntegers) {
+          columnTypes[colIndex] = "integer";
+        }
+      }
     });
 
     // Step 6: Convert data to appropriate types
     const convertedData = data.map((row) =>
       row.map((value, colIndex) =>
-        columnTypes[colIndex] === "numeric" ? convertValue(value) : value
+        columnTypes[colIndex] != "string" ? utils.convertValue(value) : value
       )
     );
 
@@ -360,10 +361,8 @@ function parseTextTable(textString) {
   // Split the input by line breaks for rows
   const rows = textString.trim().split(/\r?\n/);
 
-  // Split each row by common delimiters (comma, tab, or spaces)
-  const matrix = rows.map((row) =>
-    row.split(/\t/).filter((cell) => cell.trim() !== "")
-  );
+  // Split each row by tab delimiters
+  const matrix = rows.map((row) => row.split(/\t/));
 
   return matrix;
 }

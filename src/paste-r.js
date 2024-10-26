@@ -1,5 +1,6 @@
 const vscode = require("vscode");
 const { parseClipboard } = require("./parse-table");
+const { addTrailingZeroes } = require("./utils");
 
 async function clipboardToRDataFrame() {
   try {
@@ -20,7 +21,7 @@ async function clipboardToRDataFrame() {
     // 3: Ask the user which framework they want to use
     let framework = null;
     framework = await vscode.window.showQuickPick(
-      ["base", "tidyverse ✨", "data.table 🎩", "polars 🐻"],
+      ["base", "tibble ✨", "data.table 🎩", "polars 🐻"],
       { placeHolder: "Select the R framework to use for the dataframe" }
     );
     framework = framework.split(" ")[0];
@@ -52,24 +53,24 @@ async function clipboardToRDataFrame() {
 
 /**
  * Generates R dataframe objects.
- * Supports base R, tidyverse, data.table, and R polars frameworks.
- *
- * Modified from: https://web-apps.thecoatlessprofessor.com/data/html-table-to-dataframe-tool.html
- *
- * Framework-specific details:
- * - base R: Uses data.frame() constructor, no package dependencies
- * - tidyverse: Uses tibble() constructor, requires tidyverse package
- * - data.table: Uses data.table() constructor, requires data.table package
- * - polars: Uses pl$DataFrame() constructor, requires polars package
- *
- * @param {Object} tableData - Processed table data
- * @param {Array<string>} tableData.headers - Column names
- * @param {Array<Array<any>>} tableData.data - Table values
- * @param {Array<string>} tableData.columnTypes - Column types ('numeric' or 'string')
- * @param {string} framework - R framework to use ('base', 'tidyverse', 'data.table', 'polars')
- * @returns {string} Generated R code
- *
- */
+ * Supports base R, tibble, data.table, and R polars frameworks.
+*
+* Modified from: https://web-apps.thecoatlessprofessor.com/data/html-table-to-dataframe-tool.html
+*
+* Framework-specific details:
+* - base R: Uses data.frame() constructor, no package dependencies
+* - tibble: Uses tibble() constructor, requires tibble package
+* - data.table: Uses data.table() constructor, requires data.table package
+* - polars: Uses pl$DataFrame() constructor, requires polars package
+*
+* @param {Object} tableData - Processed table data
+* @param {Array<string>} tableData.headers - Column names
+* @param {Array<Array<any>>} tableData.data - Table values
+* @param {Array<string>} tableData.columnTypes - Column types ('numeric' or 'string')
+* @param {string} framework - R framework to use ('base', 'tibble', 'data.table', 'polars')
+* @returns {string} Generated R code
+*
+*/
 function createRDataFrame(tableData, framework) {
   const { headers, data, columnTypes } = tableData;
   let code = "";
@@ -79,12 +80,19 @@ function createRDataFrame(tableData, framework) {
    * @param {any} value - The value to format
    * @param {number} colIndex - Column index for type lookup
    * @returns {string} Formatted value
-   */
+  */
   function formatValue(value, colIndex) {
-    if (columnTypes[colIndex] === "numeric") {
-      return value;
+    if (value === "") {
+      return "NA";
+    } else if (columnTypes[colIndex] === "string") {
+      return `"${value}"`;
+    } else if (columnTypes[colIndex] === "numeric") {
+      return addTrailingZeroes(value);
+    } else if (columnTypes[colIndex] === "integer") {
+      return value + "L";
+    } else {
+      return `"${value}"`;
     }
-    return `"${value}"`;
   }
 
   // Generate code based on selected framework
@@ -97,7 +105,7 @@ function createRDataFrame(tableData, framework) {
       }`;
     });
     code += `)`;
-  } else if (framework === "tidyverse") {
+  } else if (framework === "tibble") {
     code = `tibble::tibble(\n`;
     headers.forEach((header, i) => {
       const values = data.map((row) => formatValue(row[i], i)).join(", ");

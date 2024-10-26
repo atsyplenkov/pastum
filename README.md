@@ -1,5 +1,5 @@
 <!-- badges: start -->
-[![Version](https://img.shields.io/badge/version-0.0.1-green)](https://github.com/atsyplenkov/pastum)
+[![Version](https://img.shields.io/badge/version-0.0.2-green)](https://github.com/atsyplenkov/pastum)
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://img.shields.io/badge/repo_status-WIP-yellow)](https://www.repostatus.org/#wip)
 <!-- badges: end -->
 

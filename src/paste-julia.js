@@ -1,6 +1,10 @@
 const vscode = require("vscode");
 const { parseClipboard } = require("./parse-table");
+const { addTrailingZeroes } = require("./utils");
 
+/**
+ * Parses the clipboard content into a structured table.
+ */
 async function clipboardToJuliaDataFrame() {
   try {
     // 1: Read the clipboard content
@@ -43,22 +47,28 @@ async function clipboardToJuliaDataFrame() {
  *
  * Modified from: https://web-apps.thecoatlessprofessor.com/data/html-table-to-dataframe-tool.html
  *
- * @param {Object} tableData - Processed table data
- * @param {Array<string>} tableData.headers - Column names
- * @param {Array<Array<any>>} tableData.data - Table values
- * @param {Array<string>} tableData.columnTypes - Column types ('numeric' or 'string')
- * @returns {string} Generated Julia code
- *
  */
 function createJuliaDataFrame(tableData) {
+  function formatValue(value, colIndex) {
+    if (value === "") {
+      return "missing";
+    } else if (columnTypes[colIndex] === "string") {
+      return `"${value}"`;
+    } else if (columnTypes[colIndex] === "numeric") {
+      return addTrailingZeroes(value);
+    } else if (columnTypes[colIndex] === "integer") {
+      return value;
+    } else {
+      return `"${value}"`;
+    }
+  }
+
   const { headers, data, columnTypes } = tableData;
   let code = `using DataFrames\n\n`;
 
-  code += `df = DataFrame(\n`;
+  code += `DataFrame(\n`;
   headers.forEach((header, i) => {
-    const values = data
-      .map((row) => (columnTypes[i] === "numeric" ? row[i] : `"${row[i]}"`))
-      .join(", ");
+    const values = data.map((row) => formatValue(row[i], i)).join(", ");
     code += `    :${header} => [${values}]${
       i < headers.length - 1 ? ",\n" : "\n"
     }`;

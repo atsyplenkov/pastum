@@ -1,5 +1,6 @@
 const vscode = require("vscode");
 const { parseClipboard } = require("./parse-table");
+const { addTrailingZeroes } = require("./utils");
 
 async function clipboardToPyDataFrame() {
   try {
@@ -80,10 +81,17 @@ function createPyDataFrame(tableData, framework) {
    * @returns {string} Formatted value
    */
   function formatValue(value, colIndex) {
-    if (columnTypes[colIndex] === "numeric") {
+    if (value === "") {
+      return "None";
+    } else if (columnTypes[colIndex] === "string") {
+      return `"${value}"`;
+    } else if (columnTypes[colIndex] === "numeric") {
+      return addTrailingZeroes(value);
+    } else if (columnTypes[colIndex] === "integer") {
       return value;
+    } else {
+      return `"${value}"`;
     }
-    return `"${value}"`;
   }
 
   // pandas
