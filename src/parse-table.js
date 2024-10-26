@@ -19,7 +19,7 @@ function parseClipboard(clipboardContent) {
 
   // Format headers according to R language conventions
   const formattedHeaders = parsedTableData.headers.map((header) =>
-    formatVariableName(header, "r")
+    formatVariableName(header, null)
   );
 
   // Prepare formatted data for code generation
@@ -39,24 +39,16 @@ function parseClipboard(clipboardContent) {
 
 /**
  * Formats column names to be valid variable names in different programming languages.
- * Handles specific naming conventions and restrictions for R, Python, and Julia.
+ * Handles specific naming conventions and restrictions for R.
  *
- * Transformation steps:
- * 1. Normalizes spaces (removes non-breaking spaces)
- * 2. Removes special characters
- * 3. Converts spaces to appropriate separator
- * 4. Ensures valid identifier format for each language
- *
- * Language-specific rules:
- * - R: Uses dots as separators, must start with letter or dot
- * - Python: Uses snake_case, must start with letter or underscore
- * - Julia: Uses snake_case (ASCII only), must start with letter or underscore
- *
- * @param {string} name - The original column name to be formatted
- * @param {string} language - Target programming language ('r', 'python', or 'julia')
- * @returns {string} A valid variable name for the specified language
  */
-function formatVariableName(name, language) {
+function formatVariableName(name, convention = null) {
+  // Retrieve the setting if convention is not provided
+  if (!convention) {
+    const config = vscode.workspace.getConfiguration("pastum");
+    convention = config.get("defaultConvention");
+  }
+
   // Normalize and clean the input string
   let formatted = name
     .trim()
@@ -65,27 +57,33 @@ function formatVariableName(name, language) {
     .replace(/\s+/g, "_") // Convert spaces to underscores
     .replace(/^(\d)/, "_$1"); // Prefix numbers at start with underscore
 
-  if (language === "r") {
-    // R-specific formatting
-    formatted = formatted.replace(/_/g, "."); // Use dots instead of underscores
-    // Ensure valid R identifier (must start with letter or dot)
-    if (!/^[a-zA-Z.]/.test(formatted)) {
-      formatted = "x." + formatted;
-    }
-  } else if (language === "python") {
-    // Python-specific formatting (PEP 8 compliant)
-    formatted = formatted.toLowerCase(); // Convert to lowercase for snake_case
-    // Ensure valid Python identifier (must start with letter or underscore)
-    if (!/^[a-z_]/.test(formatted)) {
-      formatted = "_" + formatted;
-    }
-  } else if (language === "julia") {
-    // Julia-specific formatting
-    formatted = formatted.toLowerCase(); // Convert to lowercase for consistency
-    // Ensure valid Julia identifier (must start with letter or underscore)
-    if (!/^[a-z_]/.test(formatted)) {
-      formatted = "_" + formatted;
-    }
+  switch (convention) {
+    case "snake_case":
+      const split = formatted.split("_");
+      formatted = split
+        .filter((word) => word !== "")
+        .map((word) => word.charAt(0).toLowerCase() + word.slice(1))
+        .join("_");
+      break;
+    case "PascalCase":
+      formatted = formatted
+        .split("_")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join("");
+      break;
+    case "camelCase":
+      formatted = formatted
+        .split("_")
+        .map((word) => word.charAt(0).toLowerCase() + word.slice(1))
+        .map((word, index) =>
+          index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)
+        )
+        .join("");
+      break;
+  }
+
+  if (!/^[a-zA-Z]/.test(formatted)) {
+    formatted = "x." + formatted;
   }
 
   return formatted;

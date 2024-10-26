@@ -48,7 +48,19 @@
         "title": "Table ➔ Julia Dataframe",
         "category": "Pastum"
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Pastum Configuration",
+      "properties": {
+        "pastum.defaultConvention": {
+          "type": "string",
+          "enum": ["PascalCase", "camelCase", "snake_case"],
+          "default": "PascalCase",
+          "markdownDescription": "Select naming convention for variable names. For example, `Hello World!` will be converted to \n\n - PascalCase: `HelloWorld` \n\n - camelCase: `helloWorld` \n\n - snake_case: `hello_world`"
+        }
+      }
+    }
   },
   "scripts": {
     "lint": "eslint .",
