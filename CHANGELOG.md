@@ -8,6 +8,7 @@ All notable changes to the "pastum" extension will be documented in this file.
 
 - Added "Paste Default Dataframe" command, which can be set in settings. Allows the user to select the default language and framework.
 - Added "Paste Default Dataframe" command to the context menu.
+- Ditched the `jsdom` dependency in favor of speed and package size
 
 ## [0.0.2] - 2024-10-26
 

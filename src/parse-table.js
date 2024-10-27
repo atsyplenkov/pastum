@@ -1,6 +1,5 @@
 // Code here was inspired by:
 // https://web-apps.thecoatlessprofessor.com/data/html-table-to-dataframe-tool.html
-const { JSDOM } = require("jsdom");
 const vscode = require("vscode");
 const utils = require("./utils.js");
 
@@ -84,33 +83,6 @@ function formatVariableName(name, convention = null) {
 }
 
 /**
- * Extracts table HTML from a potentially larger HTML string.
- * Uses multiple strategies to find and extract valid table markup.
- */
-function extractTable(html) {
-  // Strategy 1: Direct regex match for complete table tags
-  const tableMatch = html.match(/<table[\s\S]*?<\/table>/i);
-  if (tableMatch) {
-    return tableMatch[0];
-  }
-
-  // Strategy 2: Parse and extract using jsdom (instead of DOMParser)
-  try {
-    const dom = new JSDOM(html);
-    const document = dom.window.document;
-
-    const table = document.querySelector("table");
-    if (table) {
-      return table.outerHTML;
-    }
-  } catch (e) {
-    console.error("Error parsing HTML:", e);
-  }
-
-  return null;
-}
-
-/**
  * Expands a plain text table into a normalized matrix.
  * This function ensures each row has consistent columns and removes any empty rows.
  */
@@ -138,111 +110,15 @@ function expandTextTable(table) {
 }
 
 /**
- * Expands an HTML table into a normalized matrix, handling colspan and rowspan.
- * This function converts a complex HTML table with merged cells into a regular
- * matrix where each cell contains exactly one value.
- */
-function expandTable(table) {
-  // Extract all table rows
-  const rows = Array.from(table.querySelectorAll("tr"));
-
-  // Initialize result matrix
-  const matrix = [];
-  let maxCols = 0;
-  rows.forEach(() => matrix.push([]));
-
-  /**
-   * Finds the next available cell position in a row
-   * Handles cases where previous cells have been expanded due to colspan
-   */
-  function findNextEmptyCell(row, startCol) {
-    let col = startCol;
-    while (matrix[row][col] !== undefined) {
-      col++;
-    }
-    return col;
-  }
-
-  // Process each row and expand merged cells
-  rows.forEach((row, rowIndex) => {
-    const cells = Array.from(row.querySelectorAll("th, td"));
-    let colIndex = 0;
-
-    cells.forEach((cell) => {
-      // Extract span attributes
-      const colspan = parseInt(cell.getAttribute("colspan")) || 1;
-      const rowspan = parseInt(cell.getAttribute("rowspan")) || 1;
-
-      // Find next available position considering previous merged cells
-      colIndex = findNextEmptyCell(rowIndex, colIndex);
-
-      // Get and clean cell value
-      const value = utils.cleanDataValue(cell.textContent);
-
-      // Expand cell across its span range
-      for (let i = 0; i < rowspan; i++) {
-        for (let j = 0; j < colspan; j++) {
-          const currentRow = rowIndex + i;
-          const currentCol = colIndex + j;
-          matrix[currentRow][currentCol] = value;
-        }
-      }
-
-      // Track maximum columns for normalization
-      maxCols = Math.max(maxCols, colIndex + colspan);
-      colIndex += colspan;
-    });
-  });
-
-  // Normalize matrix dimensions and remove empty rows
-  return matrix
-    .map((row) => {
-      // Ensure consistent column count
-      while (row.length < maxCols) {
-        row.push("");
-      }
-      return row;
-    })
-    .filter((row, index) => {
-      // Preserve header row and remove empty data rows
-      return index === 0 || !utils.isRowEmpty(row);
-    });
-}
-
-/**
- * Parses HTML or text containing a table into structured data.
- * Handles the complete table processing pipeline from HTML or text to formatted data.
+ * Parses text containing a table into structured data.
+ * Handles the complete table processing pipeline from text to formatted data.
  */
 function parseTable(inputString) {
   try {
-    let doc;
-    let table;
     let expandedMatrix;
 
-    // Step 1: Check if input contains HTML
-    if (inputString.includes("<table")) {
-      // Handle HTML table
-      const extractedTable = extractTable(inputString);
-      if (extractedTable) {
-        const dom = new JSDOM(extractedTable);
-        doc = dom.window.document;
-        table = doc.querySelector("table");
-      } else {
-        const dom = new JSDOM(inputString);
-        doc = dom.window.document;
-        table = doc.querySelector("table");
-      }
-
-      if (!table) {
-        throw new Error("No table found in the HTML content");
-      }
-
-      // Step 2: Process HTML table into normalized matrix
-      expandedMatrix = expandTable(table);
-    } else {
-      // Handle plain text table (assuming tab or comma separated values)
-      expandedMatrix = parseTextTable(inputString);
-    }
+    // Handle plain text table (assuming tab separated values)
+    expandedMatrix = parseTextTable(inputString);
 
     // Step 3: Extract and validate headers
     const headers = expandedMatrix[0];

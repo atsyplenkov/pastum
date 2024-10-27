@@ -4,7 +4,7 @@
 
 # pastum <img src="https://github.com/atsyplenkov/pastum/raw/master/assets/logo.png" align="right" width="200" />
 
-`pastum` allows you to quickly transform any text/HTML table from your clipboard into a dataframe object in your favorite language — R, Python, or Julia. Almost all popular frameworks are supported; if something is missing, don't hesitate to raise an [issue](https://github.com/atsyplenkov/pastum/issues).
+`pastum` allows you to quickly transform any text table (tab-separated) from your clipboard into a dataframe object in your favorite language — R, Python, or Julia. Almost all popular frameworks are supported; if something is missing, don't hesitate to raise an [issue](https://github.com/atsyplenkov/pastum/issues).
 
 # Example usage
 ### Text table to polars (Python)
@@ -24,8 +24,6 @@ You can install the development version from the [Releases](https://github.com/a
 # Features
 
 - The extension mimics the behavior of the [`{datapasta}`](https://github.com/milesmcbain/datapasta/) R package and is capable of detecting the main types: `strings` (or `character` vectors in R), `integer`, and `float` values. A numeric column is considered to be `float` if at least one of the values is `float`; otherwise, the entire column will be treated as `integer`. By default, trailing zeroes are added to all `float` values to comply with `polars` rules.
-
-- The extension uses the `jsdom` package for the HTML table parsing.
 
 - Empty table cells will be replaced with `NA`, `None`, or `missing` values depending on the preferred programming language.
 

@@ -115,8 +115,6 @@
     ]
   },
   "scripts": {
-    "lint": "eslint .",
-    "pretest": "npm run lint",
     "test": "vscode-test"
   },
   "devDependencies": {
@@ -124,11 +122,6 @@
     "@types/vscode": "^1.66.0",
     "@vscode/test-cli": "^0.0.9",
     "@vscode/test-electron": "^2.4.0",
-    "chai": "^5.1.2",
-    "mocha": "^10.7.3",
     "typescript": "^5.4.5"
-  },
-  "dependencies": {
-    "jsdom": "^25.0.1"
   }
 }
