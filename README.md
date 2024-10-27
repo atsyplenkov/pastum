@@ -1,9 +1,5 @@
 <!-- badges: start -->
-
-[![Version](https://img.shields.io/badge/version-0.0.3-green)](https://github.com/atsyplenkov/pastum)
-
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://img.shields.io/badge/repo_status-WIP-yellow)](https://www.repostatus.org/#wip)
-
+[![Version](https://img.shields.io/badge/version-0.0.3-green)](https://github.com/atsyplenkov/pastum) [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://img.shields.io/badge/repo_status-WIP-yellow)](https://www.repostatus.org/#wip)
 <!-- badges: end -->
 
 # pastum <img src="https://github.com/atsyplenkov/pastum/raw/master/assets/logo.png" align="right" width="200" />
@@ -11,15 +7,12 @@
 `pastum` allows you to quickly transform any text/HTML table from your clipboard into a dataframe object in your favorite language — R, Python, or Julia. Almost all popular frameworks are supported; if something is missing, don't hesitate to raise an [issue](https://github.com/atsyplenkov/pastum/issues).
 
 # Example usage
-
 ### Text table to polars (Python)
-
 Using the command palette, insert the copied text table as a Python, R, or Julia object. Select the framework on the go.
 
 ![](https://github.com/atsyplenkov/pastum/raw/master/assets/demo-py-polars.gif)
 
 ### Text table to tibble (R)
-
 Or you can specify the `pastum.defaultDataframe` parameter in VS Code settings and insert the table using the right-click context menu:
 
 ![](https://github.com/atsyplenkov/pastum/raw/master/assets/demo-r-tibble.gif)
@@ -40,7 +33,7 @@ You can install the development version from the [Releases](https://github.com/a
 
 # IDE support
 
-The extension has only one dependency (`jsdom`) and is expected to work with any Code OSS-based IDE. It was tested with the latest release version of VS Code (1.94.2) and the pre-release version of Positron IDE (2024.11.0-69).
+The extension has only one dependency (`jsdom`) and is expected to work with any Code OSS-based IDE. It was tested with the latest release version of VS Code (1.94.2) and the pre-release version of [Positron IDE](https://github.com/posit-dev/positron) (2024.11.0-69).
 
 # Contributions
 
