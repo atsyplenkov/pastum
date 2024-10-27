@@ -31,7 +31,7 @@ You can install the development version from the [Releases](https://github.com/a
 
 # IDE support
 
-The extension has only one dependency (`jsdom`) and is expected to work with any Code OSS-based IDE. It was tested with the latest release version of VS Code (1.94.2) and the pre-release version of [Positron IDE](https://github.com/posit-dev/positron) (2024.11.0-69).
+The extension has almost zero dependencies and is expected to work with any Code OSS-based IDE. It was tested with the latest release version of VS Code (1.94.2) and the pre-release version of [Positron IDE](https://github.com/posit-dev/positron) (2024.11.0-69).
 
 # Contributions
 
