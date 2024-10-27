@@ -46,7 +46,7 @@ function formatVariableName(name, convention = null) {
   let formatted = name
     .trim()
     .replace(/\u00A0/g, " ") // Replace non-breaking spaces with regular spaces
-    .replace(/[^a-zA-Z0-9_\s]/g, "") // Remove all special characters except spaces
+    .replace(/[^a-zA-Z0-9_\s\u0400-\u04FF]/g, "") // Remove all special characters except spaces and cyrillic letters
     .replace(/\s+/g, "_") // Convert spaces to underscores
     .replace(/^(\d)/, "_$1"); // Prefix numbers at start with underscore
 
@@ -75,7 +75,7 @@ function formatVariableName(name, convention = null) {
       break;
   }
 
-  if (!/^[a-zA-Z]/.test(formatted)) {
+  if (!/^[a-zA-Z_\u0400-\u04FF]/.test(formatted)) {
     formatted = "x." + formatted;
   }
 
