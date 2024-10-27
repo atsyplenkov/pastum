@@ -1,5 +1,7 @@
 <!-- badges: start -->
+
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://img.shields.io/badge/repo_status-WIP-yellow)](https://www.repostatus.org/#wip) ![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/atsyplenkov.pastum?include_prereleases&style=flat&label=stable%20version&color=green&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Datsyplenkov.pastum) [![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/atsyplenkov.pastum?label=VS%20Marketplace%20installs&color=7abfbb&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Datsyplenkov.pastum)](https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum) [![Open VSX Downloads](https://img.shields.io/open-vsx/dt/atsyplenkov/pastum?label=Open%20VSX%20downloads&color=c160ef)](https://open-vsx.org/extension/atsyplenkov/pastum) [![Deploy Extension](https://github.com/atsyplenkov/pastum/actions/workflows/publish-extensions.yml/badge.svg)](https://github.com/atsyplenkov/pastum/actions/workflows/publish-extensions.yml)
+
 <!-- badges: end -->
 
 # pastum <img src="https://github.com/atsyplenkov/pastum/raw/master/assets/logo.png" align="right" width="200" />
@@ -7,19 +9,22 @@
 `pastum` allows you to quickly transform any text table (tab-separated) from your clipboard into a dataframe object in your favorite language — R, Python, or Julia. Almost all popular frameworks are supported; if something is missing, don't hesitate to raise an [issue](https://github.com/atsyplenkov/pastum/issues).
 
 # Example usage
+
 ### Text table to polars (Python)
+
 Using the command palette, insert the copied text table as a Python, R, or Julia object. Select the framework on the go.
 
 ![](https://github.com/atsyplenkov/pastum/raw/master/assets/demo-py-polars.gif)
 
 ### Text table to tibble (R)
+
 Or you can specify the `pastum.defaultDataframe` parameter in VS Code settings and insert the table using the right-click context menu:
 
 ![](https://github.com/atsyplenkov/pastum/raw/master/assets/demo-r-tibble.gif)
 
 # Installation
 
-You can install the development version from the [Releases](https://github.com/atsyplenkov/pastum/releases/) page. Download the latest `.vsix` file, and install it as described [here](https://code.visualstudio.com/docs/editor/extension-marketplace#_install-from-a-vsix).
+The extension is published on both the [VS Marketplace](https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum) and [Open VSX Registry](https://open-vsx.org/extension/atsyplenkov/pastum); just search for `pastum` within your IDE. Otherwise, you can install the latest version from the [Releases](https://github.com/atsyplenkov/pastum/releases/) page. Download the latest `.vsix` file and install it as described [here](https://code.visualstudio.com/docs/editor/extension-marketplace#_install-from-a-vsix).
 
 # Features
 
