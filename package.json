@@ -2,7 +2,7 @@
   "name": "pastum",
   "displayName": "Pastum",
   "description": "Convert table from clipboard to R, Python or Julia dataframe",
-  "version": "0.0.3",
+  "version": "0.0.3.1",
   "publisher": "atsyplenkov",
   "license": "MIT",
   "icon": "assets/logo.png",
