@@ -2,7 +2,7 @@ const vscode = require("vscode");
 const { parseClipboard } = require("./parse-table");
 const { addTrailingZeroes } = require("./utils");
 
-async function clipboardToRDataFrame() {
+async function clipboardToRDataFrame(framework = null) {
   try {
     // 1: Read the clipboard content
     const clipboardContent = await vscode.env.clipboard.readText();
@@ -19,12 +19,13 @@ async function clipboardToRDataFrame() {
     formattedData = parseClipboard(clipboardContent);
 
     // 3: Ask the user which framework they want to use
-    let framework = null;
-    framework = await vscode.window.showQuickPick(
-      ["base", "tibble ✨", "data.table 🎩", "polars 🐻"],
-      { placeHolder: "Select the R framework to use for the dataframe" }
-    );
-    framework = framework.split(" ")[0];
+    if (framework === null) {
+      framework = await vscode.window.showQuickPick(
+        ["base", "tibble ✨", "data.table 🎩", "polars 🐻"],
+        { placeHolder: "Select the R framework to use for the dataframe" }
+      );
+      framework = framework.split(" ")[0];
+    }
 
     if (!framework) {
       vscode.window.showErrorMessage("No framework selected.");
@@ -54,23 +55,23 @@ async function clipboardToRDataFrame() {
 /**
  * Generates R dataframe objects.
  * Supports base R, tibble, data.table, and R polars frameworks.
-*
-* Modified from: https://web-apps.thecoatlessprofessor.com/data/html-table-to-dataframe-tool.html
-*
-* Framework-specific details:
-* - base R: Uses data.frame() constructor, no package dependencies
-* - tibble: Uses tibble() constructor, requires tibble package
-* - data.table: Uses data.table() constructor, requires data.table package
-* - polars: Uses pl$DataFrame() constructor, requires polars package
-*
-* @param {Object} tableData - Processed table data
-* @param {Array<string>} tableData.headers - Column names
-* @param {Array<Array<any>>} tableData.data - Table values
-* @param {Array<string>} tableData.columnTypes - Column types ('numeric' or 'string')
-* @param {string} framework - R framework to use ('base', 'tibble', 'data.table', 'polars')
-* @returns {string} Generated R code
-*
-*/
+ *
+ * Modified from: https://web-apps.thecoatlessprofessor.com/data/html-table-to-dataframe-tool.html
+ *
+ * Framework-specific details:
+ * - base R: Uses data.frame() constructor, no package dependencies
+ * - tibble: Uses tibble() constructor, requires tibble package
+ * - data.table: Uses data.table() constructor, requires data.table package
+ * - polars: Uses pl$DataFrame() constructor, requires polars package
+ *
+ * @param {Object} tableData - Processed table data
+ * @param {Array<string>} tableData.headers - Column names
+ * @param {Array<Array<any>>} tableData.data - Table values
+ * @param {Array<string>} tableData.columnTypes - Column types ('numeric' or 'string')
+ * @param {string} framework - R framework to use ('base', 'tibble', 'data.table', 'polars')
+ * @returns {string} Generated R code
+ *
+ */
 function createRDataFrame(tableData, framework) {
   const { headers, data, columnTypes } = tableData;
   let code = "";
@@ -80,7 +81,7 @@ function createRDataFrame(tableData, framework) {
    * @param {any} value - The value to format
    * @param {number} colIndex - Column index for type lookup
    * @returns {string} Formatted value
-  */
+   */
   function formatValue(value, colIndex) {
     if (value === "") {
       return "NA";

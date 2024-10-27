@@ -2,7 +2,7 @@ const vscode = require("vscode");
 const { parseClipboard } = require("./parse-table");
 const { addTrailingZeroes } = require("./utils");
 
-async function clipboardToPyDataFrame() {
+async function clipboardToPyDataFrame(framework = null) {
   try {
     // 1: Read the clipboard content
     const clipboardContent = await vscode.env.clipboard.readText();
@@ -19,12 +19,13 @@ async function clipboardToPyDataFrame() {
     formattedData = parseClipboard(clipboardContent);
 
     // 3: Ask the user which framework they want to use
-    let framework = null;
-    framework = await vscode.window.showQuickPick(
-      ["pandas 🐼", "datatable 🎩", "polars 🐻"],
-      { placeHolder: "Select the R framework to use for the dataframe" }
-    );
-    framework = framework.split(" ")[0];
+    if (framework === null) {
+      framework = await vscode.window.showQuickPick(
+        ["pandas 🐼", "polars 🐻", "datatable 🎩"],
+        { placeHolder: "Select the Python framework" }
+      );
+      framework = framework.split(" ")[0];
+    }
 
     if (!framework) {
       vscode.window.showErrorMessage("No framework selected.");
@@ -56,18 +57,6 @@ async function clipboardToPyDataFrame() {
  * Supports pandas, polars, and datatable frameworks.
  *
  * Modified from: https://web-apps.thecoatlessprofessor.com/data/html-table-to-dataframe-tool.html
- *
- * Framework-specific details:
- * - pandas: Uses pd.DataFrame() constructor, requires pandas package
- * - polars: Uses pl.DataFrame() constructor, requires polars package
- * - datatable: Uses dt.Frame() constructor, requires datatable package
- *
- * @param {Object} tableData - Processed table data
- * @param {Array<string>} tableData.headers - Column names
- * @param {Array<Array<any>>} tableData.data - Table values
- * @param {Array<string>} tableData.columnTypes - Column types ('numeric' or 'string')
- * @param {string} framework - Python framework to use ('pandas', 'polars', 'datatable')
- * @returns {string} Generated Python code
  *
  */
 function createPyDataFrame(tableData, framework) {

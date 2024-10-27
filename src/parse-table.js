@@ -6,11 +6,6 @@ const utils = require("./utils.js");
 
 /**
  * Parses the clipboard content into a structured table.
- * If the clipboard content does not contain a valid table, shows an error message.
- * Otherwise, formats the table headers according to R language conventions and
- * prepares the table data for code generation (into a R dataframe).
- * @param {string} clipboardContent - Raw content of the clipboard
- * @returns {Object} Processed table data with headers, data, and column types
  */
 function parseClipboard(clipboardContent) {
   let parsedTableData = null;
@@ -40,7 +35,6 @@ function parseClipboard(clipboardContent) {
 /**
  * Formats column names to be valid variable names in different programming languages.
  * Handles specific naming conventions and restrictions for R.
- *
  */
 function formatVariableName(name, convention = null) {
   // Retrieve the setting if convention is not provided
@@ -92,9 +86,6 @@ function formatVariableName(name, convention = null) {
 /**
  * Extracts table HTML from a potentially larger HTML string.
  * Uses multiple strategies to find and extract valid table markup.
- *
- * @param {string} html - Raw HTML string that may contain a table
- * @returns {string|null} Extracted table HTML or null if no table found
  */
 function extractTable(html) {
   // Strategy 1: Direct regex match for complete table tags
@@ -122,14 +113,6 @@ function extractTable(html) {
 /**
  * Expands a plain text table into a normalized matrix.
  * This function ensures each row has consistent columns and removes any empty rows.
- *
- * Process:
- * 1. Ensure that all rows have the same number of columns.
- * 2. Normalize rows by filling in any missing cells with empty strings.
- * 3. Remove empty rows while preserving headers.
- *
- * @param {Array<Array<string>>} table - The text table matrix to process
- * @returns {Array<Array<string>>} Normalized matrix of table data
  */
 function expandTextTable(table) {
   // Initialize matrix
@@ -158,15 +141,6 @@ function expandTextTable(table) {
  * Expands an HTML table into a normalized matrix, handling colspan and rowspan.
  * This function converts a complex HTML table with merged cells into a regular
  * matrix where each cell contains exactly one value.
- *
- * Process:
- * 1. Creates an empty matrix based on table dimensions
- * 2. Processes each cell, expanding merged cells (colspan/rowspan)
- * 3. Normalizes the matrix to ensure consistent dimensions
- * 4. Filters out empty rows while preserving headers
- *
- * @param {HTMLTableElement} table - The HTML table element to process
- * @returns {Array<Array<string>>} Normalized matrix of table data
  */
 function expandTable(table) {
   // Extract all table rows
@@ -180,10 +154,6 @@ function expandTable(table) {
   /**
    * Finds the next available cell position in a row
    * Handles cases where previous cells have been expanded due to colspan
-   *
-   * @param {number} row - Row index to search
-   * @param {number} startCol - Starting column index
-   * @returns {number} Next available column index
    */
   function findNextEmptyCell(row, startCol) {
     let col = startCol;
@@ -242,17 +212,6 @@ function expandTable(table) {
 /**
  * Parses HTML or text containing a table into structured data.
  * Handles the complete table processing pipeline from HTML or text to formatted data.
- *
- * Processing steps:
- * 1. Extracts and validates table HTML or plain text
- * 2. Expands merged cells into normalized matrix (for HTML)
- * 3. Processes headers and data rows
- * 4. Determines column types
- * 5. Converts data to appropriate types
- *
- * @param {string} inputString - Raw HTML or text containing a table
- * @returns {Object} Processed table data with headers, data, and column types
- * @throws {Error} If table structure is invalid or missing required elements
  */
 function parseTable(inputString) {
   try {
@@ -351,9 +310,6 @@ function parseTable(inputString) {
 /**
  * Parses a plain text table (assumes comma, tab, or space delimited values)
  * into a structured matrix.
- *
- * @param {string} textString - Raw text containing a table
- * @returns {Array[]} Matrix representation of the table
  */
 function parseTextTable(textString) {
   // Split the input by line breaks for rows
