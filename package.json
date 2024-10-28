@@ -71,7 +71,7 @@
           "pastum.showContextMenu": {
             "type": "boolean",
             "default": true,
-            "description": "Show the 'Paste default dataframe' command in the editor context menu."
+            "markdownDescription": "Show the `Pastum ➔ Default Dataframe` command in the editor context menu. It will only appear in R, Python and Julia editors."
           }
         }
       },
@@ -87,7 +87,7 @@
               "snake_case"
             ],
             "default": "PascalCase",
-            "markdownDescription": "Select naming convention for variable names. For example, `Hello World!` will be converted to \n\n - PascalCase: `HelloWorld` \n\n - camelCase: `helloWorld` \n\n - snake_case: `hello_world`"
+            "markdownDescription": "Select naming convention for column names preprocessing. To learn more about naming conventions in programming, see [freecodecamp post](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case). For example, `Hello World!` will be converted to \n\n - PascalCase: `HelloWorld` \n\n - camelCase: `helloWorld` \n\n - snake_case: `hello_world`"
           }
         }
       },

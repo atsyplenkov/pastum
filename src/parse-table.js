@@ -76,7 +76,7 @@ function formatVariableName(name, convention = null) {
   }
 
   if (!/^[a-zA-Z_\u0400-\u04FF]/.test(formatted)) {
-    formatted = "x." + formatted;
+    formatted = "x" + formatted;
   }
 
   return formatted;
