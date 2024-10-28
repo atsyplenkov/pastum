@@ -22,7 +22,7 @@ async function clipboardToPyDataFrame(framework = null) {
     if (framework === null) {
       framework = await vscode.window.showQuickPick(
         ["pandas 🐼", "polars 🐻", "datatable 🎩"],
-        { placeHolder: "Select the Python framework" }
+        { placeHolder: "Select the Python framework for creating the dataframe" }
       );
       framework = framework.split(" ")[0];
     }
