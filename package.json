@@ -99,6 +99,7 @@
             "type": "string",
             "enum": [
               "R base",
+              "R tribble",
               "R tibble",
               "R data.table",
               "R polars",
@@ -107,7 +108,7 @@
               "Py polars",
               "Jl DataFrame"
             ],
-            "default": "R tibble",
+            "default": "R tribble",
             "markdownDescription": "Select default dataframe type."
           }
         }

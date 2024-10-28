@@ -83,6 +83,7 @@ function formatVariableName(name, convention = null) {
 }
 
 /**
+ * FIXME: This function is not used yet.
  * Expands a plain text table into a normalized matrix.
  * This function ensures each row has consistent columns and removes any empty rows.
  */
@@ -191,8 +192,8 @@ function parseTextTable(textString) {
   // Split the input by line breaks for rows
   const rows = textString.trim().split(/\r?\n/);
 
-  // Split each row by tab delimiters
-  const matrix = rows.map((row) => row.split(/\t/));
+  // Split each row by tab delimiters or by space and tab
+  const matrix = rows.map((row) => row.split(/\t|\s\t/));
 
   return matrix;
 }

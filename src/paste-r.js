@@ -21,8 +21,8 @@ async function clipboardToRDataFrame(framework = null) {
     // 3: Ask the user which framework they want to use
     if (framework === null) {
       framework = await vscode.window.showQuickPick(
-        ["base", "tibble ✨", "data.table 🎩", "polars 🐻"],
-        { placeHolder: "Select the R framework to use for the dataframe" }
+        ["base", "tribble 🔢", "tibble ✨", "data.table 🎩", "polars 🐻"],
+        { placeHolder: "Select the R framework for creating the dataframe" }
       );
       framework = framework.split(" ")[0];
     }
@@ -96,6 +96,22 @@ function createRDataFrame(tableData, framework) {
     }
   }
 
+  // Calculate column widths based on header and data lengths
+  function calculateColumnWidths() {
+    return headers.map((header, colIndex) => {
+      const headerWidth = header.length + 1; // +1 for `~` in tribble
+      const maxDataWidth = Math.max(
+        ...data.map((row) => formatValue(row[colIndex], colIndex).length)
+      );
+      return Math.max(headerWidth, maxDataWidth);
+    });
+  }
+
+  // Pads a value to the target width
+  function padToWidth(value, width) {
+    return value + " ".repeat(width - value.length);
+  }
+
   // Generate code based on selected framework
   if (framework === "base") {
     code = `data.frame(\n`;
@@ -115,6 +131,32 @@ function createRDataFrame(tableData, framework) {
       }`;
     });
     code += `)`;
+  } else if (framework === "tribble") {
+    const colWidths = calculateColumnWidths();
+    code = `tibble::tribble(\n`;
+
+    // Column headers with padding
+    code +=
+      "  " +
+      headers
+        // Increment by 1 to account for `,`
+        .map((header, i) => padToWidth(`~${header},`, colWidths[i] + 1))
+        .join(" ") +
+      "\n";
+
+    // Data rows with padding
+    data.forEach((row) => {
+      const rowValues = row
+        .map((value, i) =>
+          // Increment by 1 to account for `,`
+          padToWidth(`${formatValue(value, i)},`, colWidths[i] + 1)
+        )
+        .join(" ");
+      code += `  ${rowValues}\n`;
+    });
+
+    // Remove trailing comma and close parentheses
+    code = code.trimEnd().slice(0, -1) + `\n)`;
   } else if (framework === "data.table") {
     code = `data.table::data.table(\n`;
     headers.forEach((header, i) => {
