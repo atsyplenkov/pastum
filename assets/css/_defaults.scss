@@ -1,589 +1,599 @@
-clear, .clear {
-    &:after,
-    &:before {
-        content: ' ';
-        display: block;
-        clear: both;
-    }
+clear,
+.clear {
+  &:after,
+  &:before {
+    content: " ";
+    display: block;
+    clear: both;
+  }
 }
 
-html, body {
-    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    color: #515151;
-    color: white;
-    line-height: 1;
-    background: #06000A;
-    
-    @include appnav {
-        font-size: 14px;
-    }
+html,
+body {
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  color: #515151;
+  color: white;
+  line-height: 1;
+  background: #06000a;
+
+  @include appnav {
+    font-size: 14px;
+  }
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    @extend clear;
+  @extend clear;
 }
 
 img {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    height: auto;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 h1 {
-    color: white;
-    font-size: 48px;
-    line-height: 1.1;
-    font-weight: bold;
-    margin-top: 0px;
-    
-    @include tablet {
-        font-size: 28px;
-    }
-    
-    @include appnav {
-        font-size: 22px;
-    }
+  color: white;
+  font-size: 48px;
+  line-height: 1.1;
+  font-weight: bold;
+  margin-top: 0px;
+
+  @include tablet {
+    font-size: 28px;
+  }
+
+  @include appnav {
+    font-size: 22px;
+  }
 }
 
 h2 {
-    font-size: 32px;
-    font-weight: bold;
-    margin-top: 0;
-    
-    @include appnav {
-        font-size: 18px;
-    }
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 0;
+
+  @include appnav {
+    font-size: 18px;
+  }
 }
 
 h3 {
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 0;
-    
-    @include appnav {
-        font-size: 16px;
-    }
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 0;
+
+  @include appnav {
+    font-size: 16px;
+  }
 }
 
 a {
-    color: inherit;
-    transition: opacity 0.2s;
-    text-decoration: none;
-    &:hover {
-        opacity: 0.75;
-    }
-    &:active {
-        opacity: 0.85;
-    }
+  color: inherit;
+  transition: opacity 0.2s;
+  text-decoration: none;
+  &:hover {
+    opacity: 0.75;
+  }
+  &:active {
+    opacity: 0.85;
+  }
 }
 
 p {
-    font-size: 16px;
-    line-height: 1.4;
-    opacity: 0.8;
-    
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: 0.8;
+
+  @include appnav {
+    font-size: 15px;
+  }
+  &.big {
+    font-size: 20px;
+
     @include appnav {
-        font-size: 15px;
+      font-size: 17px;
     }
-    &.big {
-        font-size: 20px;
-    
-        @include appnav {
-            font-size: 17px;
-        }
-    }
+  }
 }
 
 ul {
+  margin: 0;
+  padding: 0;
+  padding-left: 0px;
+  opacity: 0.8;
+  li {
     margin: 0;
     padding: 0;
-    padding-left: 0px;
-    opacity: 0.8;
-    li {
-        margin: 0;
-        padding: 0;
-        line-height: 1.4;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
+    line-height: 1.4;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 
-        &:before {
-            content: '';
-            background: url('/assets/img/check_circle_black_24dp.svg') center center no-repeat;
-            width: 24px;
-            height: 24px;
-            min-width: 24px;
-            background-size: contain;
-            display: block;
-            margin-right: 8px;
-        }
-
-        & + li {
-            padding-top: 10px;
-    
-            @include appnav {
-                padding-top: 8px;
-            }
-        }
+    &:before {
+      content: "";
+      background: url("/assets/img/check_circle_black_24dp.svg") center center
+        no-repeat;
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      background-size: contain;
+      display: block;
+      margin-right: 8px;
     }
+
+    & + li {
+      padding-top: 10px;
+
+      @include appnav {
+        padding-top: 8px;
+      }
+    }
+  }
 }
 
 .semibold {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 main {
-    position: relative;
-    height: 100%;
-    width: 100%;
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 35px;
-    
-    @include tablet {
-        position: static;
-        padding: 35px 10px;
-    }
-    
-    img {
-        width: 172px;
-        height: 53px;
-        will-change: transform;
-    }
-    a {
-        display: block;
-        position: absolute;
-        top: 35px;
-        right: 35px;
-        color: white;
-        text-decoration: none;
-        font-size: 13px;
-        transition: opacity 0.2s;
-        
-        &:hover {
-            opacity: 0.75;
-        }
-        
-        span {
-            display: inline-block;
-            vertical-align: middle;
-        }
-        svg {
-            margin-left: 14px;
-            fill: white;
-            width: 29px;
-            height: 29px;
-            display: inline-block;
-        }
-        
-        @include tablet {
-            top: 47px;
-            right: 32px;
-            span {
-                display: none;
-            }
-            span + span {
-                display: block;
-            }
-        }
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 35px;
 
+  @include tablet {
+    position: static;
+    padding: 35px 10px;
+  }
+
+  img {
+    width: 137px;
+    height: 80px;
+    opacity: 85%;
+    will-change: transform;
+  }
+  a {
+    display: block;
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.75;
     }
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    svg {
+      margin-left: 14px;
+      fill: white;
+      width: 29px;
+      height: 29px;
+      display: inline-block;
+    }
+
+    @include tablet {
+      top: 47px;
+      right: 32px;
+      span {
+        display: none;
+      }
+      span + span {
+        display: block;
+      }
+    }
+  }
 }
 
 .background {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    overflow: hidden;
-    background-image: url('../img/bg-new_2560.jpg');
-    background-position: 50% 100%;
-    background-size: cover;
-    opacity: 0.5;
-    animation: bgIn 2s;
-    @keyframes bgIn {
-        0% { opacity: 0; }
-        30% { opacity: 0; }
-        100% { opacity: 0.5; }
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  background-image: url("../img/egor-myznik-tHGIV1GIutY-unsplash.jpg");
+  background-position: 50% 100%;
+  background-size: cover;
+  opacity: 0.5;
+  animation: bgIn 2s;
+  @keyframes bgIn {
+    0% {
+      opacity: 0;
     }
+    30% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
 }
 
 .foreground {
-    position: relative;
-    top: 0;
+  position: relative;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: 0;
     left: 0;
-    min-height: 100vh;
     width: 100%;
-    z-index: 2;
+    height: 50px;
+    background: linear-gradient(0deg, rgba(#050005, 1), rgba(#050005, 0));
+  }
+
+  @include tablet {
+    display: block;
+    position: relative;
+    min-height: 100%;
+  }
+
+  .inner {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    padding: 0 20px;
+    width: 100%;
+    max-width: 1080px;
+    padding-left: 20px;
+    box-sizing: content-box;
+    justify-content: space-between;
 
-    &:before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 50px;
-        background: linear-gradient(0deg, rgba(#050005, 1), rgba(#050005, 0));
-    }
-    
     @include tablet {
-        display: block;
-        position: relative;
-        min-height: 100%;
+      max-width: 400px;
+      display: block;
+      box-sizing: border-box;
+      margin: auto;
+      padding: 12px;
     }
-    
-    .inner {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: center;
-        width: 100%;
-        max-width: 1080px; 
-        padding-left: 20px;
-        box-sizing: content-box;
-        justify-content: space-between;
-        
-        @include tablet {
-            max-width: 400px;
-            display: block;
-            box-sizing: border-box;
-            margin: auto;
-            padding: 12px;
-        }
-    }
-    
-    .text {
-        width: 60%;
-        padding-right: 35px;
-        text-align: left;
-        color: white;
-        
-        @include tablet {
-            width: 100%;
-            padding: 0;
-        }
-        
-        .logo {
-            width: 336px;
-            height: 89px;
-            padding-bottom: 20px;
-            display: block;
-            
-            @include tablet {
-                margin: 15px auto 0;
-                width: 210px;
-                height: auto;
-            }
-        }
-        .button {
-            font-weight: bold;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 10px;
-            color: white;
-            padding: 10px 20px;;
-            font-size: 13px;
-            font-weight: 400;
-            display: inline-block;
-            text-align: center;
-            transition: background 0.1s;
-            backdrop-filter: blur(20px);
-            @include tablet {
-                width: 100%;
-            }
-            
-            &:hover {
-                background: rgba(255, 255, 255, 0.3);
-                opacity: 1;
-            }
-            &:active {
-                background: rgba(255, 255, 255, 0.35);
-                opacity: 1;
-            }
-            
-            span {
-                display: inline-block;
-                vertical-align: middle;
-                line-height: 1;
-                & + span {
-                    padding-left: 10px;
-                }
-            }
-            svg {
-                width: 22px;
-                height: 21px;
-                fill: white;
-            }
-            
-            & + a {
-                padding: 10px 0;
-                margin-left: 10px;
-                opacity: 0.5;
-                &:hover, &:active {
-                    opacity: 0.75;
-                }
-                @include tablet {
-                    margin: 5px 0 0 0;
-                }
-            }
-        }
-    }
-    .wstore {
-        width: 145px;
-        height: 52px;
-        margin-top: 7px;
-        margin-bottom: -7px;
-        @include mobile {
-            display: none;
-        }
-    }
-    .download-info {
-        padding-top: 20px;
-        p {
-            text-align: left;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.55);
-        }
+  }
+
+  .text {
+    width: 60%;
+    padding-right: 35px;
+    text-align: left;
+    color: white;
+
+    @include tablet {
+      width: 100%;
+      padding: 0;
     }
 
-    .screenshot {
-        width: 54%;
-        margin-left: auto;
-        
-        img {
-            display: block;
-            margin: auto;
-            max-width: 356px;
-        }
-        
-        @include tablet {
-            display: none;
-        }
-    }
-    .mob-screenshot {
-        display: none;
-        max-width: 600px;
+    .logo {
+      width: 336px;
+      height: 89px;
+      padding-bottom: 20px;
+      display: block;
+
+      @include tablet {
+        margin: 15px auto 0;
+        width: 210px;
         height: auto;
-        margin-bottom: 30px;
-        
+      }
+    }
+    .button {
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 10px;
+      color: white;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 400;
+      display: inline-block;
+      text-align: center;
+      transition: background 0.1s;
+      backdrop-filter: blur(20px);
+      @include tablet {
+        width: 100%;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.3);
+        opacity: 1;
+      }
+      &:active {
+        background: rgba(255, 255, 255, 0.35);
+        opacity: 1;
+      }
+
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1;
+        & + span {
+          padding-left: 10px;
+        }
+      }
+      svg {
+        width: 22px;
+        height: 21px;
+        fill: white;
+      }
+
+      & + a {
+        padding: 10px 0;
+        margin-left: 10px;
+        opacity: 0.5;
+        &:hover,
+        &:active {
+          opacity: 0.75;
+        }
         @include tablet {
-            display: block;
+          margin: 5px 0 0 0;
         }
+      }
+    }
+  }
+  .wstore {
+    width: 145px;
+    height: 52px;
+    margin-top: 7px;
+    margin-bottom: -7px;
+    @include mobile {
+      display: none;
+    }
+  }
+  .download-info {
+    padding-top: 20px;
+    p {
+      text-align: left;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+    }
+  }
+
+  .screenshot {
+    width: 54%;
+    margin-left: auto;
+
+    img {
+      display: block;
+      margin: auto;
+      max-width: 500px;
     }
 
-    .buttons-row {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        flex-wrap: wrap;
-
-        a {
-            margin-right: 10px;
-        }
-
-        & + .buttons-row {
-            padding-top: 10px;
-        }
+    @include tablet {
+      display: none;
     }
+  }
+  .mob-screenshot {
+    display: none;
+    max-width: 600px;
+    height: auto;
+    margin-bottom: 30px;
+
+    @include tablet {
+      display: block;
+    }
+  }
+
+  .buttons-row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+
+    a {
+      margin-right: 10px;
+    }
+
+    & + .buttons-row {
+      padding-top: 10px;
+    }
+  }
 }
 
 .footer {
-    width: 100%;
-    z-index: 3;
-    display: flex;
-    justify-content: space-between;
-    background-color: #4A4F57;
-    line-height: 1.2;
-    
-    @include tablet {
-        position: relative;
-        display: block;
-        text-align: center;
-        padding: 20px 0;
-    }
+  width: 100%;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  background-color: #4a4f57;
+  line-height: 1.2;
 
-    a {
-        text-decoration: underline;
+  @include tablet {
+    position: relative;
+    display: block;
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  & > div {
+    padding: 35px;
+    font-size: 12px;
+    @include tablet {
+      padding: 5px;
     }
-    
-    
-    & > div {
-        padding: 35px;
-        font-size: 12px;
-        @include tablet {
-            padding: 5px;
-        }
-    }
-    .left {
-        color: rgba(255,255,255,0.5);
-    }
-    .right {
-        color: rgba(255,255,255,0.5);
-    }
+  }
+  .left {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  .right {
+    color: rgba(255, 255, 255, 0.5);
+  }
 }
 
 .section--intro {
-    position: relative;
-    min-height: 100vh;
-    @include tablet {
-        min-height: 100%;
-    }
+  position: relative;
+  min-height: 100vh;
+  @include tablet {
+    min-height: 100%;
+  }
 }
 
 .section--design {
-    background-color: #050005;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 80px 20px 0;
-    
-    .text {
-        max-width: 664px;
-        margin: auto;
-        text-align: center;
+  background-color: #050005;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 80px 20px 0;
 
-        @include appnav {
-            text-align: left;
-        }
+  .text {
+    max-width: 664px;
+    margin: auto;
+    text-align: center;
+
+    @include appnav {
+      text-align: left;
     }
-    img {
-        max-width: 830px;
-        height: auto;
-        border-radius: 10px;
-        margin-bottom: -108px;
-        margin-top: 60px;
-        box-shadow: 0 18px 30px -10px rgba(#131518, 0.5);
-        @include appnav {
-            margin-top: 40px;
-        }
+  }
+  img {
+    max-width: 830px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: -108px;
+    margin-top: 60px;
+    box-shadow: 0 18px 30px -10px rgba(#131518, 0.5);
+    @include appnav {
+      margin-top: 40px;
     }
+  }
 }
 
 .section--features {
-    background-color: #242B33;
+  background-color: #242b33;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 220px 20px 100px;
+
+  @media (max-width: 600px) {
+    padding-top: 130px;
+    padding-bottom: 60px;
+  }
+
+  .inner {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 220px 20px 100px;
-
-    @media (max-width: 600px) {
-        padding-top: 130px;
-        padding-bottom: 60px;
+    @media (max-width: 900px) {
+      display: block;
     }
-
-    .inner {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        @media (max-width: 900px) {
-            display: block;
-        }
+  }
+  img {
+    border-radius: 10px;
+    box-shadow: 0 18px 30px -10px rgba(#131518, 0.5);
+    @media (max-width: 900px) {
+      max-width: 500px;
     }
-    img {
-        border-radius: 10px;
-        box-shadow: 0 18px 30px -10px rgba(#131518, 0.5);
-        @media (max-width: 900px) {
-            max-width: 500px;
-        }
+  }
+  .text {
+    padding-left: 70px;
+    max-width: 600px;
+    @media (max-width: 900px) {
+      padding: 40px 0 0;
     }
-    .text {
-        padding-left: 70px;
-        max-width: 600px;
-        @media (max-width: 900px) {
-            padding: 40px 0 0;
-        }
-    }
+  }
 }
 
 .section--get-started {
-    background-color: #50565D;
+  background-color: #50565d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 100px 20px;
+
+  @include tablet {
+    padding: 60px 20px;
+  }
+
+  .text {
+    text-align: center;
+    max-width: 680px;
+    width: 100%;
+  }
+  .columns {
+    max-width: 680px;
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 100px 20px;
+    align-items: flex-start;
+    margin: 0 -10px;
+    padding-top: 60px;
 
     @include tablet {
-        padding: 60px 20px;
+      padding-top: 30px;
     }
 
-    .text {
-        text-align: center;
-        max-width: 680px;
+    @media (max-width: 700px) {
+      display: block;
+      max-width: 400px;
+      margin: 0;
+    }
+    .item {
+      border-radius: 10px;
+      background-color: #242b33;
+      overflow: hidden;
+      flex: 1;
+      margin: 0 10px;
+      box-shadow: 0 18px 30px -10px rgba(#131518, 0.5);
+      margin-bottom: 20px;
+
+      @media (max-width: 700px) {
         width: 100%;
+        margin: 0 0 20px;
+      }
     }
-    .columns {
-        max-width: 680px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        margin: 0 -10px;
-        padding-top: 60px;
-
-        @include tablet {
-            padding-top: 30px;
-        }
-
-        @media (max-width: 700px) {
-            display: block;
-            max-width: 400px;
-            margin: 0;
-        }
-        .item {
-            border-radius: 10px;
-            background-color: #242B33;
-            overflow: hidden;
-            flex: 1;
-            margin: 0 10px;
-            box-shadow: 0 18px 30px -10px rgba(#131518, 0.5);
-            margin-bottom: 20px;
-
-            @media (max-width: 700px) {
-                width: 100%;
-                margin: 0 0 20px;
-            }
-        }
-        .item-logo {
-            background-color: #1D2227;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 160px;
-        }
-        .item-list {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 30px 15px;
-            text-align: center;
-
-            a {
-                display: block;
-                padding: 7px;
-                line-height: 1.2;
-                opacity: 0.75;
-                &:hover, &:active {
-                    opacity: 1;
-                }
-            }
-        }
+    .item-logo {
+      background-color: #1d2227;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 160px;
     }
+    .item-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 30px 15px;
+      text-align: center;
+
+      a {
+        display: block;
+        padding: 7px;
+        line-height: 1.2;
+        opacity: 0.75;
+        &:hover,
+        &:active {
+          opacity: 1;
+        }
+      }
+    }
+  }
 }
