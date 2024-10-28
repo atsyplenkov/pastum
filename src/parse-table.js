@@ -154,7 +154,7 @@ function parseTable(inputString) {
     // If the majority of columns are non-numeric,
     // assume all columns are strings
     columnCounts.forEach((counts, colIndex) => {
-      if (counts.nonNumeric >= counts.numeric) {
+      if (counts.nonNumeric >= 1) {
         columnTypes[colIndex] = "string";
       }
     });
