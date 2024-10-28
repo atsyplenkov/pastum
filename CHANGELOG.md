@@ -4,19 +4,19 @@ All notable changes to the "pastum" extension will be documented in this file.
 
 <!-- Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file. -->
 
-## [0.1] - 2024-10-29
+## [0.1.0] - 2024-10-29
 
 ### Added
 
-- Website with main features descriptions — [https://pastum.anatolii.nz](https://pastum.anatolii.nz)
+- Website with main features descriptions — [https://pastum.anatolii.nz](https://pastum.anatolii.nz) (#5)
 - `tibble::tribble()` support (#11)
-- Paste as `tibble::tribble()` is the default option for `pastum.defaultDataframe`
+- Paste as `tibble::tribble()` is the default option for `pastum.defaultDataframe` (i.e., context menu)
 
 ### Fixed
 
 - Minor grammar and spelling edits
 - Fixed distinction between string and numeric column types. If at least one value in the column is a string, the whole column is treated as a string.
-- Cyrillic letters support in header rows
+- Cyrillic letters support in header rows (#9)
 - Removed trailing zeroes when the table is copied from the web (#12)
 
 ## [0.0.3] - 2024-10-27
