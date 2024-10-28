@@ -50,8 +50,7 @@
       },
       {
         "command": "pastum.Defaultdataframe",
-        "title": "Pastum ➔ Default Dataframe",
-        "category": "Pastum"
+        "title": "Pastum: paste as default dataframe"
       }
     ],
     "menus": {
