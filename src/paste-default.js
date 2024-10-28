@@ -13,6 +13,9 @@ function pasteDefault() {
     case "R base":
       r.clipboardToRDataFrame("base");
       break;
+    case "R tribble":
+      r.clipboardToRDataFrame("tribble");
+      break;
     case "R tibble":
       r.clipboardToRDataFrame("tibble");
       break;
