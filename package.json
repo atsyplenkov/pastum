@@ -70,7 +70,7 @@
           "pastum.showContextMenu": {
             "type": "boolean",
             "default": true,
-            "markdownDescription": "Show the `Pastum ➔ Default Dataframe` command in the editor context menu. It will only appear in R, Python and Julia editors."
+            "markdownDescription": "Show the `Pastum: paste as default dataframe` command in the editor context menu. It will only appear in R, Python and Julia editors."
           }
         }
       },
