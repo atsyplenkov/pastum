@@ -162,9 +162,9 @@
                 </svg>
               </p>
               <p>
-                Pastum adds commands to your command palette and right-click
-                context menu, so you can paste any text table from your
-                clipboard into the editor as a dataframe object of your
+                <b>Pastum</b> adds commands to your command palette and
+                right-click context menu, so you can paste any text table from
+                your clipboard into the editor as a dataframe object of your
                 framework of choice. It ships with recognition of float,
                 integer, and strings types and built-in support of
                 <a href="https://pandas.pydata.org/">pandas</a>,
@@ -224,7 +224,7 @@
           <p class="big">
             No matter who you are, whether you are an advocate of using a
             pointing device (i.e., computer mouse) or a fan of keybindings,
-            <code>Pastum</code> has options for all of you. With the right-click
+            <b>Pastum</b> has options for all of you. With the right-click
             context menu inside the editor window, you can call the
             <code>"Paste as default dataframe"</code> command, which can be
             configured in the settings to use with your preferred
@@ -244,16 +244,29 @@
         <div class="text">
           <h2>Examples</h2>
           <p class="big">
-            Pastum offers a variety of options and features to match your
-            preferences. Just go to extension settings
-            <code>@ext:atsyplenkov.pastum</code>
+            With <b>Pastum</b>, you can copy any table from the internet, MS
+            Excel, or MS Word and paste it as a dataframe object. Here is an
+            example of transforming table from the Wikipedia page about
+            Palmerston North into a <code>tibble::tribble()</code> (or
+            <b>transposed</b> tibble) object in R.
+          </p>
+          <p>
+            <b>Pastum</b> is capable of detecting the main value types:
+            <code>strings</code> (or <code>character</code> vectors in R),
+            <code>integer</code>, and <code>float</code>. A numeric column is
+            considered to be <code>float</code> if at least one of the values is
+            <code>float</code>. Otherwise, the entire column will be treated as
+            <code>integer</code>. By default, trailing zeroes are added to all
+            <code>float</code> values to comply with <code>polars</code> rules
+            (i.e., numeric values <code>c(1, 2, 3, 4.5)</code> are transformed
+            to <code>c(1.0, 2.0, 3.0, 4.5)</code>).
           </p>
         </div>
         <div class="inner">
           <div class="img">
             <img
-              src="/assets/img/pastum-settings.png"
-              alt="Pastum configuration options"
+              src="/assets/img/pastum-examples.png"
+              alt="Pastum example. Copy wikipedia table and paste as tibble in R."
             />
           </div>
         </div>
@@ -270,8 +283,8 @@
           <div class="text">
             <h2>Configurable</h2>
             <p class="big">
-              Pastum offers a variety of options and features to match your
-              preferences. Just go to extension settings
+              <b>Pastum</b> offers a variety of options and features to match
+              your preferences. Just go to extension settings
               <code>@ext:atsyplenkov.pastum</code>
             </p>
             <ul>

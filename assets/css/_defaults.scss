@@ -495,6 +495,7 @@ main {
 .section--examples {
   background-color: #242b33;
   display: flex;
+  flex-direction: row; // Ensure images and text are side by side
   justify-content: center;
   align-items: center;
   padding: 50px 20px 10px;
@@ -502,27 +503,37 @@ main {
   @media (max-width: 600px) {
     padding-top: 130px;
     padding-bottom: 60px;
+    flex-direction: column; // Stack elements vertically in mobile view
   }
 
   .inner {
     display: flex;
     justify-content: center;
     align-items: center;
+
     @media (max-width: 900px) {
-      display: block;
+      flex-direction: column; // Ensure stacking on smaller screens
+      align-items: center; // Center elements in the column layout
     }
   }
+
   img {
     border-radius: 10px;
     @media (max-width: 900px) {
-      max-width: 500px;
+      max-width: 500px; // Set a max-width for the image in mobile view
+      width: 100%; // Make image responsive
+      height: auto; // Maintain aspect ratio
     }
   }
+
   .text {
+    padding-right: 70px; // Adjust padding as necessary
     padding-left: 70px;
     max-width: 600px;
+
     @media (max-width: 900px) {
-      padding: 40px 0 0;
+      padding: 40px 40px 0; // Adjust padding for mobile view
+      text-align: center; // Center text for better presentation on mobile
     }
   }
 }
