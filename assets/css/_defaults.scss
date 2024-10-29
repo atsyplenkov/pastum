@@ -538,6 +538,118 @@ main {
   }
 }
 
+.section--code {
+  background-color: #242b33;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+
+  img {
+    border-radius: 10px;
+    height: auto;
+    width: 30em;
+    @media (max-width: 200px) {
+      max-width: 200px; // Set a max-width for the image in mobile view
+      width: 100%; // Make image responsive
+      height: auto; // Maintain aspect ratio
+    }
+  }
+
+  .container {
+    width: 60%;
+    font-size: 0;
+    border-radius: 3px;
+    overflow: hidden;
+
+    input {
+      display: none;
+
+      &:checked + label {
+        background: #353f45;
+      }
+
+      @for $i from 1 through 4 {
+        &#tab#{$i}:checked {
+          ~ .line {
+            left: #{($i - 1) * 25%};
+          }
+          ~ .content-container #c#{$i} {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    label {
+      display: inline-block;
+      font-size: 16px;
+      height: 36px;
+      line-height: 36px;
+      width: 25%;
+      text-align: center;
+      background: #263238;
+      color: #d0ba86;
+      position: relative;
+      transition: 0.25s background ease;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1;
+        background: #4e6976;
+      }
+    }
+
+    .content-container {
+      background: #263238;
+      position: relative;
+      height: 20em;
+      font-size: 16px;
+
+      .content {
+        position: absolute;
+        padding: 10px;
+        width: 100%;
+        top: 0;
+        opacity: 0;
+        transition: 0.25s ease;
+        color: #f5f5f5;
+
+        pre {
+          padding: 10px 15px; // Controls spacing within pre
+          margin: 0; // Removes default margin
+          background-color: #353f45;
+          color: #d0ba86;
+          font-family: monospace;
+          white-space: pre-wrap; // Allows line-wrapping within pre
+          border-radius: 5px;
+        }
+
+        code {
+          display: block; // Allows line breaks
+          padding-left: 20px; // Controls additional indentation within code block
+          text-indent: -10px; // Adjust if needed for first-line alignment
+        }
+
+        h3 {
+          font-weight: 200;
+          margin: 10px 0;
+        }
+
+        p {
+          margin: 10px 0;
+          font-size: 13px;
+        }
+
+        i {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}
+
 .section--features {
   background-color: #242b33;
   display: flex;

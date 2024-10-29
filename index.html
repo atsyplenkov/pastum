@@ -45,8 +45,14 @@
   </head>
 
   <body>
+    <!-- Highlight.js -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/stackoverflow-dark.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>
-      document.documentElement.className = "js";
+      hljs.highlightAll();
     </script>
     <!-- SVG icons -->
     <svg style="display: none">
@@ -283,6 +289,109 @@
               src="/assets/img/pastum-examples.webp"
               alt="Pastum example. Copy wikipedia table and paste as tibble in R."
             />
+          </div>
+        </div>
+      </section>
+
+      <section class="section--code">
+        <img
+          src="/assets/img/wikipedia.webp"
+          alt="Pastum context menu and command palette commands"
+        />
+        <div class="container">
+          <input type="radio" id="tab1" name="tab" checked />
+          <label for="tab1"
+            ><svg
+              width="25"
+              height="25"
+              style="vertical-align: middle; margin-bottom: 3px"
+            >
+              <use xlink:href="#rstats"></use>
+            </svg>
+            tibble</label
+          >
+          <input type="radio" id="tab2" name="tab" />
+          <label for="tab2"
+            ><svg
+              width="25"
+              height="25"
+              style="vertical-align: middle; margin-bottom: 3px"
+            >
+              <use xlink:href="#python"></use>
+            </svg>
+            pandas</label
+          >
+          <input type="radio" id="tab3" name="tab" />
+          <label for="tab3"
+            ><svg
+              width="25"
+              height="25"
+              style="vertical-align: middle; margin-bottom: 3px"
+            >
+              <use xlink:href="#python"></use>
+            </svg>
+            polars</label
+          >
+          <input type="radio" id="tab4" name="tab" />
+          <label for="tab4"
+            ><svg
+              width="25"
+              height="25"
+              style="vertical-align: middle; margin-bottom: 3px"
+            >
+              <use xlink:href="#julia"></use>
+            </svg>
+            Dataframes.jl</label
+          >
+          <div class="line"></div>
+          <div class="content-container">
+            <div class="content" id="c1">
+              <pre><code class="language-r">
+tibble::tribble(
+  ~Nationality,    ~Population2018,
+  "England",       2748L,          
+  "India",         1539L,          
+  "China",         1440L,          
+  "Australia",     1155L,          
+  "South Africa",  903L,           
+  "Philippines",   693L,           
+  "Fiji",          528L,           
+  "United States", 468L,           
+  "Samoa",         441L,           
+  "Malaysia",      390L
+)
+              </code></pre>
+            </div>
+            <div class="content" id="c2">
+              <pre><code class="language-python">
+import pandas as pd
+
+pd.DataFrame({
+    "Nationality": ["England", "India", "China", "Australia", "South Africa", "Philippines", "Fiji", "United States", "Samoa", "Malaysia"],
+    "Population2018": [2748, 1539, 1440, 1155, 903, 693, 528, 468, 441, 390]
+})
+            </code></pre>
+            </div>
+            <div class="content" id="c3">
+              <pre><code class="language-python">
+import polars as pl
+
+pl.DataFrame({
+    "Nationality": ["England", "India", "China", "Australia", "South Africa", "Philippines", "Fiji", "United States", "Samoa", "Malaysia"],
+    "Population2018": [2748, 1539, 1440, 1155, 903, 693, 528, 468, 441, 390]
+})
+            </code></pre>
+            </div>
+            <div class="content" id="c4">
+              <pre><code>
+using DataFrames
+
+DataFrame(
+    :Nationality => ["England", "India", "China", "Australia", "South Africa", "Philippines", "Fiji", "United States", "Samoa", "Malaysia"],
+    :Population2018 => [2748, 1539, 1440, 1155, 903, 693, 528, 468, 441, 390]
+)
+              </code></pre>
+            </div>
           </div>
         </div>
       </section>
