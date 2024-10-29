@@ -79,6 +79,7 @@ a {
   text-decoration: none;
   &:hover {
     opacity: 0.75;
+    text-decoration: underline;
   }
   &:active {
     opacity: 0.85;
@@ -117,7 +118,7 @@ ul {
 
     &:before {
       content: "";
-      background: url("/assets/img/check_circle_black_24dp.svg") center center
+      background: url("/assets/img/pastum_star_24dp.svg") center center
         no-repeat;
       width: 24px;
       height: 24px;
@@ -135,6 +136,14 @@ ul {
       }
     }
   }
+}
+
+code {
+  background-color: #3a444a; // Blue-gray background
+  color: #d0ba86; // Brown text color
+  padding: 2px 4px; // Optional: add padding for readability
+  border-radius: 4px; // Optional: add rounded corners
+  font-family: monospace; // Ensures a monospace font
 }
 
 .semibold {

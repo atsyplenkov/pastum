@@ -33,11 +33,80 @@
     <script>
       document.documentElement.className = "js";
     </script>
-    <script>
-      var git = {
-        latest_release: "v0.0.4",
-      };
-    </script>
+    <!-- SVG icons -->
+    <svg style="display: none">
+      <!-- Symbol for python -->
+      <symbol id="python" viewBox="0 0 48 48">
+        <path
+          fill="#0277BD"
+          d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z"
+        ></path>
+        <path
+          fill="#FFC107"
+          d="M23.078,43c1.555-0.005,2.633-0.142,3.936-0.367c3.848-0.67,4.549-2.077,4.549-4.67V34h-9v-2h9.343h4.35c2.636,0,4.943-1.242,5.674-4.219c0.826-3.417,0.863-5.557,0-9.125C41.274,15.995,39.831,14,37.194,14h-3.632v5.104c0,2.966-2.686,5.896-5.764,5.896h-7.236c-2.523,0-5,1.862-5,4.377v8.586c0,2.439,1.759,4.263,4.218,4.672C19.719,42.641,21.536,43.006,23.078,43z M28.063,39c-0.821,0-1.5-0.677-1.5-1.502c0-0.833,0.679-1.498,1.5-1.498c0.837,0,1.5,0.664,1.5,1.498C29.563,38.32,28.899,39,28.063,39z"
+        ></path>
+      </symbol>
+      <!-- Symbol for julia -->
+      <symbol
+        id="rstats"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 32 32"
+        fill="white"
+      >
+        <path
+          d="M 16 5 C 8.268 5 2 9.253 2 14.5 C 2 19.285043 7.2177912 23.232664 14 23.892578 L 14 26 L 18 26 L 18 23.892578 C 19.32391 23.763761 20.586459 23.512193 21.763672 23.150391 L 23.330078 26 L 28 26 L 25.300781 21.585938 C 28.178143 19.846052 30 17.321182 30 14.5 C 30 9.253 23.732 5 16 5 z M 17.5 8 C 23.299 8 28 11.134 28 15 C 28 17.130126 26.568065 19.034482 24.316406 20.318359 C 24.089282 20.130562 23.839097 19.975923 23.566406 19.859375 C 25.534017 19.378452 27 17.615626 27 15.5 C 27 13.015 24.985 11 22.5 11 L 14 11 L 14 21.59375 C 9.9241171 20.631974 7 18.046756 7 15 C 7 11.134 11.701 8 17.5 8 z M 18 14 L 21.5 14 C 22.328 14 23 14.672 23 15.5 C 23 16.328 22.328 17 21.5 17 L 18 17 L 18 14 z M 18 20 L 19.128906 20 C 19.686906 20 20.198797 20.303969 20.466797 20.792969 L 20.917969 21.613281 C 19.996409 21.82496 19.017517 21.950414 18 21.982422 L 18 20 z"
+        ></path>
+      </symbol>
+      <!-- Symbol for julia -->
+      <symbol id="julia" viewBox="0 0 350 350">
+        <path
+          fill-rule="nonzero"
+          fill="rgb(79.6%, 23.5%, 20%)"
+          fill-opacity="1"
+          d="M 163.398438 250 C 163.398438 291.421875 129.820312 325 88.398438 325 C 46.976562 325 13.398438 291.421875 13.398438 250 C 13.398438 208.578125 46.976562 175 88.398438 175 C 129.820312 175 163.398438 208.578125 163.398438 250 Z M 163.398438 250 "
+        />
+        <path
+          fill-rule="nonzero"
+          fill="rgb(22%, 59.6%, 14.9%)"
+          fill-opacity="1"
+          d="M 250 100 C 250 141.421875 216.421875 175 175 175 C 133.578125 175 100 141.421875 100 100 C 100 58.578125 133.578125 25 175 25 C 216.421875 25 250 58.578125 250 100 Z M 250 100 "
+        />
+        <path
+          fill-rule="nonzero"
+          fill="rgb(58.4%, 34.5%, 69.8%)"
+          fill-opacity="1"
+          d="M 336.601562 250 C 336.601562 291.421875 303.023438 325 261.601562 325 C 220.179688 325 186.601562 291.421875 186.601562 250 C 186.601562 208.578125 220.179688 175 261.601562 175 C 303.023438 175 336.601562 208.578125 336.601562 250 Z M 336.601562 250 "
+        />
+      </symbol>
+
+      <!-- Symbol for #vscode -->
+      <symbol id="vscode" viewBox="0 0 48 48">
+        <path
+          d="M44.999 10.87v26.21c0 1.03-.59 1.97-1.51 2.42-2.68 1.29-8 3.85-8.35 4.01-.13.07-.38.2-.67.31.35-.6.53-1.3.53-2.02V6.2c0-.75-.2-1.45-.56-2.06.09.04.17.08.24.11.2.1 5.98 2.86 8.8 4.2C44.409 8.9 44.999 9.84 44.999 10.87zM7.499 26.03c1.6 1.46 3.43 3.13 5.34 4.86l-4.6 3.5c-.77.57-1.78.5-2.56-.05-.5-.36-1.89-1.65-1.89-1.65-1.01-.81-1.06-2.32-.11-3.19C3.679 29.5 5.179 28.13 7.499 26.03zM31.999 6.2v10.11l-7.63 5.8-6.85-5.21c4.98-4.53 10.01-9.11 12.65-11.52C30.869 4.74 31.999 5.25 31.999 6.2zM32 41.798V31.69L8.24 13.61c-.77-.57-1.78-.5-2.56.05-.5.36-1.89 1.65-1.89 1.65-1.01.81-1.06 2.32-.11 3.19 0 0 20.145 18.338 26.485 24.116C30.871 43.26 32 42.753 32 41.798z"
+        ></path>
+      </symbol>
+
+      <!-- Symbol for #vsx -->
+      <symbol id="vsx" viewBox="0 0 131 131">
+        <path
+          d="M30 44.2L52.6 5H7.3zM4.6 88.5h45.3L27.2 49.4zm51 0l22.6 39.2 22.6-39.2z"
+          fill="#c160ef"
+        ></path>
+        <path
+          d="M52.6 5L30 44.2h45.2zM27.2 49.4l22.7 39.1 22.6-39.1zm51 0L55.6 88.5h45.2z"
+          fill="#a60ee5"
+        ></path>
+      </symbol>
+
+      <!-- Symbol for #github -->
+      <symbol id="github" viewBox="0 0 90.221 87.995">
+        <path
+          d="M45.11,0A45.112,45.112,0,0,0,30.844,87.909c2.256.395,3.1-.959,3.1-2.143,0-1.071-.056-4.624-.056-8.4-11.334,2.086-14.266-2.763-15.168-5.3-.507-1.3-2.707-5.3-4.624-6.372-1.579-.846-3.834-2.932-.056-2.989,3.552-.056,6.09,3.271,6.936,4.624,4.06,6.823,10.545,4.906,13.138,3.722a9.489,9.489,0,0,1,2.876-6.034C26.953,63.888,16.465,60,16.465,42.742a17.556,17.556,0,0,1,4.624-12.123c-.451-1.128-2.03-5.752.451-11.954,0,0,3.778-1.184,12.405,4.624a42.53,42.53,0,0,1,22.555,0c8.627-5.864,12.405-4.624,12.405-4.624,2.481,6.2.9,10.826.451,11.954a17.454,17.454,0,0,1,4.624,12.123c0,17.311-10.545,21.146-20.582,22.273,1.635,1.41,3.045,4.116,3.045,8.345,0,6.034-.056,10.883-.056,12.405,0,1.184.846,2.594,3.1,2.143A45.134,45.134,0,0,0,45.11,0Z"
+          fill="#fff"
+          fill-rule="evenodd"
+        />
+      </symbol>
+    </svg>
     <main>
       <section class="section--intro">
         <div class="background"></div>
@@ -53,15 +122,8 @@
             ><a href="https://github.com/atsyplenkov/pastum"
               ><span>View project on GitHub</span
               ><span
-                ><svg
-                  role="img"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <title>GitHub</title>
-                  <path
-                    d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"
-                  ></path></svg></span
+                ><svg>
+                  <use xlink:href="#github"></use></svg></span
             ></a>
           </div>
           <div class="inner">
@@ -76,7 +138,28 @@
               <p class="big semibold">
                 This VS Code extension allows you to quickly transform any text
                 table from your clipboard into a dataframe object in your
-                favorite language — R, Python, or Julia.
+                favorite language — R
+                <svg
+                  width="25"
+                  height="25"
+                  style="vertical-align: middle; margin-bottom: 3px"
+                >
+                  <use xlink:href="#rstats"></use></svg
+                >, Python
+                <svg
+                  width="25"
+                  height="25"
+                  style="vertical-align: middle; margin-bottom: 3px"
+                >
+                  <use xlink:href="#python"></use></svg
+                >, or Julia
+                <svg
+                  width="20"
+                  height="20"
+                  style="vertical-align: middle; margin-bottom: 3px"
+                >
+                  <use xlink:href="#julia"></use>
+                </svg>
               </p>
               <p>
                 Pastum adds commands to your command palette and right-click
@@ -102,17 +185,8 @@
                     class="button windows"
                     id="win-dl1"
                     ><span
-                      ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        x="0px"
-                        y="0px"
-                        width="100"
-                        height="100"
-                        viewBox="0 0 48 48"
-                      >
-                        <path
-                          d="M44.999 10.87v26.21c0 1.03-.59 1.97-1.51 2.42-2.68 1.29-8 3.85-8.35 4.01-.13.07-.38.2-.67.31.35-.6.53-1.3.53-2.02V6.2c0-.75-.2-1.45-.56-2.06.09.04.17.08.24.11.2.1 5.98 2.86 8.8 4.2C44.409 8.9 44.999 9.84 44.999 10.87zM7.499 26.03c1.6 1.46 3.43 3.13 5.34 4.86l-4.6 3.5c-.77.57-1.78.5-2.56-.05-.5-.36-1.89-1.65-1.89-1.65-1.01-.81-1.06-2.32-.11-3.19C3.679 29.5 5.179 28.13 7.499 26.03zM31.999 6.2v10.11l-7.63 5.8-6.85-5.21c4.98-4.53 10.01-9.11 12.65-11.52C30.869 4.74 31.999 5.25 31.999 6.2zM32 41.798V31.69L8.24 13.61c-.77-.57-1.78-.5-2.56.05-.5.36-1.89 1.65-1.89 1.65-1.01.81-1.06 2.32-.11 3.19 0 0 20.145 18.338 26.485 24.116C30.871 43.26 32 42.753 32 41.798z"
-                        ></path></svg></span
+                      ><svg>
+                        <use xlink:href="#vscode"></use></svg></span
                     ><span>Install from Visual Studio | Marketplace</span></a
                   >
                 </div>
@@ -122,18 +196,8 @@
                     class="button windows"
                     id="win-dl1"
                     ><span
-                      ><svg
-                        viewBox="0 0 131 131"
-                        style="width: auto; height: 20px"
-                      >
-                        <path
-                          d="M30 44.2L52.6 5H7.3zM4.6 88.5h45.3L27.2 49.4zm51 0l22.6 39.2 22.6-39.2z"
-                          fill="#c160ef"
-                        ></path>
-                        <path
-                          d="M52.6 5L30 44.2h45.2zM27.2 49.4l22.7 39.1 22.6-39.1zm51 0L55.6 88.5h45.2z"
-                          fill="#a60ee5"
-                        ></path></svg></span
+                      ><svg>
+                        <use xlink:href="#vsx"></use></svg></span
                     ><span>Install from Open VSX Registry</span></a
                   >
                 </div>
@@ -156,17 +220,23 @@
 
       <section class="section--design">
         <div class="text">
-          <h2>Blends Right In</h2>
+          <h2>Paste as "..." your way</h2>
           <p class="big">
-            Twinkle Tray will automatically adjust the look and feel to match
-            your Windows version and color preferences. Additional options are
-            available to select the Windows version style and theme of your
-            choice.
+            No matter who you are, whether you are an advocate of using a
+            pointing device (i.e., computer mouse) or a fan of keybindings,
+            <code>Pastum</code> has options for all of you. With the right-click
+            context menu inside the editor window, you can call the
+            <code>"Paste as default dataframe"</code> command, which can be
+            configured in the settings to use with your preferred
+            language-framework pair (e.g., Python-Pandas or R-tibble). If you
+            often switch between languages and want more control, the command
+            palette (<code>Ctrl/Cmd+Shift+P</code>) has a set of commands that
+            allow you to select the language and framework on the go.
           </p>
         </div>
         <img
-          src="/assets/img/tt-comparison.jpg"
-          alt="Windows 11 brightness slider"
+          src="/assets/img/pastum-comparison.png"
+          alt="Pastum context menu and command palette commands"
         />
       </section>
 
@@ -174,34 +244,42 @@
         <div class="inner">
           <div class="img">
             <img
-              src="/assets/img/tt-features-screenshot.jpg"
-              alt="Twinkle Tray Brightness Slider"
+              src="/assets/img/pastum-settings.png"
+              alt="Pastum configuration options"
             />
           </div>
           <div class="text">
-            <h2>Features</h2>
+            <h2>Configurable</h2>
             <p class="big">
-              Twinkle Tray offers a variety of options and features to match
-              your preferences. All of which are 100% free.
+              Pastum offers a variety of options and features to match your
+              preferences. Just go to extension settings
+              <code>@ext:atsyplenkov.pastum</code>
             </p>
             <ul>
-              <li>Seamlessly blends in with Windows 10 & Windows 11.</li>
-              <li>Works with most laptops and DDC/CI-enabled monitors.</li>
               <li>
-                Bind hotkeys to adjust the brightness of specifical or all
-                displays.
+                <p>
+                  Turn on/off the context menu command by toggling
+                  <code>pastum.showContextMenu</code> option
+                </p>
               </li>
               <li>
-                Control DDC/CI features such as contrast, volume, and power
-                state.
+                <p>
+                  Choose the default language-framework pair for easy and fast
+                  pasting using the context menu or keybinding.
+                </p>
               </li>
               <li>
-                Supports brightness adjustments by time of day or when idle.
+                <p>
+                  By default, the column names are renamed following the
+                  PascalCase
+                  <a
+                    href="https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/"
+                    >convention</a
+                  >. However, the user can specify the preferred naming
+                  convention in the settings —
+                  <code>pastum.defaultConvention</code>.
+                </p>
               </li>
-              <li>Supports command line arguments for custom scripting.</li>
-              <li>Normalize backlight across different monitors.</li>
-              <li>Localized for over 20 languages.</li>
-              <li>Starts up with Windows.</li>
             </ul>
           </div>
         </div>
@@ -229,15 +307,8 @@
         <div class="columns">
           <div class="item">
             <div class="item-logo">
-              <svg viewBox="0 0 131 131" style="width: auto; height: 60%">
-                <path
-                  d="M30 44.2L52.6 5H7.3zM4.6 88.5h45.3L27.2 49.4zm51 0l22.6 39.2 22.6-39.2z"
-                  fill="#c160ef"
-                ></path>
-                <path
-                  d="M52.6 5L30 44.2h45.2zM27.2 49.4l22.7 39.1 22.6-39.1zm51 0L55.6 88.5h45.2z"
-                  fill="#a60ee5"
-                ></path>
+              <svg width="100" height="100">
+                <use xlink:href="#vsx"></use>
               </svg>
             </div>
             <div class="item-list">
@@ -253,18 +324,8 @@
           </div>
           <div class="item">
             <div class="item-logo">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                x="0px"
-                y="0px"
-                width="100"
-                height="100"
-                viewBox="0 0 48 48"
-              >
-                <path
-                  d="M44.999 10.87v26.21c0 1.03-.59 1.97-1.51 2.42-2.68 1.29-8 3.85-8.35 4.01-.13.07-.38.2-.67.31.35-.6.53-1.3.53-2.02V6.2c0-.75-.2-1.45-.56-2.06.09.04.17.08.24.11.2.1 5.98 2.86 8.8 4.2C44.409 8.9 44.999 9.84 44.999 10.87zM7.499 26.03c1.6 1.46 3.43 3.13 5.34 4.86l-4.6 3.5c-.77.57-1.78.5-2.56-.05-.5-.36-1.89-1.65-1.89-1.65-1.01-.81-1.06-2.32-.11-3.19C3.679 29.5 5.179 28.13 7.499 26.03zM31.999 6.2v10.11l-7.63 5.8-6.85-5.21c4.98-4.53 10.01-9.11 12.65-11.52C30.869 4.74 31.999 5.25 31.999 6.2zM32 41.798V31.69L8.24 13.61c-.77-.57-1.78-.5-2.56.05-.5.36-1.89 1.65-1.89 1.65-1.01.81-1.06 2.32-.11 3.19 0 0 20.145 18.338 26.485 24.116C30.871 43.26 32 42.753 32 41.798z"
-                  fill="#fff"
-                ></path>
+              <svg width="100" height="100" fill="white">
+                <use xlink:href="#vscode"></use>
               </svg>
             </div>
             <div class="item-list">
@@ -281,18 +342,8 @@
           </div>
           <div class="item">
             <div class="item-logo">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="90.221"
-                height="87.995"
-                viewBox="0 0 90.221 87.995"
-              >
-                <path
-                  id="Octicons-mark-github"
-                  d="M45.11,0A45.112,45.112,0,0,0,30.844,87.909c2.256.395,3.1-.959,3.1-2.143,0-1.071-.056-4.624-.056-8.4-11.334,2.086-14.266-2.763-15.168-5.3-.507-1.3-2.707-5.3-4.624-6.372-1.579-.846-3.834-2.932-.056-2.989,3.552-.056,6.09,3.271,6.936,4.624,4.06,6.823,10.545,4.906,13.138,3.722a9.489,9.489,0,0,1,2.876-6.034C26.953,63.888,16.465,60,16.465,42.742a17.556,17.556,0,0,1,4.624-12.123c-.451-1.128-2.03-5.752.451-11.954,0,0,3.778-1.184,12.405,4.624a42.53,42.53,0,0,1,22.555,0c8.627-5.864,12.405-4.624,12.405-4.624,2.481,6.2.9,10.826.451,11.954a17.454,17.454,0,0,1,4.624,12.123c0,17.311-10.545,21.146-20.582,22.273,1.635,1.41,3.045,4.116,3.045,8.345,0,6.034-.056,10.883-.056,12.405,0,1.184.846,2.594,3.1,2.143A45.134,45.134,0,0,0,45.11,0Z"
-                  fill="#fff"
-                  fill-rule="evenodd"
-                />
+              <svg width="100" height="100">
+                <use xlink:href="#github"></use>
               </svg>
             </div>
             <div class="item-list">
