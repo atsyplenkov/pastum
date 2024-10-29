@@ -469,7 +469,7 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 80px 20px 0;
+  padding: 50px 20px 50px;
 
   .text {
     max-width: 664px;
@@ -486,19 +486,18 @@ main {
     border-radius: 10px;
     margin-bottom: -108px;
     margin-top: 60px;
-    box-shadow: 0 18px 30px -10px rgba(#131518, 0.5);
     @include appnav {
       margin-top: 40px;
     }
   }
 }
 
-.section--features {
+.section--examples {
   background-color: #242b33;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 220px 20px 100px;
+  padding: 50px 20px 10px;
 
   @media (max-width: 600px) {
     padding-top: 130px;
@@ -515,7 +514,41 @@ main {
   }
   img {
     border-radius: 10px;
-    box-shadow: 0 18px 30px -10px rgba(#131518, 0.5);
+    @media (max-width: 900px) {
+      max-width: 500px;
+    }
+  }
+  .text {
+    padding-left: 70px;
+    max-width: 600px;
+    @media (max-width: 900px) {
+      padding: 40px 0 0;
+    }
+  }
+}
+
+.section--features {
+  background-color: #242b33;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px 50px;
+
+  @media (max-width: 600px) {
+    padding-top: 130px;
+    padding-bottom: 60px;
+  }
+
+  .inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 900px) {
+      display: block;
+    }
+  }
+  img {
+    border-radius: 10px;
     @media (max-width: 900px) {
       max-width: 500px;
     }
@@ -535,7 +568,7 @@ main {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 100px 20px;
+  padding: 50px 20px;
 
   @include tablet {
     padding: 60px 20px;
