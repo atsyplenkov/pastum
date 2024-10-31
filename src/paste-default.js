@@ -4,44 +4,32 @@ const py = require("./paste-python.js");
 const jl = require("./paste-julia.js");
 
 function pasteDefault() {
-  // Retrieve the default language-framework pair
+  // Get the default dataframe framework
   const config = vscode.workspace.getConfiguration("pastum");
-  langframe = config.get("defaultDataframe");
+  const frameR = config.get("defaultDataframeR");
+  const framePy = config.get("defaultDataframePy");
 
-  // Switch
-  switch (langframe) {
-    case "R base":
-      r.clipboardToRDataFrame("base");
+  // Get the active editor language
+  const editor = vscode.window.activeTextEditor;
+  if (!editor) {
+    vscode.window.showErrorMessage("No active editor found.");
+    return;
+  }
+
+  // Switch to the appropriate framework based on the editor language
+  switch (editor.document.languageId) {
+    case "r":
+      r.clipboardToRDataFrame(frameR);
       break;
-    case "R tribble":
-      r.clipboardToRDataFrame("tribble");
+    case "python":
+      py.clipboardToPyDataFrame(framePy);
       break;
-    case "R tibble":
-      r.clipboardToRDataFrame("tibble");
-      break;
-    case "R data.table":
-      r.clipboardToRDataFrame("data.table");
-      break;
-    case "R polars":
-      r.clipboardToRDataFrame("polars");
-      break;
-    case "Py pandas":
-      py.clipboardToPyDataFrame("pandas");
-      break;
-    case "Py polars":
-      py.clipboardToPyDataFrame("polars");
-      break;
-    case "Py datatable":
-      py.clipboardToPyDataFrame("datatable");
-      break;
-    case "Jl DataFrame":
+    case "julia":
       jl.clipboardToJuliaDataFrame();
       break;
     default:
       vscode.window.showErrorMessage("No default framework selected");
   }
-
-  return;
 }
 
 module.exports = {

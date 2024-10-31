@@ -24,8 +24,8 @@ async function clipboardToPyDataFrame(framework = null) {
         ["pandas 🐼", "polars 🐻", "datatable 🎩"],
         { placeHolder: "Select the Python framework for creating the dataframe" }
       );
-      framework = framework.split(" ")[0];
     }
+    framework = framework.split(" ")[0];
 
     if (!framework) {
       vscode.window.showErrorMessage("No framework selected.");

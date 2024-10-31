@@ -24,8 +24,8 @@ async function clipboardToRDataFrame(framework = null) {
         ["base", "tribble 🔢", "tibble ✨", "data.table 🎩", "polars 🐻"],
         { placeHolder: "Select the R framework for creating the dataframe" }
       );
-      framework = framework.split(" ")[0];
     }
+    framework = framework.split(" ")[0];
 
     if (!framework) {
       vscode.window.showErrorMessage("No framework selected.");

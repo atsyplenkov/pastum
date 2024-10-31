@@ -56,7 +56,7 @@
     "menus": {
       "editor/context": [
         {
-          "when": "config.pastum.showContextMenu && (editorLangId == 'r' || editorLangId == 'python' || editorLangId == 'julia')",
+          "when": "config.pastum.showContextMenu",
           "command": "pastum.Defaultdataframe",
           "group": "navigation@1"
         }
@@ -94,21 +94,32 @@
         "type": "object",
         "title": "Pastum Configuration",
         "properties": {
-          "pastum.defaultDataframe": {
+          "pastum.defaultDataframeR": {
             "type": "string",
             "enum": [
-              "R base",
-              "R tribble",
-              "R tibble",
-              "R data.table",
-              "R polars",
-              "Py pandas",
-              "Py datatable",
-              "Py polars",
-              "Jl DataFrame"
+              "base",
+              "tribble 🔢",
+              "tibble ✨",
+              "data.table 🎩"
             ],
-            "default": "R tribble",
-            "markdownDescription": "Select default dataframe type."
+            "default": "tribble 🔢",
+            "markdownDescription": "Select default framework for R."
+          }
+        }
+      },
+      {
+        "type": "object",
+        "title": "Pastum Configuration",
+        "properties": {
+          "pastum.defaultDataframePy": {
+            "type": "string",
+            "enum": [
+              "pandas 🐼",
+              "polars 🐻",
+              "datatable 🎩"
+            ],
+            "default": "pandas 🐼",
+            "markdownDescription": "Select default framework for Python."
           }
         }
       }
