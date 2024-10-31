@@ -142,7 +142,7 @@ code {
   background-color: #3a444a; // Blue-gray background
   color: #d0ba86; // Brown text color
   padding: 2px 4px; // Optional: add padding for readability
-  border-radius: 4px; // Optional: add rounded corners
+  border-radius: 10px; // Optional: add rounded corners
   font-family: monospace; // Ensures a monospace font
 }
 
@@ -540,28 +540,25 @@ main {
 
 .section--code {
   background-color: #242b33;
-  display: flex;
-  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  padding: 50px 20px;
+  display: flex;
+  max-width: 100%;
+  padding: 20px 20px 20px;
 
-  img {
-    border-radius: 10px;
-    height: auto;
-    width: 30em;
-    @media (max-width: 200px) {
-      max-width: 200px; // Set a max-width for the image in mobile view
-      width: 100%; // Make image responsive
-      height: auto; // Maintain aspect ratio
-    }
+  @media (max-width: 600px) {
+    padding-top: 130px;
+    padding-bottom: 60px;
   }
 
   .container {
-    width: 60%;
-    font-size: 0;
-    border-radius: 3px;
-    overflow: hidden;
+    justify-content: center;
+    padding-right: 70px;
+    padding-left: 70px;
+    width: 100%;
+    max-width: 100%;
+    @media (max-width: 900px) {
+      padding: 40px 0 0;
+    }
 
     input {
       display: none;
@@ -570,10 +567,10 @@ main {
         background: #353f45;
       }
 
-      @for $i from 1 through 4 {
+      @for $i from 1 through 5 {
         &#tab#{$i}:checked {
           ~ .line {
-            left: #{($i - 1) * 25%};
+            left: #{($i - 1) * 20%};
           }
           ~ .content-container #c#{$i} {
             opacity: 1;
@@ -584,12 +581,13 @@ main {
 
     label {
       display: inline-block;
-      font-size: 16px;
+      font-size: 20px;
       height: 36px;
+      padding: 0 15px;
       line-height: 36px;
-      width: 25%;
+      width: relative;
       text-align: center;
-      background: #263238;
+      background: #26323800;
       color: #d0ba86;
       position: relative;
       transition: 0.25s background ease;
@@ -602,15 +600,14 @@ main {
     }
 
     .content-container {
-      background: #263238;
+      background: #26323800;
       position: relative;
       height: 20em;
       font-size: 16px;
 
       .content {
         position: absolute;
-        padding: 10px;
-        width: 100%;
+        width: relative;
         top: 0;
         opacity: 0;
         transition: 0.25s ease;
@@ -623,13 +620,12 @@ main {
           color: #d0ba86;
           font-family: monospace;
           white-space: pre-wrap; // Allows line-wrapping within pre
-          border-radius: 5px;
         }
 
         code {
+          font-size: 18px;
           display: block; // Allows line breaks
           padding-left: 20px; // Controls additional indentation within code block
-          text-indent: -10px; // Adjust if needed for first-line alignment
         }
 
         h3 {
@@ -655,7 +651,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 50px 20px 50px;
+  padding: 20px 20px 50px;
 
   @media (max-width: 600px) {
     padding-top: 130px;

@@ -294,11 +294,8 @@
       </section>
 
       <section class="section--code">
-        <img
-          src="/assets/img/wikipedia.webp"
-          alt="Pastum context menu and command palette commands"
-        />
         <div class="container">
+          <h2>Paste from Wikipedia as ...</h2>
           <input type="radio" id="tab1" name="tab" checked />
           <label for="tab1"
             ><svg
@@ -308,7 +305,7 @@
             >
               <use xlink:href="#rstats"></use>
             </svg>
-            tibble</label
+            tribble</label
           >
           <input type="radio" id="tab2" name="tab" />
           <label for="tab2"
@@ -317,9 +314,9 @@
               height="25"
               style="vertical-align: middle; margin-bottom: 3px"
             >
-              <use xlink:href="#python"></use>
+              <use xlink:href="#rstats"></use>
             </svg>
-            pandas</label
+            data.frame</label
           >
           <input type="radio" id="tab3" name="tab" />
           <label for="tab3"
@@ -330,10 +327,21 @@
             >
               <use xlink:href="#python"></use>
             </svg>
-            polars</label
+            pandas</label
           >
           <input type="radio" id="tab4" name="tab" />
           <label for="tab4"
+            ><svg
+              width="25"
+              height="25"
+              style="vertical-align: middle; margin-bottom: 3px"
+            >
+              <use xlink:href="#python"></use>
+            </svg>
+            polars</label
+          >
+          <input type="radio" id="tab5" name="tab" />
+          <label for="tab5"
             ><svg
               width="25"
               height="25"
@@ -343,7 +351,6 @@
             </svg>
             Dataframes.jl</label
           >
-          <div class="line"></div>
           <div class="content-container">
             <div class="content" id="c1">
               <pre><code class="language-r">
@@ -363,6 +370,14 @@ tibble::tribble(
               </code></pre>
             </div>
             <div class="content" id="c2">
+              <pre><code class="language-r">
+data.frame(
+  Nationality = c("England", "India", "China", "Australia", "South Africa", "Philippines", "Fiji", "United States", "Samoa", "Malaysia"),
+  Population2018 = c(2748L, 1539L, 1440L, 1155L, 903L, 693L, 528L, 468L, 441L, 390L)
+)
+              </code></pre>
+            </div>
+            <div class="content" id="c3">
               <pre><code class="language-python">
 import pandas as pd
 
@@ -370,19 +385,19 @@ pd.DataFrame({
     "Nationality": ["England", "India", "China", "Australia", "South Africa", "Philippines", "Fiji", "United States", "Samoa", "Malaysia"],
     "Population2018": [2748, 1539, 1440, 1155, 903, 693, 528, 468, 441, 390]
 })
-            </code></pre>
+              </code></pre>
             </div>
-            <div class="content" id="c3">
-              <pre><code class="language-python">
+            <div class="content" id="c4">
+              <pre><code>
 import polars as pl
 
 pl.DataFrame({
     "Nationality": ["England", "India", "China", "Australia", "South Africa", "Philippines", "Fiji", "United States", "Samoa", "Malaysia"],
     "Population2018": [2748, 1539, 1440, 1155, 903, 693, 528, 468, 441, 390]
 })
-            </code></pre>
+              </code></pre>
             </div>
-            <div class="content" id="c4">
+            <div class="content" id="c5">
               <pre><code>
 using DataFrames
 
