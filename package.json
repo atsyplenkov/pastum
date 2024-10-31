@@ -62,68 +62,59 @@
         }
       ]
     },
-    "configuration": [
-      {
-        "type": "object",
-        "title": "Pastum Configuration",
-        "properties": {
-          "pastum.showContextMenu": {
-            "type": "boolean",
-            "default": true,
-            "markdownDescription": "Show the `Pastum: paste as default dataframe` command in the editor context menu. It will only appear in R, Python and Julia editors."
-          }
-        }
-      },
-      {
-        "type": "object",
-        "title": "Pastum Configuration",
-        "properties": {
-          "pastum.defaultConvention": {
-            "type": "string",
-            "enum": [
-              "PascalCase",
-              "camelCase",
-              "snake_case"
-            ],
-            "default": "PascalCase",
-            "markdownDescription": "Select naming convention for column names preprocessing. To learn more about naming conventions in programming, see [freecodecamp post](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case). For example, `Hello World!` will be converted to \n\n - PascalCase: `HelloWorld` \n\n - camelCase: `helloWorld` \n\n - snake_case: `hello_world`"
-          }
-        }
-      },
-      {
-        "type": "object",
-        "title": "Pastum Configuration",
-        "properties": {
-          "pastum.defaultDataframeR": {
-            "type": "string",
-            "enum": [
-              "base",
-              "tribble 🔢",
-              "tibble ✨",
-              "data.table 🎩"
-            ],
-            "default": "tribble 🔢",
-            "markdownDescription": "Select default framework for R."
-          }
-        }
-      },
-      {
-        "type": "object",
-        "title": "Pastum Configuration",
-        "properties": {
-          "pastum.defaultDataframePy": {
-            "type": "string",
-            "enum": [
-              "pandas 🐼",
-              "polars 🐻",
-              "datatable 🎩"
-            ],
-            "default": "pandas 🐼",
-            "markdownDescription": "Select default framework for Python."
-          }
+    "configuration": {
+      "type": "object",
+      "title": "Pastum Configuration",
+      "properties": {
+        "pastum.decimalPoint": {
+          "type": "string",
+          "enum": [
+            "10,000.00",
+            "10 000.00",
+            "10 000,00",
+            "10.000,00"
+          ],
+          "default": "10,000.00",
+          "markdownDescription": "Select default decimal separator *(e.g., '.' in `12.45`)* and digit group separator *(i.e. in numbers over 999)*. For example, `12,345.67` will be converted to `12345.67`. To learn more about decimal point and digit group separator, see [Wikipedia article](https://en.m.wikipedia.org/wiki/Decimal_separator)."
+        },
+        "pastum.defaultConvention": {
+          "type": "string",
+          "enum": [
+            "PascalCase",
+            "camelCase",
+            "snake_case"
+          ],
+          "default": "PascalCase",
+          "markdownDescription": "Select naming convention for column names preprocessing. To learn more about naming conventions in programming, see [freecodecamp post](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case). For example, `Hello World!` will be converted to \n\n - PascalCase: `HelloWorld` \n\n - camelCase: `helloWorld` \n\n - snake_case: `hello_world`"
+        },
+        "pastum.showContextMenu": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show the `Pastum: paste as default dataframe` command in the editor context menu *(i.e., right-click menu)*. It will only appear in R, Python, and Julia editors. The dataframe will be pasted according to the specified `pastum.defaultDataframeR` and `pastum.defaultDataframePy`."
+        },
+        "pastum.defaultDataframeR": {
+          "type": "string",
+          "enum": [
+            "base",
+            "tribble 🔢",
+            "tibble ✨",
+            "data.table 🎩"
+          ],
+          "default": "tribble 🔢",
+          "markdownDescription": "Select the default framework for R dataframes to be pasted using the `pastum.Defaultdataframe` command."
+        },
+        "pastum.defaultDataframePython": {
+          "type": "string",
+          "enum": [
+            "pandas 🐼",
+            "polars 🐻",
+            "datatable 🎩"
+          ],
+          "default": "pandas 🐼",
+          "markdownDescription": "Select the default framework for Python dataframes to be pasted using the `pastum.Defaultdataframe` command."
         }
       }
-    ]
+    }
   },
   "scripts": {
     "test": "vscode-test"

@@ -7,7 +7,7 @@ function pasteDefault() {
   // Get the default dataframe framework
   const config = vscode.workspace.getConfiguration("pastum");
   const frameR = config.get("defaultDataframeR");
-  const framePy = config.get("defaultDataframePy");
+  const framePy = config.get("defaultDataframePython");
 
   // Get the active editor language
   const editor = vscode.window.activeTextEditor;
