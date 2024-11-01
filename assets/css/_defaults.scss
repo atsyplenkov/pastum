@@ -129,10 +129,10 @@ ul {
     }
 
     & + li {
-      padding-top: 10px;
+      padding-top: 5px;
 
       @include appnav {
-        padding-top: 8px;
+        padding-top: 5px;
       }
     }
   }
@@ -673,7 +673,7 @@ main {
     }
   }
   .text {
-    padding-left: 70px;
+    padding-left: 30px;
     max-width: 600px;
     @media (max-width: 900px) {
       padding: 40px 0 0;
