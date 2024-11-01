@@ -56,7 +56,7 @@
     "menus": {
       "editor/context": [
         {
-          "when": "config.pastum.showContextMenu",
+          "when": "config.pastum.showContextMenu && (editorLangId == 'r' || editorLangId == 'python' || editorLangId == 'julia')",
           "command": "pastum.Defaultdataframe",
           "group": "navigation@1"
         }
