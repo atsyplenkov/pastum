@@ -390,6 +390,12 @@ main {
       max-width: 500px;
     }
 
+    video {
+      width: 100%; // or any specific width you prefer
+      height: auto; // keeps the aspect ratio
+      border-radius: 10px; // if you want rounded corners
+    }
+
     @include tablet {
       display: none;
     }
@@ -399,6 +405,12 @@ main {
     max-width: 600px;
     height: auto;
     margin-bottom: 30px;
+
+    video {
+      width: 100%; // or any specific width you prefer
+      height: auto; // keeps the aspect ratio
+      border-radius: 10px; // if you want rounded corners
+    }
 
     @include tablet {
       display: block;
