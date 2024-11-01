@@ -1,6 +1,26 @@
+const vscode = require("vscode");
+
+function normalizeValue(value, decimalPoints=null) {
+  const config = vscode.workspace.getConfiguration("pastum");
+  decimalPoints = config.get("decimalPoint");
+
+  if (decimalPoints === "10,000.00") {
+    return value.replace(/,/g, "");
+  } else if (decimalPoints === "10 000.00") {
+    return value.replace(/ /g, "");
+  } else if (decimalPoints === "10 000,00") {
+    return value.replace(/ /g, "").replace(/,/g, ".");
+  } else if (decimalPoints === "10.000,00") {
+    return value.replace(/\./g, "").replace(/,/g, ".");
+  } else if (decimalPoints === null) {
+    // return error
+    vscode.window.showErrorMessage("No default decimalPoint selected");
+  }
+}
+
 function isInt(value) {
   // Normalize the string by removing thousands separators
-  const normalized = value.replace(/,/g, "").replace(/\./g, ".");
+  const normalized = normalizeValue(value);
   // Parse value as a float
   const float = parseFloat(normalized);
   // Calculate the residual after removing the decimal point
@@ -16,7 +36,7 @@ function isInt(value) {
 
 function isNumeric(value) {
   // Normalize the string by removing thousands separators
-  const normalized = value.replace(/,/g, "").replace(/\./g, ".");
+  const normalized = normalizeValue(value);
 
   return (
     !isNaN(normalized) &&
@@ -32,10 +52,10 @@ function cleanDataValue(value) {
 
 function convertValue(value) {
   if (isNumeric(value)) {
-    let float = parseFloat(value.replace(/,/g, ""));
+    let float = parseFloat(normalizeValue(value));
     return float;
   } else if (isInt(value)) {
-    return parseInt(value.replace(/,/g, ""));
+    return parseInt(normalizeValue(value));
   }
   return value;
 }
@@ -55,4 +75,5 @@ module.exports = {
   isNumeric,
   isRowEmpty,
   addTrailingZeroes,
+  normalizeValue,
 };
