@@ -19,7 +19,7 @@ Or you can specify the `pastum.defaultDataframeR`/`pastum.defaultDataframePython
 
 ![](https://github.com/atsyplenkov/pastum/raw/master/assets/demo-r-tibble.gif)
 
-# Test it by yourself
+# Try it Yourself
 
 In the table below, the most unfortunate and complex situation is presented. It is a mixture of empty cells, strings, integer and float values. Select, copy and try to paste it into the IDE. The `{pastum}` will recognize all types correctly and fill empty cells with corresponding `NA`/`missing`/`None`/`null` values.
 
