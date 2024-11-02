@@ -101,7 +101,9 @@ function createRDataFrame(tableData, framework) {
     return headers.map((header, colIndex) => {
       const headerWidth = header.length + 1; // +1 for `~` in tribble
       const maxDataWidth = Math.max(
-        ...data.map((row) => formatValue(row[colIndex], colIndex).length)
+        ...data.map(
+          (row) => formatValue(row[colIndex], colIndex).toString().length
+        )
       );
       return Math.max(headerWidth, maxDataWidth);
     });
@@ -109,7 +111,7 @@ function createRDataFrame(tableData, framework) {
 
   // Pads a value to the target width
   function padToWidth(value, width) {
-    return value + " ".repeat(width - value.length);
+    return value + " ".repeat(width - value.toString().length);
   }
 
   // Generate code based on selected framework
