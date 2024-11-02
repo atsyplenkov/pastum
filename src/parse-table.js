@@ -152,21 +152,32 @@ function parseTable(inputString) {
         }
       });
     });
-    // If the majority of columns are non-numeric,
-    // assume all columns are strings
+    // If the majority of values in a column are non-numeric,
+    // assume whole column is string
     columnCounts.forEach((counts, colIndex) => {
-      if (counts.nonNumeric >= 1) {
+      if (counts.nonNumeric > 0) {
         columnTypes[colIndex] = "string";
       }
     });
 
-    // Check if all values in a numeric colum are integer
+    // Check if all values in a numeric column are integer
     columnTypes.forEach((type, colIndex) => {
       if (type === "numeric") {
-        const values = data.map((row) => row[colIndex]);
+        const values = data.map((row) => row[colIndex]).filter(value => value !== "");
         const allIntegers = values.every((value) => utils.isInt(value));
         if (allIntegers) {
           columnTypes[colIndex] = "integer";
+        }
+      }
+    });
+    
+    // Check if all values in a string column are boolean
+    columnTypes.forEach((type, colIndex) => {
+      if (type === "string") {
+        const values = data.map((row) => row[colIndex]).filter(value => value !== "");
+        const allBool = values.every((value) => utils.isBool(value));
+        if (allBool) {
+          columnTypes[colIndex] = "boolean";
         }
       }
     });
@@ -174,7 +185,10 @@ function parseTable(inputString) {
     // Step 6: Convert data to appropriate types
     const convertedData = data.map((row) =>
       row.map((value, colIndex) =>
-        columnTypes[colIndex] != "string" ? utils.convertValue(value) : value
+        columnTypes[colIndex] !== "string" &&
+        columnTypes[colIndex] !== "boolean"
+          ? utils.convertValue(value)
+          : value
       )
     );
 

@@ -1,6 +1,6 @@
 const vscode = require("vscode");
 const { parseClipboard } = require("./parse-table");
-const { addTrailingZeroes } = require("./utils");
+const { addTrailingZeroes, normalizeBool } = require("./utils");
 
 async function clipboardToRDataFrame(framework = null) {
   try {
@@ -89,6 +89,8 @@ function createRDataFrame(tableData, framework) {
       return `"${value}"`;
     } else if (columnTypes[colIndex] === "numeric") {
       return addTrailingZeroes(value);
+    } else if (columnTypes[colIndex] === "boolean") {
+      return normalizeBool(value, "r");
     } else if (columnTypes[colIndex] === "integer") {
       return value + "L";
     } else {

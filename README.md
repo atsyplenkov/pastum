@@ -23,13 +23,13 @@ Or you can specify the `pastum.defaultDataframeR`/`pastum.defaultDataframePython
 
 In the table below, the most unfortunate and complex situation is presented. It is a mixture of empty cells, strings, integer and float values. Select, copy and try to paste it into the IDE. The `{pastum}` will recognize all types correctly and fill empty cells with corresponding `NA`/`missing`/`None`/`null` values.
 
-| Integer ID | Strings with missing values | Only float | Int and Float |
-|------------|-----------------------------|------------|---------------|
-| 1          | Javascript                  | 1.43       | 1             |
-| 2          | Rust                        | 123,456.78 | 2             |
-| 3          |                             | -45        | 3             |
-| 4          | Clojure                     | 123456.78  | 4             |
-|            | Basic                       | -45.65     | 5.5           |
+| Integer ID | Strings with missing values | Only float | Int and Float | Boolean |
+|------------|-----------------------------|------------|---------------|---------|
+| 1          | Javascript                  | 1.43       | 1             | True    |
+| 2          | Rust                        | 123,456.78 | 2             | True    |
+| 3          |                             | -45        | 3             | True    |
+| 4          | Clojure                     | 123456.78  | 4             | True    |
+|            | Basic                       | -45.65     | 5.5           | False   |
 
 ```r
 # paste it as a tribble object in R

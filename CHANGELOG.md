@@ -4,6 +4,17 @@ All notable changes to the "pastum" extension will be documented in this file.
 
 <!-- Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file. -->
 
+## [0.2.1] - 2024-11-02
+
+### Added
+
+- JavaScript support (#15)
+- Experimental boolean support
+
+### Fixed
+
+- Correct indentation when pasting `tibble::tribble()`
+
 ## [0.2.0] - 2024-11-01
 
 ### Added

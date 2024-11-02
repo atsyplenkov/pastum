@@ -1,6 +1,6 @@
 const vscode = require("vscode");
 const { parseClipboard } = require("./parse-table");
-const { addTrailingZeroes } = require("./utils");
+const { addTrailingZeroes, normalizeBool } = require("./utils");
 
 async function clipboardToPyDataFrame(framework = null) {
   try {
@@ -22,7 +22,9 @@ async function clipboardToPyDataFrame(framework = null) {
     if (framework === null) {
       framework = await vscode.window.showQuickPick(
         ["pandas 🐼", "polars 🐻", "datatable 🎩"],
-        { placeHolder: "Select the Python framework for creating the dataframe" }
+        {
+          placeHolder: "Select the Python framework for creating the dataframe",
+        }
       );
     }
     framework = framework.split(" ")[0];
@@ -76,6 +78,8 @@ function createPyDataFrame(tableData, framework) {
       return `"${value}"`;
     } else if (columnTypes[colIndex] === "numeric") {
       return addTrailingZeroes(value);
+    } else if (columnTypes[colIndex] === "boolean") {
+      return normalizeBool(value, "python");
     } else if (columnTypes[colIndex] === "integer") {
       return value;
     } else {

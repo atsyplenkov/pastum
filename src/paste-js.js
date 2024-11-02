@@ -1,6 +1,6 @@
 const vscode = require("vscode");
 const { parseClipboard } = require("./parse-table");
-const { addTrailingZeroes } = require("./utils");
+const { addTrailingZeroes, normalizeBool } = require("./utils");
 
 async function clipboardToJSDataFrame(framework = null) {
   try {
@@ -77,6 +77,8 @@ function createJSDataFrame(tableData, framework) {
       return `"${value}"`;
     } else if (columnTypes[colIndex] === "numeric") {
       return addTrailingZeroes(value);
+    } else if (columnTypes[colIndex] === "boolean") {
+      return normalizeBool(value, "javascript");
     } else if (columnTypes[colIndex] === "integer") {
       return value;
       // FIXME:

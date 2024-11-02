@@ -1,6 +1,6 @@
 const vscode = require("vscode");
 const { parseClipboard } = require("./parse-table");
-const { addTrailingZeroes } = require("./utils");
+const { addTrailingZeroes, normalizeBool } = require("./utils");
 
 /**
  * Parses the clipboard content into a structured table.
@@ -56,6 +56,8 @@ function createJuliaDataFrame(tableData) {
       return `"${value}"`;
     } else if (columnTypes[colIndex] === "numeric") {
       return addTrailingZeroes(value);
+    } else if (columnTypes[colIndex] === "boolean") {
+      return normalizeBool(value, "julia");
     } else if (columnTypes[colIndex] === "integer") {
       return value;
     } else {

@@ -1,6 +1,6 @@
 const vscode = require("vscode");
 
-function normalizeValue(value, decimalPoints=null) {
+function normalizeValue(value, decimalPoints = null) {
   const config = vscode.workspace.getConfiguration("pastum");
   decimalPoints = config.get("decimalPoint");
 
@@ -46,6 +46,48 @@ function isNumeric(value) {
   ); // Reject numbers with leading zeros
 }
 
+function isBool(value) {
+  const normalized = value.toLowerCase().trim();
+  let boolCheck = normalized === "true" || normalized === "false";
+  return boolCheck && normalized !== "" && !isNaN(normalized);
+}
+
+function normalizeBool(value, language) {
+  const normalized = value.toLowerCase().trim();
+  switch (language) {
+    case "python":
+      if (normalized === "true") {
+        return "True";
+      } else if (normalized === "false") {
+        return "False";
+      }
+      break;
+    case "r":
+      if (normalized === "true") {
+        return "TRUE";
+      } else if (normalized === "false") {
+        return "FALSE";
+      }
+      break;
+    case "julia":
+      if (normalized === "true") {
+        return "true";
+      } else if (normalized === "false") {
+        return "false";
+      }
+      break;
+    case "javascript":
+      if (normalized === "true") {
+        return "true";
+      } else if (normalized === "false") {
+        return "false";
+      }
+      break;
+    default:
+      return value;
+  }
+}
+
 function cleanDataValue(value) {
   return value.trim().replace(/\u00A0/g, " ");
 }
@@ -76,4 +118,6 @@ module.exports = {
   isRowEmpty,
   addTrailingZeroes,
   normalizeValue,
+  normalizeBool,
+  isBool,
 };
