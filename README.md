@@ -3,7 +3,7 @@
 <!-- badges: end -->
 # [Pastum: paste as ... dataframe](https://pastum.anatolii.nz)
 
-`pastum` allows you to quickly transform any text/HTML table from your clipboard into a dataframe object in your favorite language — R, Python, or Julia. Almost all popular frameworks are supported; if something is missing, don't hesitate to raise an [issue](https://github.com/atsyplenkov/pastum/issues).
+`pastum` allows you to quickly transform any text/HTML table from your clipboard into a dataframe object in your favorite language — R, Python, Julia or JavaScript. Almost all popular frameworks are supported; if something is missing, don't hesitate to raise an [issue](https://github.com/atsyplenkov/pastum/issues).
 
 # Example usage
 
@@ -18,6 +18,30 @@ Using the command palette, insert the copied text table as a Python, R, or Julia
 Or you can specify the `pastum.defaultDataframeR`/`pastum.defaultDataframePython` parameter in the VS Code settings and insert the table using the right-click context menu by selecting `Pastum: paste as default dataframe`. The inserted language-framework pair will depend on the editor language *(i.e., you cannot paste a pandas dataframe into an R file using this command)*:
 
 ![](https://github.com/atsyplenkov/pastum/raw/master/assets/demo-r-tibble.gif)
+
+# Test it by yourself
+
+In the table below, the most unfortunate and complex situation is presented. It is a mixture of empty cells, strings, integer and float values. Select, copy and try to paste it into the IDE. The `{pastum}` will recognize all types correctly and fill empty cells with corresponding `NA`/`missing`/`None`/`null` values.
+
+| Integer ID | Strings with missing values | Only float | Int and Float |
+|------------|-----------------------------|------------|---------------|
+| 1          | Javascript                  | 1.43       | 1             |
+| 2          | Rust                        | 123,456.78 | 2             |
+| 3          |                             | -45        | 3             |
+| 4          | Clojure                     | 123456.78  | 4             |
+|            | Basic                       | -45.65     | 5.5           |
+
+```r
+# paste it as a tribble object in R
+tibble::tribble(
+  ~IntegerID, ~StringsWithMissingValues, ~OnlyFloat, ~IntAndFloat,
+  1L,         "Javascript",              1.43,       1.0,         
+  2L,         "Rust",                    123456.78,  2.0,         
+  3L,         NA,                        -45.0,      3.0,         
+  4L,         "Clojure",                 123456.78,  4.0,         
+  5L,         "Basic",                   -45.65,     5.5
+)
+```
 
 # Installation
 

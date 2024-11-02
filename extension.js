@@ -2,6 +2,7 @@ const vscode = require("vscode");
 const r = require("./src/paste-r.js");
 const py = require("./src/paste-python.js");
 const jl = require("./src/paste-julia.js");
+const js = require("./src/paste-js.js");
 const def = require("./src/paste-default.js");
 
 function activate(context) {
@@ -17,6 +18,10 @@ function activate(context) {
     vscode.commands.registerCommand(
       "pastum.Jldataframe",
       jl.clipboardToJuliaDataFrame
+    ),
+    vscode.commands.registerCommand(
+      "pastum.JSdataframe",
+      js.clipboardToJSDataFrame
     ),
     vscode.commands.registerCommand("pastum.Defaultdataframe", def.pasteDefault)
   );

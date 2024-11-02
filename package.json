@@ -2,9 +2,13 @@
   "name": "pastum",
   "displayName": "Pastum",
   "description": "Convert table from clipboard to R, Python or Julia dataframe",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "publisher": "atsyplenkov",
   "license": "MIT",
+  "pricing": "Free",
+  "sponsor": {
+    "url": "https://github.com/sponsors/atsyplenkov"
+  },
   "icon": "assets/logo.png",
   "repository": {
     "type": "git",
@@ -49,6 +53,11 @@
         "category": "Pastum"
       },
       {
+        "command": "pastum.JSdataframe",
+        "title": "Table ➔ JavaScript Dataframe",
+        "category": "Pastum"
+      },
+      {
         "command": "pastum.Defaultdataframe",
         "title": "Pastum: paste as default dataframe"
       }
@@ -56,7 +65,7 @@
     "menus": {
       "editor/context": [
         {
-          "when": "config.pastum.showContextMenu && (editorLangId == 'r' || editorLangId == 'python' || editorLangId == 'julia')",
+          "when": "config.pastum.showContextMenu && (editorLangId == 'r' || editorLangId == 'python' || editorLangId == 'julia'|| editorLangId == 'javascript')",
           "command": "pastum.Defaultdataframe",
           "group": "navigation@1"
         }
@@ -112,6 +121,17 @@
           ],
           "default": "pandas 🐼",
           "markdownDescription": "Select the default framework for Python dataframes to be pasted using the `pastum.Defaultdataframe` command."
+        },
+        "pastum.defaultDataframeJavascript": {
+          "type": "string",
+          "enum": [
+            "base",
+            "polars 🐻",
+            "arquero 🏹",
+            "danfo 🐝"
+          ],
+          "default": "polars 🐻",
+          "markdownDescription": "Select the default framework for JavaScript dataframes to be pasted using the `pastum.Defaultdataframe` command."
         }
       }
     }

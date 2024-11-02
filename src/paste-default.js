@@ -2,12 +2,14 @@ const vscode = require("vscode");
 const r = require("./paste-r.js");
 const py = require("./paste-python.js");
 const jl = require("./paste-julia.js");
+const js = require("./paste-js.js");
 
 function pasteDefault() {
   // Get the default dataframe framework
   const config = vscode.workspace.getConfiguration("pastum");
   const frameR = config.get("defaultDataframeR");
   const framePy = config.get("defaultDataframePython");
+  const frameJS = config.get("defaultDataframeJavascript");
 
   // Get the active editor language
   const editor = vscode.window.activeTextEditor;
@@ -26,6 +28,9 @@ function pasteDefault() {
       break;
     case "julia":
       jl.clipboardToJuliaDataFrame();
+      break;
+    case "javascript":
+      js.clipboardToJSDataFrame(frameJS);
       break;
     default:
       vscode.window.showErrorMessage("No default framework selected");
