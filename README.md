@@ -1,5 +1,5 @@
 <!-- badges: start -->
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fpastum.anatolii.nz)](https://pastum.anatolii.nz/) ![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/atsyplenkov.pastum?include_prereleases&style=flat&label=stable%20version&color=green&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Datsyplenkov.pastum) [![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/atsyplenkov.pastum?label=VS%20Marketplace%20installs&color=7abfbb&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Datsyplenkov.pastum)](https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum) [![Open VSX Downloads](https://img.shields.io/open-vsx/dt/atsyplenkov/pastum?label=Open%20VSX%20downloads&color=c160ef)](https://open-vsx.org/extension/atsyplenkov/pastum) [![Deploy Extension](https://github.com/atsyplenkov/pastum/actions/workflows/publish-extensions.yml/badge.svg)](https://github.com/atsyplenkov/pastum/actions/workflows/publish-extensions.yml) ![GitHub License](https://img.shields.io/github/license/atsyplenkov/pastum?color=blue) [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://img.shields.io/badge/repo_status-WIP-yellow)](https://www.repostatus.org/#wip)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fpastum.anatolii.nz)](https://pastum.anatolii.nz/) ![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/atsyplenkov.pastum?include_prereleases&style=flat&label=stable%20version&color=green&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Datsyplenkov.pastum) [![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/atsyplenkov.pastum?label=VS%20Marketplace%20installs&color=7abfbb&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Datsyplenkov.pastum)](https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum) [![Open VSX Downloads](https://img.shields.io/open-vsx/dt/atsyplenkov/pastum?label=Open%20VSX%20downloads&color=c160ef)](https://open-vsx.org/extension/atsyplenkov/pastum) [![Deploy Extension](https://github.com/atsyplenkov/pastum/actions/workflows/publish-extensions.yml/badge.svg)](https://github.com/atsyplenkov/pastum/actions/workflows/publish-extensions.yml) ![GitHub License](https://img.shields.io/github/license/atsyplenkov/pastum?color=blue) [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 <!-- badges: end -->
 # [Pastum: paste as ... dataframe](https://pastum.anatolii.nz)
 
@@ -29,7 +29,7 @@ In the table below, the most unfortunate and complex situation is presented. It 
 | 2          | Rust                        | 123,456.78 | 2             |
 | 3          |                             | -45        | 3             |
 | 4          | Clojure                     | 123456.78  | 4             |
-|            | Basic                       | -45.65     | 5.5           |
+| 5          | Basic                       | -45.65     | 5.5           |
 
 ```r
 # paste it as a tribble object in R
@@ -72,6 +72,9 @@ Alternatively, you can install the latest version from the [Releases](https://gi
 # IDE support
 The extension has almost zero dependencies and is expected to work with any Code OSS-based IDE. It was tested with the latest release version of VS Code (1.94.2) and the pre-release version of [Positron IDE](https://github.com/posit-dev/positron) (2024.11.0-69).
 So, if you are using VS Code, go to the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum); otherwise, visit the [Open VSX Registry](https://open-vsx.org/extension/atsyplenkov/pastum).
+
+# Questions and Feature Requests
+There's a lot going on with the development of new features in Pastum. If you have any questions or something is not working, feel free to [open an issue](https://github.com/atsyplenkov/formalist/issues) or start a conversation on [BlueSky](https://bsky.app/profile/anatolii.nz).
 
 # Contributions
 Contributions are welcome! If you'd like to contribute, please, fork, submit a PR and I'll merge it.
