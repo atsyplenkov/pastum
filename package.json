@@ -145,7 +145,7 @@
             "compact ↩️"
           ],
           "default": "columnar ↔️",
-          "markdownDescription": "Select the default aligment for Markdown tables to be pasted using the `pastum.Defaultdataframe` command."
+          "markdownDescription": "Select the default alignment for Markdown tables to be pasted using the `pastum.Defaultdataframe` command."
         }
       }
     }

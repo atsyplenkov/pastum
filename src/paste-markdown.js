@@ -2,7 +2,7 @@ const vscode = require("vscode");
 const { parseClipboard } = require("./parse-table");
 const { addTrailingZeroes, normalizeBool } = require("./utils");
 
-async function clipboardToMarkdown(aligment = null) {
+async function clipboardToMarkdown(alignment = null) {
   try {
     // 1: Read the clipboard content
     const clipboardContent = await vscode.env.clipboard.readText();
@@ -18,24 +18,24 @@ async function clipboardToMarkdown(aligment = null) {
     let formattedData = null;
     formattedData = parseClipboard(clipboardContent);
 
-    // 3: Ask the user which aligment they want to use
-    if (aligment === null) {
-      aligment = await vscode.window.showQuickPick(
-        ["columnar ↩️", "compact ↩️"],
+    // 3: Ask the user which alignment they want to use
+    if (alignment === null) {
+      alignment = await vscode.window.showQuickPick(
+        ["columnar ↔️", "compact ↩️"],
         {
-          placeHolder: "Select the aligment for creating the Markdown table",
+          placeHolder: "Select the alignment for creating the Markdown table",
         }
       );
     }
-    aligment = aligment.split(" ")[0];
+    alignment = alignment.split(" ")[0];
 
-    if (!aligment) {
+    if (!alignment) {
       vscode.window.showErrorMessage("No alignment selected.");
       return;
     }
 
     // 4: Generate the Markdown code using the selected alignment
-    const pyCode = createMarkdown(formattedData, aligment);
+    const pyCode = createMarkdown(formattedData, alignment);
 
     if (!pyCode) {
       vscode.window.showErrorMessage("Failed to generate Markdown code.");
@@ -58,7 +58,7 @@ async function clipboardToMarkdown(aligment = null) {
  * Generates a markdown table.
  * Supports columnar and compact aligments.
  */
-function createMarkdown(tableData, aligment) {
+function createMarkdown(tableData, alignment) {
   const { headers, data, columnTypes } = tableData;
   let code = "\n";
 
@@ -110,7 +110,7 @@ function createMarkdown(tableData, aligment) {
     return before ? fill + value : value + fill;
   }
 
-  if (aligment === "compact") {
+  if (alignment === "compact") {
     // Column headers without padding
     let vals = headers.map((header, i) => header).join(" | ");
     code = `| ${vals} |\n`;
@@ -125,7 +125,7 @@ function createMarkdown(tableData, aligment) {
       code += `| ${rowValues} |\n`;
     });
 
-  } else if (aligment === "columnar") {
+  } else if (alignment === "columnar") {
     // Calculate column widths based on header and data lengths
     const colWidths = calculateColumnWidths(headers, data);
     // Column headers with padding
