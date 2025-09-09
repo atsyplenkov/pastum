@@ -141,10 +141,10 @@
         "pastum.defaultAligmentMarkdown": {
           "type": "string",
           "enum": [
-            "columnar ▥",
-            "compact 🗉"
+            "columnar ↔️",
+            "compact ↩️"
           ],
-          "default": "columnar ▥",
+          "default": "columnar ↔️",
           "markdownDescription": "Select the default aligment for Markdown tables to be pasted using the `pastum.Defaultdataframe` command."
         }
       }

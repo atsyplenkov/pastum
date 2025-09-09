@@ -21,7 +21,7 @@ async function clipboardToMarkdown(aligment = null) {
     // 3: Ask the user which aligment they want to use
     if (aligment === null) {
       aligment = await vscode.window.showQuickPick(
-        ["columnar ▥", "compact 🗉"],
+        ["columnar ↩️", "compact ↩️"],
         {
           placeHolder: "Select the aligment for creating the Markdown table",
         }
