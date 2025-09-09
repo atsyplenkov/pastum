@@ -1,8 +1,8 @@
 {
   "name": "pastum",
   "displayName": "Pastum",
-  "description": "Convert table from clipboard to R, Python or Julia dataframe",
-  "version": "0.2.1",
+  "description": "Convert table from clipboard to R, Python, Julia, JS or Markdown dataframe",
+  "version": "0.3.0",
   "publisher": "atsyplenkov",
   "license": "MIT",
   "pricing": "Free",
@@ -20,7 +20,7 @@
     "email": "atsyplenkov@fastmail.com"
   },
   "engines": {
-    "vscode": "^1.66.0"
+    "vscode": "^1.101.0"
   },
   "categories": [
     "Other",
@@ -145,7 +145,7 @@
             "compact ↩️"
           ],
           "default": "columnar ↔️",
-          "markdownDescription": "Select the default alignment for Markdown tables to be pasted using the `pastum.Defaultdataframe` command."
+          "markdownDescription": "Select the default aligment for Markdown tables to be pasted using the `pastum.Defaultdataframe` command."
         }
       }
     }

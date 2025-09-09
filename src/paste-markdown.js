@@ -56,7 +56,7 @@ async function clipboardToMarkdown(alignment = null) {
 
 /**
  * Generates a markdown table.
- * Supports columnar and compact aligments.
+ * Supports columnar and compact alignments.
  */
 function createMarkdown(tableData, alignment) {
   const { headers, data, columnTypes } = tableData;
@@ -87,7 +87,7 @@ function createMarkdown(tableData, alignment) {
   // Calculate column widths based on header and data lengths
   function calculateColumnWidths(columns, rows) {
     return columns.map((header, colIndex) => {
-      const headerWidth = header.length ;
+      const headerWidth = header.length;
       const maxDataWidth = Math.max(
         ...rows.map(
           (row) => formatValue(row[colIndex], colIndex).toString().length
@@ -131,7 +131,7 @@ function createMarkdown(tableData, alignment) {
     // Column headers with padding
     let vals = headers
       .map((header, i) => padToWidth(header, colWidths[i], " ", false))
-            .join(" | ");
+      .join(" | ");
     code = `| ${vals} |\n`;
     // Column headers/rows separators with padding
     vals = headers
@@ -143,9 +143,9 @@ function createMarkdown(tableData, alignment) {
     data.forEach((row) => {
       const cells = row
         .map((value, i) => padToWidth(
-            formatValue(value, i),
-            colWidths[i], " ", getAlign(i)
-          )).join(" | ");
+          formatValue(value, i),
+          colWidths[i], " ", getAlign(i)
+        )).join(" | ");
       code += `| ${cells} |\n`;
     });
   }
