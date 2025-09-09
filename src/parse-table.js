@@ -205,11 +205,83 @@ function parseTable(inputString) {
 function parseTextTable(textString) {
   // Split the input by line breaks for rows
   const rows = textString.trim().split(/\r?\n/);
+  const rlen = rows.length;
+  const len2 = rlen - 2;
 
-  // Split each row by tab delimiters or by space and tab
-  const matrix = rows.map((row) => row.split(/\t|\s\t/));
+  // Delimiters: TAB (spreadsheets, IDEs), comma (CSV), semicolon (CSV), pipe (TSV)
+  // or by spaces (fixed width)
+  const patterns = [ '\\t|\\s\\t', ',', ';', '\\|', '\\s+' ];
+  let results = [];
+  let columns = [];
+  // Finds the best pattern to split the table
+  for (let i = 0; i < patterns.length; i++) {
+    let pattern = patterns[i];
+    let regex = new RegExp(pattern, 'gm');
+    let matrix = rows.map((row) => row.split(regex));
+    let cols = getNumSplitRows(matrix, i);
+    // Check if the pattern perfectly split all rows with same number of columns
+    if ((cols[0] > 1) && (cols[0] >= len2) && cols[1] >= rlen) {
+      return matrix;
+    }
+    results[i] = matrix;
+    columns[i] = cols;
+  }
+  // Choose the pattern that best splits the table
+  const sorted = columns.sort(sortByBestRowSplit);
+  const best = sorted[0][2];
+  const res = results[best];
+  // Append empty cells to make the table rectangular and avoid errors while converting
+  const maxCols = getMaxCols(res);;
+  const normalized = res.map((row) => {
+    if (row.length < maxCols) {
+      const diff = maxCols - row.length;
+      return row.concat(new Array(diff).fill(""));
+    }
+    return row;
+  });
+  return normalized;
+}
 
-  return matrix;
+function sortByBestRowSplit(a, b) {
+  let res = b[0] - a[0]; // More rows with same number of columns (DESC)
+  if (res == 0) {
+    res = b[1] - a[1]; // More rows with columns split by the pattern (DESC)
+    if (res == 0) {
+      res = a[2] - b[2]; // Pattern order (ASC) gives TAB
+    }
+  }
+  return res
+}
+
+function getMaxCols(matrix) {
+  let maxCols = 0;
+  let numRows = matrix.length;
+  for (let i = 0; i < numRows; i++) {
+    let cols = matrix[i].length;
+    if (cols > maxCols) {
+      maxCols = cols;
+    }
+  }
+  return maxCols;
+}
+
+function getNumSplitRows(matrix, index) {
+  let numRowSplit = 0;
+  let numColsEqual = -1;
+  let numCols = -1;
+  let numRows = matrix.length;
+  for (let i = 0; i < numRows; i++) {
+    let cols = matrix[i].length;
+    if (cols > 1) {
+      numRowSplit += 1;
+      if (numCols <= 0) {
+        numCols = cols;
+      } else if (cols == numCols) {
+        numColsEqual += 1;
+      }
+    }
+  }
+  return [numColsEqual, numRowSplit, index];
 }
 
 module.exports = {
