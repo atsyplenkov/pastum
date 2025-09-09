@@ -1,10 +1,23 @@
 # Pastum: paste as ... dataframe
 
-<!-- badges: start -->
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fpastum.anatolii.nz)](https://pastum.anatolii.nz/) [![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/atsyplenkov.pastum?label=VS%20Marketplace%20installs&color=7abfbb&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Datsyplenkov.pastum)](https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum) [![Open VSX Downloads](https://img.shields.io/open-vsx/dt/atsyplenkov/pastum?label=Open%20VSX%20downloads&color=c160ef)](https://open-vsx.org/extension/atsyplenkov/pastum) [![Deploy Extension](https://github.com/atsyplenkov/pastum/actions/workflows/publish-extensions.yml/badge.svg)](https://github.com/atsyplenkov/pastum/actions/workflows/publish-extensions.yml) [![Tests](https://github.com/atsyplenkov/pastum/actions/workflows/ci.yml/badge.svg)](https://github.com/atsyplenkov/pastum/actions/workflows/ci.yml) ![GitHub License](https://img.shields.io/github/license/atsyplenkov/pastum?color=blue)
-<!-- badges: end -->
+<p align="center">
+    <a href="https://pastum.anatolii.nz/">
+        <img src="https://img.shields.io/website?url=https%3A%2F%2Fpastum.anatolii.nz&style=flat&labelColor=1e2c2e&color=007ACC&logo=Visual%20Studio%20Code&logoColor=white"></a>
+    <a href="https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum">
+        <img src="https://img.shields.io/visual-studio-marketplace/i/atsyplenkov.pastum?style=flat&labelColor=1e2c2e&color=007ACC&logo=Visual%20Studio%20Code&logoColor=white&label=VS%20Marketplace%20installs"></a>
+    <br>
+    <a href="https://open-vsx.org/extension/atsyplenkov/pastum">
+        <img src="https://img.shields.io/open-vsx/dt/atsyplenkov/pastum?style=flat&labelColor=1e2c2e&color=007ACC&logo=Open%20VSX&logoColor=white&label=Open%20VSX%20downloads"></a>
+    <a href="https://github.com/atsyplenkov/pastum/actions/workflows/ci.yml">
+        <img src="https://img.shields.io/github/actions/workflow/status/atsyplenkov/pastum/ci.yml?style=flat&labelColor=1e2c2e&color=007ACC&logo=GitHub%20Actions&logoColor=white&label=tests"></a>
+    <a href="https://github.com/atsyplenkov/pastum/actions/workflows/publish-extensions.yml">
+        <img src="https://img.shields.io/github/actions/workflow/status/atsyplenkov/pastum/publish-extensions.yml?style=flat&labelColor=1e2c2e&color=007ACC&logo=GitHub%20Actions&logoColor=white&label=deploy"></a>
+    <br>
+    <a href="https://github.com/atsyplenkov/pastum/blob/master/LICENSE.md">
+        <img src="https://img.shields.io/github/license/atsyplenkov/pastum?style=flat&labelColor=1e2c2e&color=007ACC&logo=GitHub&logoColor=white"></a>
+</p>
 
-`pastum` allows you to quickly transform any text/HTML table from your clipboard into a dataframe object in your favorite language — R, Python, Julia or JavaScript. Almost all popular frameworks are supported; if something is missing, don't hesitate to raise an [issue](https://github.com/atsyplenkov/pastum/issues).
+`pastum` allows you to quickly transform any text/HTML table from your clipboard into a dataframe object in your favorite language — R, Python, Julia, JavaScript or Markdown. Almost all popular frameworks are supported; if something is missing, don't hesitate to raise an [issue](https://github.com/atsyplenkov/pastum/issues).
 
 # Example usage
 
