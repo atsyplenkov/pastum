@@ -155,7 +155,7 @@
   },
   "devDependencies": {
     "@types/node": "24.x",
-    "@types/vscode": "^1.99.0",
+    "@types/vscode": "^1.103.0",
     "@vscode/test-cli": "^0.0.11",
     "@vscode/test-electron": "^2.5.2",
     "typescript": "^5.9.2"
