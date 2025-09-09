@@ -141,7 +141,7 @@ function parseTable(inputString) {
     // each column
     data.forEach((row) => {
       row.forEach((value, colIndex) => {
-        if (value === "") {
+        if (value === null || value === undefined || value === "") {
           // Ignore empty values
           return;
         }
@@ -164,7 +164,7 @@ function parseTable(inputString) {
     columnTypes.forEach((type, colIndex) => {
       if (type === "numeric") {
         const values = data.map((row) => row[colIndex]).filter(value => value !== "");
-        const allIntegers = values.every((value) => utils.isInt(value));
+        const allIntegers = values.every((value) => value && utils.isInt(value));
         if (allIntegers) {
           columnTypes[colIndex] = "integer";
         }
@@ -175,7 +175,7 @@ function parseTable(inputString) {
     columnTypes.forEach((type, colIndex) => {
       if (type === "string") {
         const values = data.map((row) => row[colIndex]).filter(value => value !== "");
-        const allBool = values.every((value) => utils.isBool(value));
+        const allBool = values.every((value) => value && utils.isBool(value));
         if (allBool) {
           columnTypes[colIndex] = "boolean";
         }
