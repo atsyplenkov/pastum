@@ -58,6 +58,11 @@
         "category": "Pastum"
       },
       {
+        "command": "pastum.Markdown",
+        "title": "Table ➔ Markdown",
+        "category": "Pastum"
+      },
+      {
         "command": "pastum.Defaultdataframe",
         "title": "Pastum: paste as default dataframe"
       }
@@ -132,6 +137,15 @@
           ],
           "default": "polars 🐻",
           "markdownDescription": "Select the default framework for JavaScript dataframes to be pasted using the `pastum.Defaultdataframe` command."
+        },
+        "pastum.defaultAligmentMarkdown": {
+          "type": "string",
+          "enum": [
+            "columnar ↔️",
+            "compact ↩️"
+          ],
+          "default": "columnar ↔️",
+          "markdownDescription": "Select the default alignment for Markdown tables to be pasted using the `pastum.Defaultdataframe` command."
         }
       }
     }

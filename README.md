@@ -19,6 +19,12 @@ Or you can specify the `pastum.defaultDataframeR`/`pastum.defaultDataframePython
 
 ![](https://github.com/atsyplenkov/pastum/raw/master/assets/demo-r-tibble.gif)
 
+### Text table to Markdown table
+
+You can also paste from the clipboard as Markdown table by choosing the `Table ➔ Markdown`
+option in the quick command shortcut or in the right click menu.
+
+
 # Try it Yourself
 
 In the table below, the most unfortunate and complex situation is presented. It is a mixture of empty cells, strings, integer and float values. Select, copy and try to paste it into the IDE. The `{pastum}` will recognize all types correctly and fill empty cells with corresponding `NA`/`missing`/`None`/`null` values.
