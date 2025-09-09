@@ -115,7 +115,7 @@ function createMarkdown(tableData, aligment) {
     let vals = headers.map((header, i) => header).join(" | ");
     code = `| ${vals} |\n`;
     // Column headers/rows separators without padding
-    vals = headers.map((header, i) => "-").join("-|- ");
+    vals = headers.map((header, i) => "-").join("-|-");
     code += `|-${vals}-|\n`;
 
     // Data rows without padding
