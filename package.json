@@ -55,6 +55,11 @@
         "category": "Pastum"
       },
       {
+        "command": "pastum.Sql",
+        "title": "Table ➔ SQL",
+        "category": "Pastum"
+      },
+      {
         "command": "pastum.Markdown",
         "title": "Table ➔ Markdown",
         "category": "Pastum"
@@ -153,6 +158,20 @@
           ],
           "default": "columnar ↔️",
           "markdownDescription": "Select the default aligment for Markdown tables to be pasted using the `pastum.Defaultdataframe` command."
+        },
+        "pastum.defaultSqlStatement": {
+          "type": "string",
+          "enum": [
+            "SELECT FROM VALUES",
+            "SELECT UNION ALL",
+            "INSERT INTO VALUES",
+            "INSERT INTO SELECT VALUES",
+            "INSERT INTO",
+            "DELETE WHERE",
+            "CREATE TABLE"
+          ],
+          "default": "INSERT INTO VALUES",
+          "markdownDescription": "Select the default SQL statement to be pasted using the `pastum.Defaultdataframe` command."
         }
       }
     }

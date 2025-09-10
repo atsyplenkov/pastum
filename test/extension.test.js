@@ -157,6 +157,7 @@ suite('Pastum Extension Test Suite', () => {
 				'pastum.Jldataframe',
 				'pastum.JSdataframe',
 				'pastum.Markdown',
+				'pastum.Sql',
 				'pastum.Defaultdataframe'
 			];
 

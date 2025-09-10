@@ -6,6 +6,7 @@ const pastePython = require('../src/paste-python');
 const pasteJulia = require('../src/paste-julia');
 const pasteJS = require('../src/paste-js');
 const pasteMarkdown = require('../src/paste-markdown');
+const pasteSql = require('../src/paste-sql');
 const pasteDefault = require('../src/paste-default');
 
 suite('Paste Modules Test Suite', () => {
@@ -48,6 +49,7 @@ suite('Paste Modules Test Suite', () => {
           case 'defaultDataframePython': return 'pandas 🐼';
           case 'defaultDataframeJavascript': return 'polars 🐻';
           case 'defaultAligmentMarkdown': return 'columnar ↔️';
+          case 'defaultSqlStatement': return 'INSERT INTO VALUES';
           default: return null;
         }
       }
@@ -89,6 +91,12 @@ suite('Paste Modules Test Suite', () => {
   suite('Markdown Paste Module Tests', () => {
     test('clipboardToMarkdown - function exists', () => {
       assert.strictEqual(typeof pasteMarkdown.clipboardToMarkdown, 'function');
+    });
+  });
+
+  suite('Sql Paste Module Tests', () => {
+    test('clipboardToSql - function exists', () => {
+      assert.strictEqual(typeof pasteSql.clipboardToSql, 'function');
     });
   });
 
