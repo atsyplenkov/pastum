@@ -63,6 +63,8 @@ async function clipboardToPyDataFrame(framework = null) {
  */
 function createPyDataFrame(tableData, framework) {
   const { headers, data, columnTypes } = tableData;
+  const config = vscode.workspace.getConfiguration("pastum");
+  const libraryDeclaration = config.get("libraryDeclaration");
   let code = "";
 
   /**
@@ -89,33 +91,30 @@ function createPyDataFrame(tableData, framework) {
 
   // pandas
   if (framework === "pandas") {
-    code = `import pandas as pd\n\n`;
+    code = libraryDeclaration ? `import pandas as pd\n\n` : "";
     code += `pd.DataFrame({\n`;
     headers.forEach((header, i) => {
       const values = data.map((row) => formatValue(row[i], i)).join(", ");
-      code += `    "${header}": [${values}]${
-        i < headers.length - 1 ? ",\n" : "\n"
-      }`;
+      code += `    "${header}": [${values}]${i < headers.length - 1 ? ",\n" : "\n"
+        }`;
     });
     code += `})`;
   } else if (framework === "datatable") {
-    code = `import datatable as dt\n\n`;
+    code = libraryDeclaration ? `import datatable as dt\n\n` : "";
     code += `dt.Frame({\n`;
     headers.forEach((header, i) => {
       const values = data.map((row) => formatValue(row[i], i)).join(", ");
-      code += `    "${header}": [${values}]${
-        i < headers.length - 1 ? ",\n" : "\n"
-      }`;
+      code += `    "${header}": [${values}]${i < headers.length - 1 ? ",\n" : "\n"
+        }`;
     });
     code += `})`;
   } else if (framework === "polars") {
-    code = `import polars as pl\n\n`;
+    code = libraryDeclaration ? `import polars as pl\n\n` : "";
     code += `pl.DataFrame({\n`;
     headers.forEach((header, i) => {
       const values = data.map((row) => formatValue(row[i], i)).join(", ");
-      code += `    "${header}": [${values}]${
-        i < headers.length - 1 ? ",\n" : "\n"
-      }`;
+      code += `    "${header}": [${values}]${i < headers.length - 1 ? ",\n" : "\n"
+        }`;
     });
     code += `})`;
   }
