@@ -29,6 +29,7 @@ async function clipboardToSql(statement = null) {
         "INSERT INTO",
         "DELETE WHERE",
         "UPDATE WHERE",
+        "MERGE INTO",
         "CREATE TABLE"
       ];
       statement = await vscode.window.showQuickPick(
@@ -44,7 +45,7 @@ async function clipboardToSql(statement = null) {
     }
 
     let keyColumns = [];
-    if (statement === "UPDATE WHERE") {
+    if (statement === "UPDATE WHERE" || statement === "MERGE INTO") {
       keyColumns = await vscode.window.showQuickPick(
         tableData.headers,
         {
@@ -205,6 +206,23 @@ function createSql(tableData, statement, keyColumns) {
     return sql;
   }
 
+  function getSqlAsMergeInto(rows, cols, keys) {
+    let unionall = getRowsAsUnionAll(rows, cols);
+    let onkeys = keys.map(k => `t2.${k} = s1.${k}`).join("\n   AND ");
+    let nonkeys = cols.filter(k => keys.indexOf(k) < 0);
+    let upset = nonkeys.map(k => `  ${k} = s1.${k}`).join(",\n");
+    let c1 = cols.join(", ");
+    let c2 = cols.join(", s1.");
+    let into = `  INSERT (${c1})\n  VALUES (s1.${c2})`;
+
+    let sql = `MERGE INTO mytable AS t2 USING(\n${unionall}\n`
+      + `  ) AS s1\n    ON ${onkeys}\n`
+      + `WHEN MATCHED THEN UPDATE SET\n${upset}\n`
+      + `WHEN NOT MATCHED THEN\n${into}\n`
+      + `WHEN NOT MATCHED BY SOURCE THEN\n  DELETE;\n`;
+    return sql;
+  }
+
   function getSqlAsInsertFromSelectValues(rows, cols) {
     let sql = getSqlAsSelectFromValues(rows, cols);
     return `INSERT INTO mytable\n${sql}`;
@@ -257,6 +275,8 @@ function createSql(tableData, statement, keyColumns) {
       return getSqlAsDeleteWhere(data, headers);
     case "UPDATE WHERE":
       return getSqlAsUpdateWhere(data, headers, keyColumns);
+    case "MERGE INTO":
+      return getSqlAsMergeInto(data, headers, keyColumns);
     case "CREATE TABLE":
       return getSqlAsCreateTable(data, headers);
   }

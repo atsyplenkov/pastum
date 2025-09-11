@@ -169,6 +169,7 @@
             "INSERT INTO",
             "DELETE WHERE",
             "UPDATE WHERE",
+            "MERGE INTO",
             "CREATE TABLE"
           ],
           "default": "INSERT INTO VALUES",
