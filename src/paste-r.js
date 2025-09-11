@@ -74,7 +74,11 @@ async function clipboardToRDataFrame(framework = null) {
  */
 function createRDataFrame(tableData, framework) {
   const { headers, data, columnTypes } = tableData;
-  let code = "";
+  const config = vscode.workspace.getConfiguration("pastum");
+  const airFormat = config.get("airFormat");
+
+  let code = airFormat ? "# fmt:skip\n" : "";
+  // let code = "";
 
   /**
    * Formats a value according to its column type for R syntax
@@ -118,26 +122,24 @@ function createRDataFrame(tableData, framework) {
 
   // Generate code based on selected framework
   if (framework === "base") {
-    code = `data.frame(\n`;
+    code += `data.frame(\n`;
     headers.forEach((header, i) => {
       const values = data.map((row) => formatValue(row[i], i)).join(", ");
-      code += `  ${header} = c(${values})${
-        i < headers.length - 1 ? ",\n" : "\n"
-      }`;
+      code += `  ${header} = c(${values})${i < headers.length - 1 ? ",\n" : "\n"
+        }`;
     });
     code += `)`;
   } else if (framework === "tibble") {
-    code = `tibble::tibble(\n`;
+    code += `tibble::tibble(\n`;
     headers.forEach((header, i) => {
       const values = data.map((row) => formatValue(row[i], i)).join(", ");
-      code += `  ${header} = c(${values})${
-        i < headers.length - 1 ? ",\n" : "\n"
-      }`;
+      code += `  ${header} = c(${values})${i < headers.length - 1 ? ",\n" : "\n"
+        }`;
     });
     code += `)`;
   } else if (framework === "tribble") {
     const colWidths = calculateColumnWidths();
-    code = `tibble::tribble(\n`;
+    code += `tibble::tribble(\n`;
 
     // Column headers with padding
     code +=
@@ -162,21 +164,19 @@ function createRDataFrame(tableData, framework) {
     // Remove trailing comma and close parentheses
     code = code.trimEnd().slice(0, -1) + `\n)`;
   } else if (framework === "data.table") {
-    code = `data.table::data.table(\n`;
+    code += `data.table::data.table(\n`;
     headers.forEach((header, i) => {
       const values = data.map((row) => formatValue(row[i], i)).join(", ");
-      code += `  ${header} = c(${values})${
-        i < headers.length - 1 ? ",\n" : "\n"
-      }`;
+      code += `  ${header} = c(${values})${i < headers.length - 1 ? ",\n" : "\n"
+        }`;
     });
     code += `)`;
   } else if (framework === "polars") {
-    code = `polars::pl$DataFrame(\n`;
+    code += `polars::pl$DataFrame(\n`;
     headers.forEach((header, i) => {
       const values = data.map((row) => formatValue(row[i], i)).join(", ");
-      code += `  ${header} = c(${values})${
-        i < headers.length - 1 ? ",\n" : "\n"
-      }`;
+      code += `  ${header} = c(${values})${i < headers.length - 1 ? ",\n" : "\n"
+        }`;
     });
     code += `)`;
   }
