@@ -17,7 +17,7 @@
         <img src="https://img.shields.io/github/license/atsyplenkov/pastum?style=flat&labelColor=1e2c2e&color=007ACC&logo=GitHub&logoColor=white"></a>
 </p>
 
-`pastum` allows you to quickly transform any text/HTML table from your clipboard into a dataframe object in your favorite language — R, Python, Julia, JavaScript or Markdown. Almost all popular frameworks are supported; if something is missing, don't hesitate to raise an [issue](https://github.com/atsyplenkov/pastum/issues).
+`pastum` allows you to quickly transform any text/HTML/CSV table from your clipboard into a dataframe object in your favorite language — R, Python, Julia, JavaScript or Markdown. Almost all popular frameworks are supported; if something is missing, don't hesitate to raise an [issue](https://github.com/atsyplenkov/pastum/issues).
 
 # Example usage
 
@@ -33,11 +33,16 @@ Or you can specify the `pastum.defaultDataframeR`/`pastum.defaultDataframePython
 
 ![](https://github.com/atsyplenkov/pastum/raw/master/assets/demo-r-tibble.gif)
 
-### Text table to Markdown table
+# Supported languages and frameworks
 
-You can also paste from the clipboard as Markdown table by choosing the `Table ➔ Markdown`
-option in the quick command shortcut or in the right click menu.
+- R: `base`, `tribble 🔢`, `tibble ✨`, `data.table 🎩`
+- Python: `pandas 🐼`, `polars 🐻`, `datatable 🎩`
+- Julia: `DataFrames.jl`
+- JavaScript: `base`, `polars 🐻`, `arquero 🏹`, `danfo 🐝`
+- Markdown: `columnar ↔️`, `compact ↩️`
+- SQL: work in progress
 
+`pastum` recognises tables in the following formats: text, HTML, CSV, TSV.
 
 # Try it Yourself
 
@@ -67,9 +72,9 @@ tibble::tribble(
 
 The extension is published on both the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum) and the [Open VSX Registry](https://open-vsx.org/extension/atsyplenkov/pastum): just click `Install` there or manually install it with:
 
-1) Start VS Code (or any other Code OSS-based IDE, such as [Positron](https://github.com/posit-dev/positron)).
+1) Start VS Code (or any other Code OSS-based IDE, such as [Positron](https://github.com/posit-dev/positron), Cursor, etc.).
 
-2) Inside VS Code, go to the extensions view either by executing the `View: Show Extensions` command (click View -> Command Palette...) or by clicking on the extension icon on the left side of the VS Code window.
+2) Inside VS Code, go to the extensions view either by executing the `View: Show Extensions` command (click `View -> Command Palette`) or by clicking on the extension icon on the left side of the VS Code window.
 
 3) In the extensions view, simply search for the term `pastum` in the marketplace search box, then select the extension named `Pastum` and click the install button.
 
@@ -87,14 +92,15 @@ Alternatively, you can install the latest version from the [Releases](https://gi
 
 - By default, the column names are renamed following the PascalCase [convention](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case) _(i.e., non-machine friendly column names like 'Long & Ugly column💥' will be transformed to 'LongUglyColumn')_. However, the user can specify the preferred naming convention in the settings — `pastum.defaultConvention`.
 
-- Since `v0.2.0`, users can control the [decimal separator](https://en.m.wikipedia.org/wiki/Decimal_separator) _(e.g., '.' in `12.45`)_ and the digit group separator _(i.e., in numbers over 999)_ through the `pastum.decimalPoint` config. By default, it is set up for a dot (.) as the decimal separator and a comma (,) as the group separator.
+- Since `v0.2.0`, users can control the [decimal separator](https://en.m.wikipedia.org/wiki/Decimal_separator) _(e.g., '.' in `12.45`)_ and the digit group separator _(i.e., in numbers over 999)_ through the `pastum.decimalPoint` config. By default, it is set up for a dot (`.`) as the decimal separator and a comma (`,`) as the group separator.
+
+- Since `v0.3.0`, users can control the library declaration pasted with the dataframe (e.g., `import pandas as pd` in Python or `using DataFrames` in Julia) through the `pastum.libraryDeclaration` config.
 
 # IDE support
-The extension has almost zero dependencies and is expected to work with any Code OSS-based IDE. It was tested with the latest release version of VS Code (1.94.2) and the pre-release version of [Positron IDE](https://github.com/posit-dev/positron) (2024.11.0-69).
-So, if you are using VS Code, go to the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum); otherwise, visit the [Open VSX Registry](https://open-vsx.org/extension/atsyplenkov/pastum).
+The extension has almost zero dependencies and is expected to work with any Code OSS-based IDE. So, if you are using VS Code, go to the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum); otherwise, visit the [Open VSX Registry](https://open-vsx.org/extension/atsyplenkov/pastum).
 
 # Questions and Feature Requests
-There's a lot going on with the development of new features in Pastum. If you have any questions or something is not working, feel free to [open an issue](https://github.com/atsyplenkov/formalist/issues) or start a conversation on [BlueSky](https://bsky.app/profile/anatolii.nz).
+There's a lot going on with the development of new features in Pastum. If you have any questions or something is not working, feel free to [open an issue](https://github.com/atsyplenkov/pastum/issues) or start a conversation on [BlueSky](https://bsky.app/profile/anatolii.nz).
 
 # Contributions
 Contributions are welcome! If you'd like to contribute, please, fork, submit a PR and I'll merge it.
