@@ -6,9 +6,6 @@
   "publisher": "atsyplenkov",
   "license": "MIT",
   "pricing": "Free",
-  "sponsor": {
-    "url": "https://github.com/sponsors/atsyplenkov"
-  },
   "icon": "assets/logo.png",
   "repository": {
     "type": "git",
@@ -105,6 +102,11 @@
           "type": "boolean",
           "default": true,
           "markdownDescription": "Show the `Pastum: paste as default dataframe` command in the editor context menu *(i.e., right-click menu)*. It will only appear in R, Python, and Julia editors. The dataframe will be pasted according to the specified `pastum.defaultDataframeR` and `pastum.defaultDataframePy`."
+        },
+        "pastum.airFormat": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Add comment to skip air formatting in R. (i.e., `# fmt:skip`) before the pasted dataframe."
         },
         "pastum.defaultDataframeR": {
           "type": "string",
