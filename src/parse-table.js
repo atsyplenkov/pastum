@@ -164,18 +164,18 @@ function parseTable(inputString) {
     columnTypes.forEach((type, colIndex) => {
       if (type === "numeric") {
         const values = data.map((row) => row[colIndex]).filter(value => value !== "");
-        const allIntegers = values.every((value) => value && utils.isInt(value));
+        const allIntegers = values.every((value) => utils.isInt(value));
         if (allIntegers) {
           columnTypes[colIndex] = "integer";
         }
       }
     });
-    
+
     // Check if all values in a string column are boolean
     columnTypes.forEach((type, colIndex) => {
       if (type === "string") {
         const values = data.map((row) => row[colIndex]).filter(value => value !== "");
-        const allBool = values.every((value) => value && utils.isBool(value));
+        const allBool = values.every((value) => utils.isBool(value));
         if (allBool) {
           columnTypes[colIndex] = "boolean";
         }
@@ -186,7 +186,7 @@ function parseTable(inputString) {
     const convertedData = data.map((row) =>
       row.map((value, colIndex) =>
         columnTypes[colIndex] !== "string" &&
-        columnTypes[colIndex] !== "boolean"
+          columnTypes[colIndex] !== "boolean"
           ? utils.convertValue(value)
           : value
       )
@@ -210,7 +210,7 @@ function parseTextTable(textString) {
 
   // Delimiters: TAB (spreadsheets, IDEs), comma (CSV), semicolon (CSV), pipe (TSV)
   // or by spaces (fixed width)
-  const patterns = [ '\\t|\\s\\t', ',', ';', '\\|', '\\s+' ];
+  const patterns = ['\\t|\\s\\t', ',', ';', '\\|', '\\s+'];
   let results = [];
   let columns = [];
   // Finds the best pattern to split the table
@@ -220,7 +220,7 @@ function parseTextTable(textString) {
     let matrix = rows.map((row) => row.split(regex));
     let cols = getNumSplitRows(matrix, i);
     // Check if the pattern perfectly split all rows with same number of columns
-    if ((cols[0] > 1) && (cols[0] >= len2) && cols[1] >= rlen) {
+    if (cols[0] >= rlen && cols[1] >= rlen) {
       return matrix;
     }
     results[i] = matrix;
@@ -267,7 +267,7 @@ function getMaxCols(matrix) {
 
 function getNumSplitRows(matrix, index) {
   let numRowSplit = 0;
-  let numColsEqual = -1;
+  let numColsEqual = 0;
   let numCols = -1;
   let numRows = matrix.length;
   for (let i = 0; i < numRows; i++) {
@@ -276,6 +276,7 @@ function getNumSplitRows(matrix, index) {
       numRowSplit += 1;
       if (numCols <= 0) {
         numCols = cols;
+        numColsEqual = 1; // First row establishes the column count
       } else if (cols == numCols) {
         numColsEqual += 1;
       }
