@@ -68,6 +68,12 @@
       <path fill-rule="nonzero" fill="rgb(58.4%, 34.5%, 69.8%)" fill-opacity="1"
         d="M 336.601562 250 C 336.601562 291.421875 303.023438 325 261.601562 325 C 220.179688 325 186.601562 291.421875 186.601562 250 C 186.601562 208.578125 220.179688 175 261.601562 175 C 303.023438 175 336.601562 208.578125 336.601562 250 Z M 336.601562 250 " />
     </symbol>
+    <!-- Symbol for markdown -->
+    <symbol id="markdown" viewBox="0 0 25 25" fill="white">
+      <path
+        d="M22.269 19.385H1.731a1.73 1.73 0 0 1-1.73-1.73V6.345a1.73 1.73 0 0 1 1.73-1.73h20.538a1.73 1.73 0 0 1 1.73 1.73v11.308a1.73 1.73 0 0 1-1.73 1.731zm-16.5-3.462v-4.5l2.308 2.885 2.307-2.885v4.5h2.308V8.078h-2.308l-2.307 2.885-2.308-2.885H3.461v7.847zM21.231 12h-2.308V8.077h-2.307V12h-2.308l3.461 4.039z">
+      </path>
+    </symbol>
 
     <!-- Symbol for #vscode -->
     <symbol id="vscode" viewBox="0 0 48 48">
@@ -124,9 +130,13 @@
               <svg width="20" height="20" style="vertical-align: middle; margin-bottom: 3px">
                 <use xlink:href="#julia"></use>
               </svg>
-              or JavaScript
+              , JavaScript
               <svg width="20" height="20" style="vertical-align: middle; margin-bottom: 3px">
                 <use xlink:href="#js"></use>
+              </svg>
+              , or Markdown
+              <svg width="20" height="20" style="vertical-align: middle; margin-bottom: 3px">
+                <use xlink:href="#markdown"></use>
               </svg>
             </p>
             <p>
@@ -247,6 +257,11 @@
             <use xlink:href="#julia"></use>
           </svg>
           Dataframes.jl</label>
+        <input type="radio" id="tab6" name="tab" />
+        <label for="tab6"><svg width="25" height="25" style="vertical-align: middle; margin-bottom: 3px">
+            <use xlink:href="#markdown"></use>
+          </svg>
+          Markdown</label>
         <div class="content-container">
           <div class="content" id="c1">
             <pre><code class="language-r">
@@ -303,6 +318,22 @@ DataFrame(
 )
               </code></pre>
           </div>
+          <div class="content" id="c6">
+            <pre><code>
+| Nationality  | Population2018 |
+|--------------|----------------|
+| England      | 2748           |
+| India        | 1539           |
+| China        | 1440           |
+| Australia    | 1155           |
+| South Africa | 903            |
+| Philippines  | 693            |
+| Fiji         | 528            |
+| United States| 468            |
+| Samoa        | 441            |
+| Malaysia     | 390            |
+              </code></pre>
+          </div>
         </div>
       </div>
     </section>
@@ -351,6 +382,13 @@ DataFrame(
                 <code>pastum.decimalPoint</code> config. By default, it is set
                 up for a dot (.) as the decimal separator and a comma (,) as
                 the group separator.
+              </p>
+            </li>
+            <li>
+              <p>
+                Users can control the library declaration pasted with the dataframe
+                (e.g., <code>import pandas as pd</code> in Python or <code>using DataFrames</code> in Julia) through the
+                <code>pastum.libraryDeclaration</code> config.
               </p>
             </li>
           </ul>

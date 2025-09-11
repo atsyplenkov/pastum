@@ -1,5 +1,6 @@
 clear,
 .clear {
+
   &:after,
   &:before {
     content: " ";
@@ -77,10 +78,12 @@ a {
   color: inherit;
   transition: opacity 0.2s;
   text-decoration: none;
+
   &:hover {
     opacity: 0.75;
     text-decoration: underline;
   }
+
   &:active {
     opacity: 0.85;
   }
@@ -94,6 +97,7 @@ p {
   @include appnav {
     font-size: 15px;
   }
+
   &.big {
     font-size: 20px;
 
@@ -108,6 +112,7 @@ ul {
   padding: 0;
   padding-left: 0px;
   opacity: 0.8;
+
   li {
     margin: 0;
     padding: 0;
@@ -118,8 +123,7 @@ ul {
 
     &:before {
       content: "";
-      background: url("/assets/img/pastum_star_24dp.svg") center center
-        no-repeat;
+      background: url("/assets/img/pastum_star_24dp.svg") center center no-repeat;
       width: 24px;
       height: 24px;
       min-width: 24px;
@@ -128,7 +132,7 @@ ul {
       margin-right: 8px;
     }
 
-    & + li {
+    &+li {
       padding-top: 5px;
 
       @include appnav {
@@ -174,6 +178,7 @@ main {
     opacity: 85%;
     will-change: transform;
   }
+
   a {
     display: block;
     position: absolute;
@@ -192,6 +197,7 @@ main {
       display: inline-block;
       vertical-align: middle;
     }
+
     svg {
       margin-left: 14px;
       fill: white;
@@ -203,10 +209,12 @@ main {
     @include tablet {
       top: 47px;
       right: 32px;
+
       span {
         display: none;
       }
-      span + span {
+
+      span+span {
         display: block;
       }
     }
@@ -224,13 +232,16 @@ main {
   background-size: cover;
   opacity: 0.5;
   animation: bgIn 2s;
+
   @keyframes bgIn {
     0% {
       opacity: 0;
     }
+
     30% {
       opacity: 0;
     }
+
     100% {
       opacity: 0.5;
     }
@@ -309,6 +320,7 @@ main {
         height: auto;
       }
     }
+
     .button {
       font-weight: bold;
       background: rgba(255, 255, 255, 0.25);
@@ -321,6 +333,7 @@ main {
       text-align: center;
       transition: background 0.1s;
       backdrop-filter: blur(20px);
+
       @include tablet {
         width: 100%;
       }
@@ -329,6 +342,7 @@ main {
         background: rgba(255, 255, 255, 0.3);
         opacity: 1;
       }
+
       &:active {
         background: rgba(255, 255, 255, 0.35);
         opacity: 1;
@@ -338,41 +352,49 @@ main {
         display: inline-block;
         vertical-align: middle;
         line-height: 1;
-        & + span {
+
+        &+span {
           padding-left: 10px;
         }
       }
+
       svg {
         width: 22px;
         height: 21px;
         fill: white;
       }
 
-      & + a {
+      &+a {
         padding: 10px 0;
         margin-left: 10px;
         opacity: 0.5;
+
         &:hover,
         &:active {
           opacity: 0.75;
         }
+
         @include tablet {
           margin: 5px 0 0 0;
         }
       }
     }
   }
+
   .wstore {
     width: 145px;
     height: 52px;
     margin-top: 7px;
     margin-bottom: -7px;
+
     @include mobile {
       display: none;
     }
   }
+
   .download-info {
     padding-top: 20px;
+
     p {
       text-align: left;
       font-size: 13px;
@@ -400,6 +422,7 @@ main {
       display: none;
     }
   }
+
   .mob-screenshot {
     display: none;
     max-width: 600px;
@@ -427,7 +450,7 @@ main {
       margin-right: 10px;
     }
 
-    & + .buttons-row {
+    &+.buttons-row {
       padding-top: 10px;
     }
   }
@@ -452,16 +475,19 @@ main {
     text-decoration: underline;
   }
 
-  & > div {
+  &>div {
     padding: 35px;
     font-size: 12px;
+
     @include tablet {
       padding: 5px;
     }
   }
+
   .left {
     color: rgba(255, 255, 255, 0.5);
   }
+
   .right {
     color: rgba(255, 255, 255, 0.5);
   }
@@ -470,6 +496,7 @@ main {
 .section--intro {
   position: relative;
   min-height: 100vh;
+
   @include tablet {
     min-height: 100%;
   }
@@ -492,12 +519,14 @@ main {
       text-align: left;
     }
   }
+
   img {
     max-width: 830px;
     height: auto;
     border-radius: 10px;
     margin-bottom: -108px;
     margin-top: 60px;
+
     @include appnav {
       margin-top: 40px;
     }
@@ -531,6 +560,7 @@ main {
 
   img {
     border-radius: 10px;
+
     @media (max-width: 900px) {
       max-width: 500px; // Set a max-width for the image in mobile view
       width: 100%; // Make image responsive
@@ -568,6 +598,7 @@ main {
     padding-left: 70px;
     width: 100%;
     max-width: 100%;
+
     @media (max-width: 900px) {
       padding: 40px 0 0;
     }
@@ -575,16 +606,17 @@ main {
     input {
       display: none;
 
-      &:checked + label {
+      &:checked+label {
         background: #353f45;
       }
 
-      @for $i from 1 through 5 {
+      @for $i from 1 through 6 {
         &#tab#{$i}:checked {
-          ~ .line {
+          ~.line {
             left: #{($i - 1) * 20%};
           }
-          ~ .content-container #c#{$i} {
+
+          ~.content-container #c#{$i} {
             opacity: 1;
           }
         }
@@ -674,19 +706,24 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+
     @media (max-width: 900px) {
       display: block;
     }
   }
+
   img {
     border-radius: 10px;
+
     @media (max-width: 900px) {
       max-width: 500px;
     }
   }
+
   .text {
     padding-left: 30px;
     max-width: 600px;
+
     @media (max-width: 900px) {
       padding: 40px 0 0;
     }
@@ -710,6 +747,7 @@ main {
     max-width: 680px;
     width: 100%;
   }
+
   .columns {
     max-width: 680px;
     width: 100%;
@@ -728,6 +766,7 @@ main {
       max-width: 400px;
       margin: 0;
     }
+
     .item {
       border-radius: 10px;
       background-color: #242b33;
@@ -742,6 +781,7 @@ main {
         margin: 0 0 20px;
       }
     }
+
     .item-logo {
       background-color: #1d2227;
       display: flex;
@@ -749,6 +789,7 @@ main {
       align-items: center;
       height: 160px;
     }
+
     .item-list {
       display: flex;
       flex-direction: column;
@@ -762,6 +803,7 @@ main {
         padding: 7px;
         line-height: 1.2;
         opacity: 0.75;
+
         &:hover,
         &:active {
           opacity: 1;
