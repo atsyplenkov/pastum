@@ -103,6 +103,11 @@
           "default": true,
           "markdownDescription": "Show the `Pastum: paste as default dataframe` command in the editor context menu *(i.e., right-click menu)*. It will only appear in R, Python, and Julia editors. The dataframe will be pasted according to the specified `pastum.defaultDataframeR` and `pastum.defaultDataframePy`."
         },
+        "pastum.libraryDeclaration": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Add library declaration to the pasted dataframe. (i.e., `import pandas as pd`) before the pasted dataframe."
+        },
         "pastum.airFormat": {
           "type": "boolean",
           "default": true,

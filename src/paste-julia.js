@@ -66,14 +66,15 @@ function createJuliaDataFrame(tableData) {
   }
 
   const { headers, data, columnTypes } = tableData;
-  let code = `using DataFrames\n\n`;
+  const config = vscode.workspace.getConfiguration("pastum");
+  const libraryDeclaration = config.get("libraryDeclaration");
+  let code = libraryDeclaration ? `using DataFrames\n\n` : "";
 
   code += `DataFrame(\n`;
   headers.forEach((header, i) => {
     const values = data.map((row) => formatValue(row[i], i)).join(", ");
-    code += `    :${header} => [${values}]${
-      i < headers.length - 1 ? ",\n" : "\n"
-    }`;
+    code += `    :${header} => [${values}]${i < headers.length - 1 ? ",\n" : "\n"
+      }`;
   });
   code += `)`;
 

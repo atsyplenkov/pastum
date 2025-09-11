@@ -62,6 +62,8 @@ async function clipboardToJSDataFrame(framework = null) {
  */
 function createJSDataFrame(tableData, framework) {
   const { headers, data, columnTypes } = tableData;
+  const config = vscode.workspace.getConfiguration("pastum");
+  const libraryDeclaration = config.get("libraryDeclaration");
   let code = "";
 
   /**
@@ -100,7 +102,7 @@ function createJSDataFrame(tableData, framework) {
     });
     code += `};`;
   } else if (framework === "polars") {
-    code = `import pl from "nodejs-polars";\n\n`;
+    code = libraryDeclaration ? `import pl from "nodejs-polars";\n\n` : "";
     code += `const df = pl.DataFrame({\n`;
     headers.forEach((header, i) => {
       const values = data.map((row) => formatValue(row[i], i)).join(", ");
@@ -110,7 +112,7 @@ function createJSDataFrame(tableData, framework) {
     });
     code += `});`;
   } else if (framework === "arquero") {
-    code = `import {table} from "arquero";\n\n`;
+    code = libraryDeclaration ? `import {table} from "arquero";\n\n` : "";
     code += `const df = table({\n`;
     headers.forEach((header, i) => {
       const values = data.map((row) => formatValue(row[i], i)).join(", ");
@@ -120,7 +122,7 @@ function createJSDataFrame(tableData, framework) {
     });
     code += `});`;
   } else if (framework === "danfo") {
-    code = `import * as dfd from "danfojs-node";\n\n`;
+    code = libraryDeclaration ? `import * as dfd from "danfojs-node";\n\n` : "";
     code += `obj_data = {\n`;
     headers.forEach((header, i) => {
       const values = data.map((row) => formatValue(row[i], i)).join(", ");
