@@ -3,20 +3,21 @@ const { parseClipboard } = require("./parse-table");
 const { addTrailingZeroes, normalizeBool } = require("./utils");
 
 async function clipboardToSql(statement = null) {
+
+  function abortOnError(message) {
+    vscode.window.showErrorMessage(message);
+  }
+
   try {
     // 1: Read the clipboard content
     const clipboardContent = await vscode.env.clipboard.readText();
 
     if (!clipboardContent) {
-      vscode.window.showErrorMessage(
-        "Clipboard is empty or contains unsupported content."
-      );
-      return;
+      return abortOnError("Clipboard is empty or contains unsupported content.");
     }
 
     // 2: Try to extract the table from clipboard content
-    let formattedData = null;
-    formattedData = parseClipboard(clipboardContent);
+    let tableData = parseClipboard(clipboardContent);
 
     // 3: Ask the user which statement they want to use
     if (statement === null) {
@@ -27,6 +28,7 @@ async function clipboardToSql(statement = null) {
         "INSERT INTO SELECT VALUES",
         "INSERT INTO",
         "DELETE WHERE",
+        "UPDATE WHERE",
         "CREATE TABLE"
       ];
       statement = await vscode.window.showQuickPick(
@@ -38,16 +40,28 @@ async function clipboardToSql(statement = null) {
     }
 
     if (!statement) {
-      vscode.window.showErrorMessage("No statement selected.");
-      return;
+      return abortOnError("No SQL statement selected.");
+    }
+
+    let keyColumns = [];
+    if (statement === "UPDATE WHERE") {
+      keyColumns = await vscode.window.showQuickPick(
+        tableData.headers,
+        {
+          placeHolder: "Select the key columns for matching rows",
+          canPickMany: true
+        }
+      );
+      if (!keyColumns || keyColumns.length === 0) {
+        return abortOnError("No key columns for matching rows selected.");
+      }
     }
 
     // 4: Generate the Sql code using the selected statement
-    const sqlCode = createSql(formattedData, statement);
+    const sqlCode = createSql(tableData, statement, keyColumns);
 
     if (!sqlCode) {
-      vscode.window.showErrorMessage("Failed to generate Sql code.");
-      return;
+      return abortOnError("Failed to generate Sql code.");
     }
 
     // 5: Insert the generated code into the active editor
@@ -58,14 +72,14 @@ async function clipboardToSql(statement = null) {
       });
     }
   } catch (error) {
-    vscode.window.showErrorMessage(`Error: ${error.message}`);
+    abortOnError(`Error: ${error.message}`);
   }
 }
 
 /**
  * Generates a Sql script based on the provided table data.
  */
-function createSql(tableData, statement) {
+function createSql(tableData, statement, keyColumns) {
 
   /**
    * Formats a value according to its column type for SQL syntax
@@ -123,10 +137,33 @@ function createSql(tableData, statement) {
     return "";
   }
 
+  function getRowsAs2Columns(
+    rows, cols, keys,
+    template1, col1start, col1sep, col1end,
+    template2, col2start, col2sep, col2end) {
+
+    const lines = rows.map(function (row, j) {
+      const vals = row.map(function (value, i) {
+        let nam1 = cols[i];
+        let val2 = formatValue(value, i);
+        let pos = keys.indexOf(nam1) < 0 ? 1 : 2;
+        let tpl = pos === 1 ? template1 : template2;
+        let res = tpl.replace("{1}", nam1).replace("{2}", val2);
+        return [res, pos];
+      });
+      let val1 = vals.filter(v => v[1] === 1).map(v => v[0]);
+      let val2 = vals.filter(v => v[1] === 2).map(v => v[0]);
+      let text1 = col1start + val1.join(col1sep) + col1end;
+      let text2 = col2start + val2.join(col2sep) + col2end;
+      return [text1, text2];
+    });
+    return lines;
+  }
+
   // Pads a value to the target width
   function padToWidth(value, width, padding) {
     let wide = width - value.toString().length;
-    return value +padding.repeat(wide);
+    return value + padding.repeat(wide);
   }
 
   function getRowsAsTuple(rows, cols) {
@@ -134,7 +171,7 @@ function createSql(tableData, statement) {
   }
 
   function getRowsAsUnionAll(rows, cols) {
-    return getRowsAs(rows, cols, "{2} AS {1}", "  SELECT", ", ", "", " UNION ALL\n");
+    return getRowsAs(rows, cols, "{2} AS {1}", "  SELECT ", ", ", "", " UNION ALL\n");
   }
 
   function getColumnsAsTuple(cols) {
@@ -195,6 +232,15 @@ function createSql(tableData, statement) {
     return res;
   }
 
+  function getSqlAsUpdateWhere(rows, cols, keys) {
+    const vals = getRowsAs2Columns(
+      rows, cols, keys, "{1} = {2}", "", ", ", "", "{1} = {2}", "", " AND ", ""
+    );
+    let stmt = `UPDATE mytable SET {1} WHERE {2};`;
+    let sql = vals.map(v => stmt.replace("{1}", v[0]).replace("{2}", v[1].replaceAll("= NULL", "IS NULL")));
+    return sql.join("\n") + "\n\n";
+  }
+
   const { headers, data, columnTypes } = tableData;
   switch (statement) {
     case "SELECT FROM VALUES":
@@ -209,6 +255,8 @@ function createSql(tableData, statement) {
       return getSqlAsInsertIntoMultiple(data, headers);
     case "DELETE WHERE":
       return getSqlAsDeleteWhere(data, headers);
+    case "UPDATE WHERE":
+      return getSqlAsUpdateWhere(data, headers, keyColumns);
     case "CREATE TABLE":
       return getSqlAsCreateTable(data, headers);
   }

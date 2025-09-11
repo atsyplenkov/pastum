@@ -168,6 +168,7 @@
             "INSERT INTO SELECT VALUES",
             "INSERT INTO",
             "DELETE WHERE",
+            "UPDATE WHERE",
             "CREATE TABLE"
           ],
           "default": "INSERT INTO VALUES",
