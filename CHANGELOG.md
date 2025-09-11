@@ -1,8 +1,15 @@
-# Change Log
-
-All notable changes to the "pastum" extension will be documented in this file.
+# Changelog
 
 <!-- Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file. -->
+
+## Development version
+
+### Added
+
+- Markdown table support (thanks to @juarezr)
+- TSV and CSV table support (thanks to @juarezr)
+- `pastum.libraryDeclaration` configuration option, which allows the user to add library declaration to the pasted dataframe. (#18)
+- `pastum.airFormat` configuration option, which allows the user to add comment to skip air formatting in R. (#16)
 
 ## [0.2.1] - 2024-11-02
 
