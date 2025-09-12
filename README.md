@@ -40,7 +40,7 @@ Or you can specify the `pastum.defaultDataframeR`/`pastum.defaultDataframePython
 - Julia: `DataFrames.jl`
 - JavaScript: `base`, `polars 🐻`, `arquero 🏹`, `danfo 🐝`
 - Markdown: `columnar ↔️`, `compact ↩️`
-- SQL: work in progress
+- SQL: many options to generate SELECT, INSERT, UPDATE, MERGE, AND CREATE TABLE statements.
 
 `pastum` recognises tables in the following formats: text, HTML, CSV, TSV.
 
