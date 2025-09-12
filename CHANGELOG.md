@@ -2,7 +2,7 @@
 
 <!-- Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file. -->
 
-## Development version
+## [0.3.0] - 2025-09-12
 
 ### Added
 
