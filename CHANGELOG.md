@@ -6,6 +6,7 @@
 
 ### Added
 
+- Support to generate SQL statements for querying and modifying database tables (in #41, thanks to @juarezr)
 - Markdown table support (thanks to @juarezr)
 - TSV and CSV table support (thanks to @juarezr)
 - `pastum.libraryDeclaration` configuration option, which allows the user to add library declaration to the pasted dataframe. (#18)
