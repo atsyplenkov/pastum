@@ -2,7 +2,7 @@
   "name": "pastum",
   "displayName": "Pastum",
   "description": "Convert table from clipboard to R, Python, Julia, or JS dataframes and also to SQL or Markdown",
-  "version": "0.3.1",
+  "version": "0.3.0.9000",
   "publisher": "atsyplenkov",
   "license": "MIT",
   "pricing": "Free",
