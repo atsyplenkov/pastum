@@ -69,6 +69,7 @@ tibble::tribble(
 ```
 
 # Installation
+### Release version
 
 The extension is published on both the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum) and the [Open VSX Registry](https://open-vsx.org/extension/atsyplenkov/pastum): just click `Install` there or manually install it with:
 
@@ -79,6 +80,9 @@ The extension is published on both the [VS Code Marketplace](https://marketplace
 3) In the extensions view, simply search for the term `pastum` in the marketplace search box, then select the extension named `Pastum` and click the install button.
 
 Alternatively, you can install the latest version from the [Releases](https://github.com/atsyplenkov/pastum/releases/) page. Download the latest `.vsix` file and install it as described [here](https://code.visualstudio.com/docs/editor/extension-marketplace#_install-from-a-vsix).
+
+### Development version
+The bleeding-edge development version is available as [CI artefacts](https://github.com/atsyplenkov/pastum/actions/workflows/ci.yml) in a `.vsix` format.
 
 # Features
 
