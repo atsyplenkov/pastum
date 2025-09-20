@@ -4,6 +4,7 @@ const py = require("./paste-python.js");
 const jl = require("./paste-julia.js");
 const js = require("./paste-js.js");
 const md = require("./paste-markdown.js");
+const sql = require("./paste-sql.js");
 
 function pasteDefault() {
   // Get the default dataframe framework
@@ -12,6 +13,7 @@ function pasteDefault() {
   const framePy = config.get("defaultDataframePython");
   const frameJS = config.get("defaultDataframeJavascript");
   const frameMD = config.get("defaultAligmentMarkdown");
+  const frameSql = config.get("defaultSqlStatement");
 
   // Get the active editor language
   const editor = vscode.window.activeTextEditor;
@@ -36,6 +38,9 @@ function pasteDefault() {
       break;
     case "markdown":
       md.clipboardToMarkdown(frameMD);
+      break;
+    case "sql":
+      sql.clipboardToSql(frameSql);
       break;
     default:
       vscode.window.showErrorMessage("No default framework selected");

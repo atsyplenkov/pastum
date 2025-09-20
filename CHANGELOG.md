@@ -5,6 +5,11 @@
 ## [0.3.0] - 2025-09-12
 
 ### Added
+- Support to generate SQL statements for querying and modifying database tables (in #41, thanks to @juarezr)
+
+## [0.3.0] - 2025-09-12
+
+### Added
 
 - Markdown table support (thanks to @juarezr)
 - TSV and CSV table support (thanks to @juarezr)

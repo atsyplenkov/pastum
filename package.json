@@ -1,8 +1,8 @@
 {
   "name": "pastum",
   "displayName": "Pastum",
-  "description": "Convert table from clipboard to R, Python, Julia, JS or Markdown dataframe",
-  "version": "0.3.0",
+  "description": "Convert table from clipboard to R, Python, Julia, or JS dataframes and also to SQL or Markdown",
+  "version": "0.3.1",
   "publisher": "atsyplenkov",
   "license": "MIT",
   "pricing": "Free",
@@ -52,6 +52,11 @@
       {
         "command": "pastum.JSdataframe",
         "title": "Table ➔ JavaScript Dataframe",
+        "category": "Pastum"
+      },
+      {
+        "command": "pastum.Sql",
+        "title": "Table ➔ SQL",
         "category": "Pastum"
       },
       {
@@ -153,6 +158,22 @@
           ],
           "default": "columnar ↔️",
           "markdownDescription": "Select the default aligment for Markdown tables to be pasted using the `pastum.Defaultdataframe` command."
+        },
+        "pastum.defaultSqlStatement": {
+          "type": "string",
+          "enum": [
+            "SELECT FROM VALUES",
+            "SELECT UNION ALL",
+            "INSERT INTO VALUES",
+            "INSERT INTO SELECT VALUES",
+            "INSERT INTO",
+            "DELETE WHERE",
+            "UPDATE WHERE",
+            "MERGE INTO",
+            "CREATE TABLE"
+          ],
+          "default": "INSERT INTO VALUES",
+          "markdownDescription": "Select the default SQL statement to be pasted using the `pastum.Defaultdataframe` command."
         }
       }
     }
