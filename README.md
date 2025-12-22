@@ -101,7 +101,7 @@ The bleeding-edge development version is available as [CI artefacts](https://git
 - Since `v0.3.0`, users can control the library declaration pasted with the dataframe (e.g., `import pandas as pd` in Python or `using DataFrames` in Julia) through the `pastum.libraryDeclaration` config.
 
 # IDE support
-The extension has almost zero dependencies and is expected to work with any Code OSS-based IDE. So, if you are using VS Code, go to the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum); otherwise, visit the [Open VSX Registry](https://open-vsx.org/extension/atsyplenkov/pastum).
+The extension has almost zero dependencies and is expected to work with any Code OSS-based IDE starting from `v1.104.0`. So, if you are using VS Code, go to the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=atsyplenkov.pastum); otherwise, visit the [Open VSX Registry](https://open-vsx.org/extension/atsyplenkov/pastum).
 
 # Questions and Feature Requests
 There's a lot going on with the development of new features in Pastum. If you have any questions or something is not working, feel free to [open an issue](https://github.com/atsyplenkov/pastum/issues) or start a conversation on [BlueSky](https://bsky.app/profile/anatolii.nz).
