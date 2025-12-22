@@ -2,7 +2,14 @@
 
 <!-- Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file. -->
 
-## [0.3.0] - 2025-09-12
+## [0.3.2] - 2025-12-22
+
+Patch release that fixes some vulnerabilities in dependencies.
+
+### Fixed
+- quoted values are now parsed correctly (#42)
+
+## [0.3.1] - 2025-09-12
 
 ### Added
 - Support to generate SQL statements for querying and modifying database tables (in #41, thanks to @juarezr)

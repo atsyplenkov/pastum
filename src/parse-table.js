@@ -219,10 +219,7 @@ function parseTextTable(textString) {
     let regex = new RegExp(pattern, 'gm');
     let matrix = rows.map((row) => row.split(regex));
     let cols = getNumSplitRows(matrix, i);
-    // Check if the pattern perfectly split all rows with same number of columns
-    if (cols[0] >= rlen && cols[1] >= rlen) {
-      return matrix;
-    }
+
     results[i] = matrix;
     columns[i] = cols;
   }
@@ -238,7 +235,14 @@ function parseTextTable(textString) {
       return row.concat(new Array(diff).fill(""));
     }
     return row;
-  });
+  }).map(row => row.map(cell => {
+    // Strip surrounding quotes if present
+    const trimmed = cell.trim();
+    if (trimmed.startsWith('"') && trimmed.endsWith('"') && trimmed.length >= 2) {
+      return trimmed.slice(1, -1);
+    }
+    return cell;
+  }));
   return normalized;
 }
 
