@@ -1,4 +1,4 @@
-# Pastum: paste as ... dataframe
+<h1 align=center><code>pastum</code></h1>
 
 <p align="center">
     <a href="https://pastum.anatolii.nz/">
